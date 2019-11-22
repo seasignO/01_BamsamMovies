@@ -23,7 +23,7 @@
 
 > - projact 시작 : 환경변수와 라이브러리 설치, 프로젝트 시작 전 기본 틀 작성
 >   **=>** *Django - settings, models, forms, urls, templates ...ect*
-> - 
+> - 소셜로그인 추가, 구글로 로그인 시도 시, `profile/` 이라는 알 수 없는 경로로 들어가게된다. **=>** settings.py 에 `LOGIN_REDIRECT_URL` 추가
 
 
 
