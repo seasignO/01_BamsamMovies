@@ -17,25 +17,28 @@ def index(request):
 
 def get_movieData(request):
     api_key =  config('API_KEY')
-    url = f'https://api.themoviedb.org/3/discover/movie?api_key={api_key}&primary_release_year=2017&language=ko-KR&sort_by=revenue.desc'
-    api_data = requests.get(url).json()
-    # pprint(api_data)
-    movies = api_data.get('results')
-    # pprint(movies)
-    for movie in movies:
-        empty_movie = Movie()
-        empty_movie.title = movie.get('title')
-        empty_movie.original_title = movie.get('original_title')
-        empty_movie.summary = movie.get('overview')
-        empty_movie.come_out = movie.get('release_date')
-        empty_movie.poster_url = 'https://image.tmdb.org/t/p/original/' + movie.get('poster_path')
-        empty_movie.backdrop_url = 'https://image.tmdb.org/t/p/original/' + movie.get('backdrop_path')
-        empty_movie.character_id = movie.get('id')
-        get_genres = movie.get('genre_ids')
+    for i in range(1,4):
+        url = f'https://api.themoviedb.org/3/discover/movie?api_key={api_key}&primary_release_year=2018&language=ko-KR&sort_by=revenue&page={i}'
+        api_data = requests.get(url).json()
+        # pprint(api_data)
+        movies = api_data.get('results')
+        # pprint(movies)
+        for movie in movies:
+            empty_movie = Movie()
+            empty_movie.title = movie.get('title')
+            empty_movie.original_title = movie.get('original_title')
+            empty_movie.summary = movie.get('overview')
+            empty_movie.come_out = movie.get('release_date')
+            empty_movie.poster_url = 'https://image.tmdb.org/t/p/original' + movie.get('poster_path')
+            empty_movie.backdrop_url = 'https://image.tmdb.org/t/p/original' + movie.get('backdrop_path')
+            empty_movie.character_id = movie.get('id')
+            get_genres = movie.get('genre_ids')
 
-        empty_movie.save()
-        for g in get_genres:
-            empty_movie.genres.add(g)
+            empty_movie.save()
+
+            for g in get_genres:
+                empty_movie.genres.add(g)
+
     return redirect('movies:index')
 
 def get_genreData(request):

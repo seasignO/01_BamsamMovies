@@ -1,14 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'movies/base.html' %}
 
 {% load socialaccount %}
+{% load bootstrap4 %}
 
-{% block content %}
+{% block base %}
+<h1>LOGIN</h1>
+  
+<a href="{% provider_login_url 'naver'%}" class="btn btn-success font-weight-bold">NAVER</a><br>
+<a href="{% provider_login_url 'google'%}" class="btn btn-danger font-weight-bold">GOOGLE</a><br>
+<a href="{% provider_login_url 'kakao'%}" class="btn btn-warning font-weight-bold">KAKAO</a><br>
 
-<h1>로그인</h1>
-네이버 : <a href="{% provider_login_url 'naver'%}">네이버 로그인</a><br>
-구글 : <a href="{% provider_login_url 'google'%}">구글 로그인</a><br>
-카카오 : <a href="{% provider_login_url 'kakao'%}">카카오 로그인</a><br>
+  <a href="{% url 'movies:get_movieData' %}">[영화데이터 얻어오기]</a>
+  <a href="{% url 'movies:get_genreData' %}">[장르데이터 얻어오기]</a>
 
-<a href="{% url 'movies:get_movieData' %}">[영화데이터 얻어오기]</a>
-<a href="{% url 'movies:get_genreData' %}">[장르데이터 얻어오기]</a>
-{% endblock content %}
+{% endblock base %}
