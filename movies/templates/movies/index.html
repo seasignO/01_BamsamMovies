@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load socialaccount%}
+{% load socialaccount %}
 
 {% block content %}
 
@@ -9,4 +9,6 @@
 구글 : <a href="{% provider_login_url 'google'%}">구글 로그인</a><br>
 카카오 : <a href="{% provider_login_url 'kakao'%}">카카오 로그인</a><br>
 
+<a href="{% url 'movies:get_movieData' %}">[영화데이터 얻어오기]</a>
+<a href="{% url 'movies:get_genreData' %}">[장르데이터 얻어오기]</a>
 {% endblock content %}
