@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,13 +8,16 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Document</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap&subset=korean" rel="stylesheet">		 background-color: #1c1d1f;
+	 }
+	</style>
 </head>
 
 <body>
+
 	<div class="container">
-    {% block base %}
-    {% endblock base %}
+    {% block content %}
+    {% endblock content %}
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
