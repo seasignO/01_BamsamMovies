@@ -20,6 +20,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     path('movies/', include('movies.urls')),
-    path('api/v1/', include('movies.urls')),
+    # path('api/v1/', include('movies.urls')),
     path('admin/', admin.site.urls),
 ]
