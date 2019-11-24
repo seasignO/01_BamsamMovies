@@ -52,13 +52,10 @@ def my_message(request):
 
 def send_message(request):
     if request.method == 'POST':
-        form = MessageForm(request.POST)
-        # return redirect('accounts:send_message')
-        if form.is_valid():
-            temp = form.save(commit=False)
-            temp.send = request.user
-            temp.save()
-            return redirect('movies:index')
+        receive = request.POST.get('receive')
+        send = request.POST.get('send')
+        content = request.POST.get('content')
+        movie = request.POST.get('movie') if request.POST.get('movie') else ' '
     else:
         form = MessageForm()
     context = {'form': form}
