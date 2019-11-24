@@ -29,10 +29,11 @@ def get_movieData(request):
         empty_movie.poster_url = 'https://image.tmdb.org/t/p/original/' + movie.get('poster_path')
         empty_movie.backdrop_url = 'https://image.tmdb.org/t/p/original/' + movie.get('backdrop_path')
         empty_movie.character_id = movie.get('id')
-        genres = movie.get('genre_ids')
-        for genre in genres:
-            empty_movie.genre_ids = genre
+        get_genres = movie.get('genre_ids')
+
         empty_movie.save()
+        for g in get_genres:
+            empty_movie.genres.add(g)
     return redirect('movies:index')
 
 def get_genreData(request):
@@ -41,7 +42,7 @@ def get_genreData(request):
     genres = genre_data.get('genres')
     for genre in genres:
         t_genre = Genre()
-        t_genre.genreId = genre.get('id')
+        t_genre.id = genre.get('id')
         t_genre.name = genre.get('name')
         t_genre.save()
     # print(genres)
