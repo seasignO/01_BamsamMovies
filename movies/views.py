@@ -16,14 +16,16 @@ def index(request):
     return render(request, 'movies/index.html', context)
 
 def get_movieData(request):
-    url = f'https://api.themoviedb.org/3/discover/movie?api_key=8cd57daba319f543423d53955a196f8c&primary_release_year=2017&sort_by=revenue.desc'
+    api_key =  config('API_KEY')
+    url = f'https://api.themoviedb.org/3/discover/movie?api_key={api_key}&primary_release_year=2017&language=ko-KR&sort_by=revenue.desc'
     api_data = requests.get(url).json()
     # pprint(api_data)
     movies = api_data.get('results')
     # pprint(movies)
     for movie in movies:
         empty_movie = Movie()
-        empty_movie.title = movie.get('original_title')
+        empty_movie.title = movie.get('title')
+        empty_movie.original_title = movie.get('original_title')
         empty_movie.summary = movie.get('overview')
         empty_movie.come_out = movie.get('release_date')
         empty_movie.poster_url = 'https://image.tmdb.org/t/p/original/' + movie.get('poster_path')
@@ -37,7 +39,7 @@ def get_movieData(request):
     return redirect('movies:index')
 
 def get_genreData(request):
-    url = f'https://api.themoviedb.org/3/genre/movie/list?api_key=8cd57daba319f543423d53955a196f8c&language=en-US'
+    url = f'https://api.themoviedb.org/3/genre/movie/list?api_key={api_key}&language=ko-KR'
     genre_data = requests.get(url).json()
     genres = genre_data.get('genres')
     for genre in genres:

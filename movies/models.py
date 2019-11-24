@@ -12,6 +12,7 @@ class Genre(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=150)
+    original_title = models.CharField(max_length=150)
     summary = models.TextField()
     poster_url = models.TextField()
     backdrop_url = models.TextField()
