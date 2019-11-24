@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Genre(models.Model):
+    genreId = models.CharField(max_length=20)
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -12,7 +13,13 @@ class Genre(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=150)
     summary = models.TextField()
-    director = models.CharField(max_length=45)
+    poster_url = models.TextField()
+    backdrop_url = models.TextField()
+    come_out = models.CharField(max_length=20)
+    audience = models.IntegerField(null=True)
+    character_id = models.IntegerField()
+    genre = models.ManyToManyField(Genre, blank=True)
+
 
     def __str__(self):
         return self.title

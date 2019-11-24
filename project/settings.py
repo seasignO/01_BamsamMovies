@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'movies.apps.MoviesConfig',
     'accounts.apps.AccountsConfig',
+    'IPython',
     'bootstrap4',
     'rest_framework',
     'django_extensions',
@@ -133,5 +134,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-SITE_ID = 1
+SITE_ID = 2
+
 LOGIN_REDIRECT_URL = '/movies/'
