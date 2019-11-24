@@ -21,7 +21,7 @@ def login(request):
     else:
         form = AuthenticationForm()
 
-    context = {'form': form}
+    context = {'form': form, 'isForm': 'login' }
     return render(request, 'accounts/auth_form.html', context)
 
 @login_required
@@ -39,7 +39,7 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
 
-    context = {'form': form}
+    context = {'form': form, 'isForm': 'signup' }
     return render(request, 'accounts/auth_form.html', context)
 
 
