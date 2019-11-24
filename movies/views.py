@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'movies/index.html', context)
 
 def get_movieData(request):
-    api_key =  config('API_KEY')
+    api_key = config('API_KEY')
     for i in range(1,4):
         url = f'https://api.themoviedb.org/3/discover/movie?api_key={api_key}&primary_release_year=2018&language=ko-KR&sort_by=revenue&page={i}'
         api_data = requests.get(url).json()
@@ -24,13 +24,18 @@ def get_movieData(request):
         movies = api_data.get('results')
         # pprint(movies)
         for movie in movies:
+            # print(movie)
             empty_movie = Movie()
             empty_movie.title = movie.get('title')
             empty_movie.original_title = movie.get('original_title')
             empty_movie.summary = movie.get('overview')
             empty_movie.come_out = movie.get('release_date')
-            empty_movie.poster_url = 'https://image.tmdb.org/t/p/original' + movie.get('poster_path')
-            empty_movie.backdrop_url = 'https://image.tmdb.org/t/p/original' + movie.get('backdrop_path')
+            empty_movie.poster_url = 'https://image.tmdb.org/t/p/original' + movie.get('poster_path') if movie.get('poster_path') != None else ' '
+            # print(movie.get('poster_path'))
+            # if movie.get("backdrop_path") != None:
+            empty_movie.backdrop_url = 'https://image.tmdb.org/t/p/original' + movie.get("backdrop_path") if movie.get("backdrop_path") != None else ' '
+           
+            # print(movie.get('backdrop_path'))
             empty_movie.character_id = movie.get('id')
             get_genres = movie.get('genre_ids')
 

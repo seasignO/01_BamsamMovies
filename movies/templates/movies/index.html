@@ -10,7 +10,7 @@
 <a href="{% provider_login_url 'google'%}" class="btn btn-danger font-weight-bold">GOOGLE</a><br>
 <a href="{% provider_login_url 'kakao'%}" class="btn btn-warning font-weight-bold">KAKAO</a><br>
 
-  <a href="{% url 'movies:get_movieData' %}">[영화데이터 얻어오기]</a>
-  <a href="{% url 'movies:get_genreData' %}">[장르데이터 얻어오기]</a>
+  <a href="{% url 'movies:get_genreData' %}">다음</a>
+  <a href="{% url 'movies:get_movieData' %}">시작하기</a>
 
 {% endblock base %}
