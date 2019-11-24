@@ -27,13 +27,16 @@
 
 #### 191123(토)
 
-- Model 수정
-  - User Model, Movie Model이 가지고 있어야 할 FIeid 재정의
-- 새로운 Model 정의
-  - 쪽지를 위한 Message Model 정의
-  - BLANK=True와 null=True를 헷갈릴 수 있다.
+> - Model 수정
+>   - User Model, Movie Model이 가지고 있어야 할 FIeid 재정의
+> - 새로운 Model 정의
+>   - 쪽지를 위한 Message Model 정의
+>   - BLANK=True와 null=True를 헷갈릴 수 있다.
+> - Movie DB API에서 필요한 정보를 추출해 영화 DB구축
 
-- Movie DB API에서 필요한 정보를 추출해 영화 DB구축
+#### 191124(일)
+
+> - 
 
 
 
