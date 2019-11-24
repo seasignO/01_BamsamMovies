@@ -56,6 +56,12 @@ def send_message(request):
         send = request.POST.get('send')
         content = request.POST.get('content')
         movie = request.POST.get('movie') if request.POST.get('movie') else ' '
+        message = Message()
+        message.receive = receive
+        message.send = send
+        message.content = content
+        message.movie = movie
+        message.save()
     else:
         form = MessageForm()
     context = {'form': form}
