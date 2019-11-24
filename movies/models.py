@@ -4,7 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Genre(models.Model):
-    genreId = models.CharField(max_length=20)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -18,7 +18,7 @@ class Movie(models.Model):
     come_out = models.CharField(max_length=20)
     audience = models.IntegerField(null=True)
     character_id = models.IntegerField()
-    genre = models.ManyToManyField(Genre, blank=True)
+    genres = models.ManyToManyField(Genre, related_name='movies')
 
 
     def __str__(self):
