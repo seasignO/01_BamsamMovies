@@ -1,51 +1,76 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .dimm			{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:block; }
+    #modal { display: none; }
+  </style>
+</head>
+<body>
+  {% include '_navBar.html' %}
+  <div class="container">
+    <a id="sendBtn" class="btn btn-primary mt-3" href="#" onclick="appearModal()">메세지 보내기</a>
+    <br>
+    <ul class="list-group list-group-flush">
+      {% for message in messages %}
+        <li class="list-group-item">
+          {{message.send}} / {{ message.comment}}
+        
+        </li>
+      {% endfor %}
+    </ul>
 
-  <a class="btn btn-primary mt-3" href="{% url 'accounts:send_message' %}">메세지 보내기</a>
-  <br>
-  <ul class="list-group list-group-flush">
-    {% for message in messages %}
-      <li class="list-group-item">
-        {{message.send}} / {{ message.comment}}
-      
-      </li>
-    {% endfor %}
-  </ul>
-
-
-  <div class="layerPopup">
-
-    <div class="dimmed" style="width: 100%; height: 100%;">
-    </div>
-
-    <div id="modal" class="modal text-center my-auto" tabindex="-1" role="dialog" style="display: none;">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> {% endcomment %}
-            <button type="button" class="btn btn-primary">Save changes</button>
+    <div id="modal" class="modal text-center my-auto" tabindex="-1" role="dialog">
+      <form action="" method="POST">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">메세지 보내기</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">With textarea</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> {% endcomment %}
+              <button type="button" class="btn btn-primary">메세지 보내기</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 
 <script type="text/javascript">
-  function appearModal() {
     const modal = document.querySelector('#modal')
-    const modalBtn = document.querySelector('.close')
+    const sendBtn = document.querySelector('#sendBtn')
+    const dimm = document.createElement('div')
+    const closeBtn = document.querySelector('.close')
+    sendBtn.onclick = function(){
+      document.body.appendChild(dimm)
+      dimm.setAttribute('class','dimm');
+      dimm.style.display = 'block'
+      modal.style.display = 'block'
+      modal.style.zIndex = '1'
+    }
 
-
-  }
+    closeBtn.onclick = function(){
+      modal.style.display = 'none'
+      dimm.style.display = 'none'
+    }
 </script>
-
-{% endblock content %}
+</body>
+</html>
+  
