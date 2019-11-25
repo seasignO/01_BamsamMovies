@@ -19,8 +19,8 @@ class Movie(models.Model):
     come_out = models.CharField(max_length=20)
     audience = models.IntegerField(null=True)
     character_id = models.IntegerField()
-    genres = models.ManyToManyField(Genre, related_name='movies')
-
+    genres = models.ManyToManyField(Genre, related_name='movie_set')
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __str__(self):
         return self.title
@@ -29,7 +29,7 @@ class Movie(models.Model):
 class Rating(models.Model):
     comment = models.TextField()
     score = models.IntegerField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings_set')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
