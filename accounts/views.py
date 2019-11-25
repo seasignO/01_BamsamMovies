@@ -56,13 +56,15 @@ def send_message(request):
         send = request.POST.get('send')
         content = request.POST.get('content')
         movie = request.POST.get('movie') if request.POST.get('movie') else ' '
-        message = Message()
-        message.receive = receive
-        message.send = send
-        message.content = content
-        message.movie = movie
-        message.is_read = False
-        message.save()
+        form = MessageForm()
+        form.receive = receive
+        form.send = send
+        form.content = content
+        form.movie = movie
+        form.is_read = False
+        if form.is_valid():
+            form.save()
+
     else:
         form = MessageForm()
     context = {'form': form}
@@ -73,7 +75,7 @@ def read_message(request, message_pk):
     if message.is_read == False:
         message.is_read = True
 
-
+@login_required
 def user_detail(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
     context = {'user': user}
