@@ -9,14 +9,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Abel" />
 
-  <link rel="stylesheet" type="text/css" href="slick/slick.css" />
-  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <style>
+    html,
     body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+
+
+
+
+
+
       background-color: black;
       height: 100%;
 
@@ -49,45 +69,126 @@
         text-shadow: 0 0 20px #d62b55, 0 0 30px #ff4da6, 0 0 40px #9c0010, 0 0 50px #ff4da6, 0 0 30px #ff4da6, 0 0 70px #ff1f57, 0 0 30px #cf1140;
       }
     }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
   </style>
 </head>
 
 <body>
+  <div class="text-center" style="margin-bottom: 20px;">
+    {% if mes == True %}
+    <p>임시태그</p>
+    {% else %}
+    <h1 class="glow"
+      style="margin-top: 70px; margin-left: 0px; font-family: 'Nanum Myeongjo', serif; color: white; font-size: 60px;">
+      오늘의 영화가 부디 기쁘길 바래요.</h1>
+    {% comment %} <h1 class="glow" style="font-family: 'Courier New'; color: white; font-size: 60px;">CHOOSE GENRE
+    </h1>
+    {% endcomment %}
+    {% endif %}
+  </div>
+  <br>
+
+  {% comment %} <div class="mx-auto"></div> {% endcomment %}
 
 
   <div class="container">
-    <div class="text-center" style="margin-bottom: 76px;">
-      {% if mes == True %}
-      asdasd
-      {% else %}
-      <h1 class="glow" style="margin-top: 70px; margin-left: 0px; font-family: Abel; color: white; font-size: 60px;">How
-        about a movie
-        like this?</h1>
-      {% comment %} <h1 class="glow" style="font-family: 'Courier New'; color: white; font-size: 60px;">CHOOSE GENRE
-      </h1>
-      {% endcomment %}
-      {% endif %}
+    <div class="my-1 text-right" style="display: block;">
+      <a href="#" class="btn btn-danger"><b>더 많은 영화</b></a>
     </div>
-    <br>
-
-
-
-    <div class="mx-auto">
-      {% for movie in random_movies %}
-      <a href="{% url 'movies:movie_detail' movie.pk %}">
-        {% if movie.poster_url == null %}
-        <img src="{% static 'movies/images/no_image.jpg' %}" alt="{{movie.title}}" style="width:200px; height:280px;">
-        {% else %}
-        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="{{movie.title}}"
-          style="width:200px; height:280px;">
-        {% endif %}
-      </a>
-      {% endfor %}
-    </div>
-
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+
+  <div style="display: block; height: 280px; margin-top: 70px;">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for movie in random_movies %}
+        {% if movie.poster_url == null %}
+        <div class="card-block special-card" style="width: 18rem; background-color: #1a1b1c;">
+          <div class="swiper-slide"><img src="{% static 'movies/images/no_image.jpg' %}" alt="{{movie.title}}"
+              style="width:200px; height:280px;">
+            <div class="card-body">
+              <p class="text-light"><a href="{% url 'movies:movie_detail' movie.pk %}"
+                  class="text-reset">{{movie.title}}</a></p>
+            </div>
+          </div>
+        </div>
+        {% comment %} <img src="{% static 'movies/images/no_image.jpg' %}" alt="{{movie.title}}"
+          style="width:200px; height:280px;"> {% endcomment %}
+        {% else %}
+        <div class="swiper-slide">
+          <a href="{% url 'movies:movie_detail' movie.pk %}">
+            <div class="card-block special-card" style="width: 18rem; background-color: #1a1b1c;">
+              <div class="swiper-slide"><img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}"
+                  alt="{{movie.title}}" style="width: 200px; height: 280px;">
+                <div class="card-body">
+                  <p class="text-light">
+                    <a href="{% url 'movies:movie_detail' movie.pk %}" class="text-reset"
+                      style="font-size: 13px;">{{movie.title}}</a></p>
+                </div>
+
+              </div>
+            </div>
+            {% comment %} <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="{{movie.title}}"
+              style="width:200px; height:280px;"> {% endcomment %}
+          </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+
+  {% comment %} <script src="../package/js/swiper.min.js"></script> {% endcomment %}
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      slidesPerGroup: 3,
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -95,7 +196,7 @@
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  </script> {% endcomment %}
 </body>
 
 </html>

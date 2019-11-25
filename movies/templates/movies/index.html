@@ -68,9 +68,6 @@
         "HELLO<br>{{request.user}}" </h1>
       <a class="btn btn-danger" href="{% url 'movies:genre_page' %}"
         style="margin-top: 32px; margin-left: 0px;"><b>시작하기</b></a>
-      {% comment %} <a href="{% url 'movies:get_genreData' %}" class="btn btn-danger d-block mx-auto"
-        style="width:10%; margin-top: 50px;"><b>다음</b></a> {% endcomment %}
-
       {% else %}
       <h1 class="text-center" style="margin-top: 50px;">정상적인 로그인 시도를 해주세요.</h1>
       {% endif %}
