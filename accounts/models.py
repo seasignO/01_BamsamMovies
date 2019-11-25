@@ -11,7 +11,7 @@ class Message(models.Model):
     send = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receive")
     # receive_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment = models.TextField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
     is_read = models.BooleanField()
 
 class User(AbstractUser):

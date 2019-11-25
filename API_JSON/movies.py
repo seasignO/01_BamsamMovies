@@ -91,7 +91,7 @@ for i in range(len(movies)):
         'come_out': come_out,  
         'audience': audience,
         'director': director,
-        'genres': genres,
+        # 'genres': genres,
     }
     result.append(movie_tmp)
 
