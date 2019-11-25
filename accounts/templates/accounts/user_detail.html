@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<button class="btn btn-primary mt-3" onclick="location.href='{% url 'accounts:index' %}'">메인화면으로</button>
+{% comment %} <button class="btn btn-primary mt-3" onclick="location.href='{% url 'accounts:index' %}'">메인화면으로</button> {% endcomment %}
 <div class="jumbotron mt-5">
   <h1 class="display-4">{{user}}</h1>
   <hr class="my-4">
@@ -10,9 +10,7 @@
       평점 정보
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for review in user.review_set.all %}
-        <a class="dropdown-item" href="{% url 'movies:movie_detail' review.movie.pk %}">{{review.movie.title}} / {{review.score}}</a>
-      {% endfor %}
+
     </div>
   </div>
 
@@ -21,37 +19,37 @@
       좋아하는 영화 정보
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for movie in user.like_movies.all %}
+      {% comment %} {% for movie in user.like_movies.all %}
         <a class="dropdown-item" href="{% url 'movies:movie_detail' movie.pk %}">{{movie.title}}</a>
-      {% endfor %}
+      {% endfor %} {% endcomment %}
     </div>
   </div>
 
   <div class="dropdown mt-3 d-inline-block">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       팔로잉 {{user.followings.all|length}}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% for following in user.followings.all  %}
         <a class="dropdown-item" href="{% url 'accounts:user_detail' following.pk%}"> {{following}}</a>
       {% endfor %}
-    </div>
+    </div> {% endcomment %}
   </div>
 
   <div class="dropdown d-inline">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       팔로워 {{user.follow_user.all|length}}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% for follower in user.follow_user.all %}
         <a class="dropdown-item" href="{% url 'accounts:user_detail' follower.pk%}">{{follower}}</a>
       {% endfor %}
-    </div>
+    </div> {% endcomment %}
   </div>
   
   <hr>
 
-  {% if request.user in user.followers.all %}
+  {% if request.user in user.followe_user.all %}
     <p>이미 팔로우 중인 유저입니다.</p>
     <a class="btn btn-danger" href="{% url 'accounts:follow' user.pk %}" role="button">unfollow</a>
   {% else %}

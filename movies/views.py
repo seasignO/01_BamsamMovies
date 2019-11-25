@@ -7,8 +7,9 @@ from decouple import config
 from pprint import pprint
 from .models import Movie, Genre, Rating
 import random
-from .forms import RatingForm
-from django.http import HttpResponse
+from .forms import RatingForm, MovieModifyForm, CustomRatingForm
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -42,23 +43,101 @@ def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     form = RatingForm()
     ratings = movie.ratings_set.all()
-    print(ratings)
     context = {'movie': movie, 'form': form, 'ratings': ratings}
     return render(request, 'movies/movie_detail.html', context)
 
-def rating_create(request, movie_pk):
-    if request.is_ajax():
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        
-        pass
-    else:
-        pass
-    # if request.method == 'POST':
-    #     rating = Rating()
-    #     rating.comment = request.POST.get('comment')
-    #     rating.score = request.POST.get('score')
-    #     rating.user = request.user
-    #     rating.movie = movie
-    #     rating.save()
-    #     return HttpResponse('리뷰 작성 완료')
+# @login_required
+# def rating_create(request, movie_pk):
+#     if request.is_ajax():
+#         movie = get_object_or_404(Movie, pk=movie_pk)
+#         body_unicode = request.body.decode('UTF-8')
+#         body = json.loads(body_unicode)
+#         rating = Rating()
+#         if body['comment'] == '' or body['score'] == None:
+#             return HttpResponse('빈 내용 작성 불가')
+#         else:
+#             rating.comment = body['comment']
+#             rating.score = body['score']
+#             rating.user = request.user
+#             rating.movie = movie
+#             rating.save()
+#             return HttpResponse('Rating 작성 성공')
+#     else:
+#         pass
 
+@login_required
+def rating_create(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            t_form = form.save(commit=False)
+            t_form.user = request.user
+            t_form.movie_id = movie_pk
+            t_form.save()
+    else:
+        form = RatingForm()
+    return redirect('movies:movie_detail', movie_pk)
+    
+@login_required
+def rating_modify(request, movie_pk, rating_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    rating = get_object_or_404(Rating, pk=rating_pk, movie_id=movie_pk)
+    if request.method == 'POST':
+        form = RatingForm(request.POST, instance=rating)
+        form.comment = request.POST.get('comment')
+        form.score = request.POST.get('score')
+        if form.is_valid():
+            print('유효성 통과')
+            t_form = form.save(commit=False)
+            t_form.user = request.user
+            t_form.movie_id = movie_pk
+            t_form.save()
+    return redirect('movies:movie_detail', movie_pk)
+    
+    
+
+@login_required
+def rating_delete(request, movie_pk, rating_pk):
+    rating = get_object_or_404(Rating, movie_id=movie_pk, pk=rating_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if rating.user == request.user:
+        rating.delete()
+    return redirect('movies:movie_detail', movie_pk)
+
+@login_required
+def movie_modify(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.user.username != 'admin':
+        return redirect('movies:movie_detail', movie_pk)
+    
+    if request.method == 'POST':
+        form = MovieModifyForm(request.POST, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect('movies:movie_detail', movie_pk)
+    else:
+        form = MovieModifyForm(instance=movie, initial={'genres': [genre.id for genre in movie.genres.all()]})
+    context = {'form': form}
+    return render(request, 'movies/form.html', context)
+
+@login_required
+def movie_delete(request, movie_pk):
+    if request.user.username != 'admin':
+        return redirect('movies:movie_detail', movie_pk)
+
+@login_required
+def movie_like(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+
+    if movie.like_users.filter(pk=user.pk).exists():
+        movie.like_users.remove(user)
+        liked = False
+    else:
+        movie.like_users.add(user)
+        liked = True
+    
+    context = {'liked': liked, 'count': movie.like_users.count()}
+    return JsonResponse(context)
+         
