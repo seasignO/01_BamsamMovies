@@ -19,16 +19,10 @@ class Movie(models.Model):
     teaser = models.TextField()
     come_out = models.CharField(max_length=20)
     audience = models.IntegerField(null=True)
-<<<<<<< HEAD
-    character_id = models.IntegerField()
-    genres = models.ManyToManyField(Genre, related_name='movie_set')
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
-=======
     director = models.CharField(max_length=50)
     genres = models.ManyToManyField(Genre, related_name='movies')
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
->>>>>>> 84e52e4c406203264725ebae89fb86d27e7365b0
 
     def __str__(self):
         return self.title
