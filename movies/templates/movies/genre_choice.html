@@ -1,39 +1,101 @@
+{% load bootstrap4 %}
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Abel" />
+
+  <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+  <style>
+    body {
+      background-color: black;
+      height: 100%;
+
+      background-image: url({% static 'movies/images/bg2.png' %});
+
+      background-size: cover;
+
+      background-repeat: no-repeat;
+      background-position: 10%, 10%;
+      background-position: center;
+
+      background-attachment: fixed;
+    }
+
+    .glow {
+      font-size: 80px;
+      color: #fff;
+      text-align: center;
+      -webkit-animation: glow 1s ease-in-out infinite alternate;
+      -moz-animation: glow 1s ease-in-out infinite alternate;
+      animation: glow 1s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ba0431, 0 0 20px #d62b55, 0 0 30px #9c0010, 0 0 40px #e60073, 0 0 20px #e60073, 0 0 60px #ff1f57, 0 0 30px #cf1140;
+      }
+
+      to {
+        text-shadow: 0 0 20px #d62b55, 0 0 30px #ff4da6, 0 0 40px #9c0010, 0 0 50px #ff4da6, 0 0 30px #ff4da6, 0 0 70px #ff1f57, 0 0 30px #cf1140;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="app">
-  <button>
-    {% if mes == True %}
-      이미 선호하는 장르를 고르셨군요
-    {% else %}
-      아직 선호하는 장르를 고르지 않으셨네요
-    {% endif %}
-  </button>
+
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 76px;">
+      {% if mes == True %}
+      asdasd
+      {% else %}
+      <h1 class="glow" style="margin-top: 70px; margin-left: 0px; font-family: Abel; color: white; font-size: 60px;">How
+        about a movie
+        like this?</h1>
+      {% comment %} <h1 class="glow" style="font-family: 'Courier New'; color: white; font-size: 60px;">CHOOSE GENRE
+      </h1>
+      {% endcomment %}
+      {% endif %}
+    </div>
+    <br>
 
 
-  {% for movie in random_movies %}
-    <a href="{% url 'movies:movie_detail' movie.pk %}">
-      <img src="{{movie.poster_url}}" alt="{{movie.title}}" class="img-thumbnail" style="width:200px; height:200px;">
-    </a>
-  {% endfor %}
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
- const app = new Vue({
-   el: '#app',
-   computed: {
-     randomNumber: function(){
 
-     }
-   }
- })
-</script>
+    <div class="mx-auto">
+      {% for movie in random_movies %}
+      <a href="{% url 'movies:movie_detail' movie.pk %}">
+        {% if movie.poster_url == null %}
+        <img src="{% static 'movies/images/no_image.jpg' %}" alt="{{movie.title}}" style="width:200px; height:280px;">
+        {% else %}
+        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="{{movie.title}}"
+          style="width:200px; height:280px;">
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 </body>
+
 </html>
