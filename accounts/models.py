@@ -16,7 +16,7 @@ class Message(models.Model):
 
 class User(AbstractUser):
     follow_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followings", blank=True)
-    messages = models.ForeignKey(Message, on_delete = models.CASCADE, blank=True)
+    messages = models.ForeignKey(Message, on_delete = models.CASCADE, null=True)
     like_genres = models.ManyToManyField(Genre, related_name="like_genre_users", blank=True)
     like_movies = models.ManyToManyField(Movie, related_name="like_movie_users", blank=True)
     ban_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
