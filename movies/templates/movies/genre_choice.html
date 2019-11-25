@@ -7,7 +7,33 @@
   <title>Document</title>
 </head>
 <body>
-  {{ mes }}
-  
+
+<div id="app">
+  <button>
+    {% if mes == True %}
+      이미 선호하는 장르를 고르셨군요
+    {% else %}
+      아직 선호하는 장르를 고르지 않으셨네요
+    {% endif %}
+  </button>
+
+
+  {% for movie in random_movies %}
+    <a href="{% url 'movies:movie_detail' movie.pk %}">
+      <img src="{{movie.poster_url}}" alt="{{movie.title}}" class="img-thumbnail" style="width:200px; height:200px;">
+    </a>
+  {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+ const app = new Vue({
+   el: '#app',
+   computed: {
+     randomNumber: function(){
+
+     }
+   }
+ })
+</script>
 </body>
 </html>

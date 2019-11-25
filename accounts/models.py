@@ -12,12 +12,14 @@ class Message(models.Model):
     # receive_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment = models.TextField()
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
+    is_read = models.BooleanField()
 
 class User(AbstractUser):
     follow_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followings", blank=True)
-    messages = models.ForeignKey(Message, on_delete = models.CASCADE, null=True)
+    messages = models.ForeignKey(Message, on_delete = models.CASCADE, blank=True)
     like_genres = models.ManyToManyField(Genre, related_name="like_genre_users", blank=True)
     like_movies = models.ManyToManyField(Movie, related_name="like_movie_users", blank=True)
+    ban_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
 
 
