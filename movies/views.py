@@ -26,11 +26,13 @@ def index(request):
 def genre_page(request):
     user = request.user
     # print('user.like_genres : ',user.like_genres.all().count())
+    if not user.is_authenticated:
+        return redirect('movies:index')
     if user.like_genres.all().count() == 0:
         mes = False
     else:
         mes = True
-    print(type(Movie.objects.all()))
+    # print(type(Movie.objects.all()))
     random_movies = random.sample(list(Movie.objects.all()), 10)
     
     context = {'mes': mes, 'random_movies': random_movies}
