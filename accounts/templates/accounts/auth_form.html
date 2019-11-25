@@ -1,17 +1,54 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load socialaccount %}
-{% block content %}
-  <form action="" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button class="btn btn-primary">submit!</button>
-  </form>
-{% if isForm == 'login' %}
-  네이버 : <a href="{% provider_login_url 'naver'%}">네이버 로그인</a><br>
-  구글 : <a href="{% provider_login_url 'google'%}">구글 로그인</a><br>
-  카카오 : <a href="{% provider_login_url 'kakao'%}">카카오 로그인</a><br>
-  <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
-{% endif %}
+{% load static %}
 
+
+{% block content %}
+<style>
+  body {
+    background-color: black;
+    height: 100%;
+
+    background-image: url({% static 'movies/images/bg4.jpg' %});
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+    background-position: 0, 0;
+    background-position: center;
+
+    background-attachment: fixed;
+  }
+</style>
+<div style="margin-top: 45px;">
+  <img src="{% static 'movies/images/logo.png' %}" alt="logo" style="width: 300px; margin: auto; display: block;">
+</div>
+<div class="row" style="margin-top: 27px; margin-bottom: 80px;">
+  <div class="card-block special-card mx-auto rounded border border-warning"
+    style="width: 18rem; background-color: rgba(245, 245, 245, 0.4);">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="mx-3 my-3">
+        <b>{% bootstrap_form form %}</b>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-danger my-2">SUBMIT</button>
+      </div>
+    </form>
+    {% if isForm == 'login' %}
+    <div class="text-center">
+      <a href="{% url 'accounts:signup' %}" class="btn btn-danger">SIGN UP</a>
+    </div>
+    <hr>
+    <a href="{% provider_login_url 'naver'%}" class="btn btn-success mx-auto" style="display: block; width: 50%;"><img
+        src="{% static 'movies/images/naver.png' %}" alt="naver" style="width: 25px;"> 　　NAVER</a><br>
+    <a href="{% provider_login_url 'google'%}" class="btn btn-light my-0 mx-auto"
+      style="display: block; width: 50%;"><img src="{% static 'movies/images/google.png' %}" alt="google"
+        style="width: 25px;"> 　 GOOGLE</a><br>
+    <a href="{% provider_login_url 'kakao'%}" class="btn btn-warning mx-auto" style="display: block; width: 50%;"><img
+        src="{% static 'movies/images/kakao.png' %}" alt="kakao" style="width: 25px;"> 　　KAKAO</a><br>
+    {% endif %}
+  </div>
+</div>
 {% endblock content %}
