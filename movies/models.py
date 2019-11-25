@@ -16,9 +16,10 @@ class Movie(models.Model):
     summary = models.TextField()
     poster_url = models.TextField()
     backdrop_url = models.TextField()
+    teaser = models.TextField()
     come_out = models.CharField(max_length=20)
     audience = models.IntegerField(null=True)
-    character_id = models.IntegerField()
+    director = models.CharField(max_length=50)
     genres = models.ManyToManyField(Genre, related_name='movies')
 
 
