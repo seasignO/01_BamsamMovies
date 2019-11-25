@@ -17,8 +17,8 @@
   <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap&subset=korean" rel="stylesheet">
   <style>
     @font-face {
-      font-family: 'curcle';
-      scr: url({% static 'movies/stylesheet/curcle.ttf' %} format("truetype"));
+      font-family: 'neontubes2-webfont';
+      scr: url({% static 'movies/stylesheet/neontubes2-webfont.woff' %} format("woff"));
     }
 
     body {
@@ -62,9 +62,9 @@
     <div class="container">
       {% if request.user %}
       <h1 class="glow text-left"
-        style="margin-top: 100px; margin-left: 0px; font-family: 'Poor Story', cursive; color: white; font-size: 48px;">
-        안녕하세요.<br>{{request.user}}님 </h1>
-        <a class="btn btn-danger" href="{% url 'movies:genre_page' %}">시작하기</a>
+        style="margin-top: 100px; margin-left: 0px; font-family: 'Courier New'; color: white; font-size: 60px;">
+        HELLO<br>{{request.user}} </h1>
+        <a class="btn btn-danger" href="{% url 'movies:genre_page' %}" style="margin-top: 32px; margin-left: 0px;"><b>시작하기</b></a>
       {% comment %} <a href="{% url 'movies:get_genreData' %}" class="btn btn-danger d-block mx-auto"
         style="width:10%; margin-top: 50px;"><b>다음</b></a> {% endcomment %}
 
