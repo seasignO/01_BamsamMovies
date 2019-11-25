@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="btn btn-primary mt-3" onclick="location.href='{% url 'accounts:index' %}'">메인화면으로</button>
+<div class="jumbotron mt-5">
+  <h1 class="display-4">{{user}}</h1>
+  <hr class="my-4">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      평점 정보
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for review in user.review_set.all %}
+        <a class="dropdown-item" href="{% url 'movies:movie_detail' review.movie.pk %}">{{review.movie.title}} / {{review.score}}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="dropdown mt-3">
+    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      좋아하는 영화 정보
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for movie in user.like_movies.all %}
+        <a class="dropdown-item" href="{% url 'movies:movie_detail' movie.pk %}">{{movie.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="dropdown mt-3 d-inline-block">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      팔로잉 {{user.followings.all|length}}명
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for following in user.followings.all  %}
+        <a class="dropdown-item" href="{% url 'accounts:user_detail' following.pk%}"> {{following}}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="dropdown d-inline">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      팔로워 {{user.follow_user.all|length}}명
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for follower in user.follow_user.all %}
+        <a class="dropdown-item" href="{% url 'accounts:user_detail' follower.pk%}">{{follower}}</a>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <hr>
+
+  {% if request.user in user.followers.all %}
+    <p>이미 팔로우 중인 유저입니다.</p>
+    <a class="btn btn-danger" href="{% url 'accounts:follow' user.pk %}" role="button">unfollow</a>
+  {% else %}
+     <a class="btn btn-primary" href="{% url 'accounts:follow' user.pk %}" role="button">follow</a>
+  {% endif %}
+
+</div>
+{% endblock content %}

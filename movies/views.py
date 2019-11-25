@@ -1,11 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import Message
 import csv
 import requests, json
 from datetime import datetime, timedelta
 from decouple import config
 from pprint import pprint
-from .models import Movie, Genre
+from .models import Movie, Genre, Rating
+import random
+from .forms import RatingForm
+from django.http import HttpResponse
+
+
 
 # Create your views here.
 def index(request):
@@ -20,13 +25,38 @@ def index(request):
 
 def genre_page(request):
     user = request.user
-    mes = ''
     # print('user.like_genres : ',user.like_genres.all().count())
     if user.like_genres.all().count() == 0:
-        mes = '좋아하는 장르를 선택해주세요'
+        mes = False
     else:
-        mes = '이미 선호하는 장르가 있으시군요'
-    context = {'mes': mes}
+        mes = True
+    print(type(Movie.objects.all()))
+    random_movies = random.sample(list(Movie.objects.all()), 10)
+    
+    context = {'mes': mes, 'random_movies': random_movies}
     return render(request, 'movies/genre_choice.html', context)
 
+def movie_detail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    form = RatingForm()
+    ratings = movie.ratings_set.all()
+    print(ratings)
+    context = {'movie': movie, 'form': form, 'ratings': ratings}
+    return render(request, 'movies/movie_detail.html', context)
+
+def rating_create(request, movie_pk):
+    if request.is_ajax():
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        
+        pass
+    else:
+        pass
+    # if request.method == 'POST':
+    #     rating = Rating()
+    #     rating.comment = request.POST.get('comment')
+    #     rating.score = request.POST.get('score')
+    #     rating.user = request.user
+    #     rating.movie = movie
+    #     rating.save()
+    #     return HttpResponse('리뷰 작성 완료')
 
