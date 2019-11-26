@@ -17,22 +17,13 @@
 
   body {
     background-color: #1a1b1c;
-    height: 100%;
-    background-image: url({% static 'movies/images/logo2.png' %});
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 10%, 10%;
-    background-position: center;
-
-      {
-      % comment %
-    }
-
-    background-attachment: fixed;
-
-      {
-      % endcomment %
-    }
+    {% comment %} height: 100%; {% endcomment %}
+    {% comment %} background-image: url({% static 'movies/images/logo2.png' %}); {% endcomment %}
+    {% comment %} background-size: cover; {% endcomment %}
+    {% comment %} background-repeat: no-repeat; {% endcomment %}
+    {% comment %} background-position: 10%, 10%; {% endcomment %}
+    {% comment %} background-position: center; {% endcomment %}
+    {% comment %} background-attachment: fixed; {% endcomment %}
   }
 
 
@@ -83,13 +74,30 @@
     background: #ccc;
   }
 
+  .nav {
+    background-image: url({% static 'movies/images/logo2-2.png' %});
+    background-color: #1a1b1c;
+    height: 36%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 10%, 10%;
+    background-position: center;
+    {% comment %} background-attachment: fixed; {% endcomment %}
+  }
   }
 </style>
 {% endblock css %}
 
-{% block content %}
-<h1 class="text-center text-warning" style="margin-top: 290px;">MOVIE LIST</h1>
+{% block no_container %}
+<nav class="nav">　</nav>
+{% endblock no_container %}
 
+{% block content %}
+<div class="text-center">
+  <h1 class="text-center text-warning border-bottom border-right px-3 border-warning pb-3" style="margin-top: 35px; display: inline-block;">MOVIE LIST</h1>
+</div>
+
+<p>한쪽에 포스터, 한쪽에 포스터와 자세히 보러가기</p>
 
 <div class="container">
   <div class="row">

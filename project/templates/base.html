@@ -15,6 +15,10 @@
 <body>
 
 	{% include '_navBar.html' %}
+
+	{% block no_container %}
+	{% endblock no_container %}
+
 	<div class="container">
 		{% block content %}
 		{% endblock content %}
