@@ -23,7 +23,6 @@
       position: relative;
       height: 100%;
     }
-
     body {
       background: #eee;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -34,18 +33,13 @@
 
       background-color: black;
       height: 100%;
-
       background-image: url({% static 'movies/images/bg2.png' %});
-
       background-size: cover;
-
       background-repeat: no-repeat;
       background-position: 10%, 10%;
       background-position: center;
-
       background-attachment: fixed;
     }
-
     .glow {
       font-size: 80px;
       color: #fff;
@@ -54,26 +48,21 @@
       -moz-animation: glow 1s ease-in-out infinite alternate;
       animation: glow 1s ease-in-out infinite alternate;
     }
-
     @-webkit-keyframes glow {
       from {
         text-shadow: 0 0 10px #ba0431, 0 0 20px #d62b55, 0 0 30px #9c0010, 0 0 40px #e60073, 0 0 20px #e60073, 0 0 60px #ff1f57, 0 0 30px #cf1140;
       }
-
       to {
         text-shadow: 0 0 20px #d62b55, 0 0 30px #ff4da6, 0 0 40px #9c0010, 0 0 50px #ff4da6, 0 0 30px #ff4da6, 0 0 70px #ff1f57, 0 0 30px #cf1140;
       }
     }
-
     .swiper-container {
       width: 100%;
       height: 100%;
     }
-
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-
       /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
@@ -106,7 +95,7 @@
 
   <div class="container">
     <div class="my-1 text-right" style="display: block;">
-      <a href="#" class="btn btn-danger">MORE</a>
+      <a href="{% url 'movies:main' %}" class="btn btn-danger">MORE</a>
     </div>
   </div>
 
@@ -129,7 +118,7 @@
         {% else %}
         <div class="swiper-slide">
           <a href="{% url 'movies:movie_detail' movie.pk %}">
-            <div class="card-block special-card" style="width: 18rem; background-color: #1a1b1c; border-radius: 15px;"">
+            <div class="card-block special-card" style="width: 18rem; background-color: #1a1b1c; border-radius: 15px;">
               <div class="swiper-slide"><img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}"
                   alt="{{movie.title}}" style="width: 200px; height: 280px;">
                 <div class="card-body">
@@ -146,15 +135,12 @@
         {% endif %}
         {% endfor %}
       </div>
-
       <div class="swiper-pagination"></div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </div>
-
   {% comment %} <script src="../package/js/swiper.min.js"></script> {% endcomment %}
-
   <script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 3,
@@ -182,5 +168,4 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script> {% endcomment %}
 </body>
-
 </html>

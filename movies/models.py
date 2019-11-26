@@ -33,7 +33,7 @@ class Cast(models.Model):
     name = models.CharField(max_length=50)
     character = models.CharField(max_length=50)
     profile_path = models.TextField()
-    movie = models.ManyToManyField(Movie)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name 

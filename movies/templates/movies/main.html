@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block content %}
-  
-{% endblock content %}
+{% block css %}
+<style>
+  html,
+  body {
+    position: relative;
+    height: 100%;
+  }
+
+  body {
+    background-color: #1a1b1c;
+    height: 100%;
+    background-image: url({% static 'movies/images/logo2.png' %});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 10%, 10%;
+    background-position: center;
+    background-attachment: fixed;
+  }
+</style>
+{% endblock css %}
+
