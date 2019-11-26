@@ -59,12 +59,13 @@
         {% comment %} {% bootstrap_form form %}{% csrf_token %}
         <button style="submit" class="btn btn-primary">submit!</button>
       </form> {% endcomment %}
-        <form action="" @submit.prevent="addRating">
-          <input type="hidden" v-model="moviePk", value="{{movie.pk}}">
-          <input type="number" v-model="ratingScore" value="" id=""/>
+        
+        <form action="" @submit.prevent=addRating({{movie.pk}})>
+          <input type="number" min="1" max="10" v-model="ratingScore" value="" id=""/>
           <input type="text" v-model="ratingComment" value="" id=""/>
-          {ratingComment}
+          <button type="submit" class="btn btn-primary">작성하기</button>
         </form>
+        {ratingComment}
       {% else %}
       <br>
       <div style="text-align: center;">
@@ -123,8 +124,8 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
     const app = new Vue({
-      delimiters: ['{', '}'],
       el: '#app',
+      delimiters: ['{', '}'],
       data: {
         ratingList: [],
         ratingComment: '',
@@ -132,7 +133,7 @@
         moviePk: 0,
       },
       methods: {
-        addRating: function() {
+        addRating: function(movieId) {
           const requestForm = new FormData()
           requestForm.append('comment', this.ratingComment)
           requestForm.append('score', this.ratingScore)
@@ -140,7 +141,10 @@
           axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
           axios.defaults.xsrfCookieName = 'csrftoken'
           axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-          axios.post(`/movies/`)
+          axios.post(`/movies/addRating/${movieId}/`, requestForm)
+          .then(response => {
+            console.log(response.data)
+          })
         },
       },
       //computed: {

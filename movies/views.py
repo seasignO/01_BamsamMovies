@@ -28,7 +28,7 @@ def genre_page(request):
     user = request.user
     # print('user.like_genres : ',user.like_genres.all().count())
     if not user.is_authenticated:
-        return redirect('movies:index')
+        return redirect('accounts:login')
     if user.like_genres.all().count() == 0:
         mes = False
     else:
@@ -146,3 +146,33 @@ def like(request, movie_pk):
     else:        
         return HttpResponseBadRequest
 
+@login_required
+def addRating(request, movie_pk):
+    if not 1<= int(request.POST.get('score')) < 10:
+        return redirect('movies:movie_detail')
+    if request.is_ajax():
+        # print(request.POST.get('comment'))
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        form = RatingForm(request.POST)
+        # form.comment = request.POST.get('comment')
+        # form.score = request.POST.get('score')
+        print(form)
+        # print(list(Rating.objects.filter(movie_id=movie_pk)))
+        if form.is_valid():
+            print('유효성 통과')
+            t_form = form.save(commit=False)
+            t_form.movie_id = movie_pk
+            t_form.user = request.user
+            t_form.save()
+        allRatings = Rating.objects.filter(movie_id=movie_pk)
+        # print(allRatings.values())
+
+        print(type(list(allRatings.values())))
+        # print(type(movie.ratings_set.count()))
+        context = {'count': movie.ratings_set.count(), 'allRatings': list(allRatings.values()), }
+        return JsonResponse(context)
+    else:
+        return HttpResponseBadRequest
+    
+
+        

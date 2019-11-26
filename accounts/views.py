@@ -28,7 +28,7 @@ def login(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return redirect('movies:index')
+    return redirect('')
 
 def signup(request):
     if request.method == 'POST':
