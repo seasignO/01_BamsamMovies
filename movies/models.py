@@ -19,9 +19,10 @@ class Movie(models.Model):
     backdrop_url = models.TextField(null=True)
     teaser = models.TextField()
     come_out = models.CharField(max_length=20)
-    audience = models.IntegerField(null=True)
+    audience = models.FloatField(null=True)
     director = models.CharField(max_length=50)
     genres = models.ManyToManyField(Genre, related_name='movies')
+    # casts = models.ManyToManyField(Cast)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
 
@@ -32,7 +33,7 @@ class Cast(models.Model):
     name = models.CharField(max_length=50)
     character = models.CharField(max_length=50)
     profile_path = models.TextField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ManyToManyField(Movie)
 
     def __str__(self):
         return self.name 
