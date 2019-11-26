@@ -3,7 +3,6 @@
 {% load socialaccount %}
 {% load static %}
 
-
 {% block content %}
 <style>
   body {
@@ -24,7 +23,7 @@
 <div style="margin-top: 45px;">
   <img src="{% static 'movies/images/logo_neon.png' %}" alt="logo" style="width: 300px; margin: auto; display: block;">
 </div>
-<div class="row" style="margin-top: 27px; margin-bottom: 80px;">
+<div class="row" style="margin-top: 27px; margin-bottom: 10px;">
   <div class="card-block special-card mx-auto rounded border border-warning"
     style="width: 30rem; background-color: rgba(245, 245, 245, 0.4);">
     <form action="" method="POST">
@@ -32,8 +31,9 @@
       <div class="mx-3 my-3">
         <b>{% bootstrap_form form %}</b>
       </div>
+      <hr>
       <div class="container">
-      <div class="row justify-content-around">
+      <div class="row justify-content-around" style="margin-bottom: 20px;">
       <div class="text-center">
         <button class="btn btn-danger">SUBMIT</button>
       </div>
@@ -44,15 +44,14 @@
     </div>
     </div>
     </div>
-    <hr>
-    <a href="{% provider_login_url 'naver'%}" class="btn btn-success mx-auto" style="display: block; width: 50%;"><img
-        src="{% static 'movies/images/naver.png' %}" alt="naver" style="width: 25px;"> 　　NAVER</a><br>
-    <a href="{% provider_login_url 'google'%}" class="btn btn-light my-0 mx-auto"
-      style="display: block; width: 50%;"><img src="{% static 'movies/images/google.png' %}" alt="google"
-        style="width: 25px;"> 　 GOOGLE</a><br>
-    <a href="{% provider_login_url 'kakao'%}" class="btn btn-warning mx-auto" style="display: block; width: 50%;"><img
-        src="{% static 'movies/images/kakao.png' %}" alt="kakao" style="width: 25px;"> 　　KAKAO</a><br>
-    {% endif %}
   </div>
 </div>
+    <a href="{% provider_login_url 'naver'%}" class="btn btn-success mx-auto" style="display: block; width: 20%;"><img
+        src="{% static 'movies/images/naver.png' %}" alt="naver" style="width: 25px;"> 　　NAVER</a><br>
+    <a href="{% provider_login_url 'google'%}" class="btn btn-light my-0 mx-auto"
+      style="display: block; width: 20%;"><img src="{% static 'movies/images/google.png' %}" alt="google"
+        style="width: 25px;"> 　 GOOGLE</a><br>
+    <a href="{% provider_login_url 'kakao'%}" class="btn btn-warning mx-auto" style="display: block; width: 20%;"><img
+        src="{% static 'movies/images/kakao.png' %}" alt="kakao" style="width: 25px;"> 　　KAKAO</a><br>
+    {% endif %}
 {% endblock content %}
