@@ -28,7 +28,7 @@
       <h5 class="card-title"></h5>
       <p class="card-text">{{ movie.summary }}</p>
       <br>
-       {% if user in movie.like_users.all %}          
+       {% if request.user in movie.like_users.all %}          
         <i class="fas fa-heart-broken like-button" style="color: black;" data-id="{{ movie.pk }}">싫은데요</i> 
        {% else %}         
         <i class="fas fa-heart like-button" style="color: crimson;" data-id="{{ movie.pk }}">좋아요</i>      
@@ -67,13 +67,13 @@
     <ul class="list-group">
       {% for rating in ratings %}
         <div id="">
-          <div class="{{rating.id}} ratingForm">
+          <div class="{{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <a href="{% url 'accounts:user_detail' rating.user.pk %}">{{rating.user}}</a> {{rating.comment}}
               <div>
                 <span class="badge badge-primary badge-pill">{{rating.score}}점</span>
                 {% if rating.user == request.user %}
-                  <a href="#" class="badge badge-success modify-btn" data-id="{{rating.id}}" onclick="return false;">수정</a>
+                  <a href="#" class="badge badge-success modify-btn" data-id="{{rating.pk}}" onclick="return false;">수정</a>
                   <form action="" style="display:inline;" method="POST">
                     <a href="#" class="badge badge-danger rating-delete">삭제</a>
                   </form>
@@ -82,7 +82,7 @@
               </div>
             </li>
           </div>
-          <li class="{{rating.pk}} modifyForm" style="display:none;" class="list-group-item">
+          <li class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;" class="list-group-item">
             <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
               {% csrf_token %}              
               <div class="form-row">
@@ -92,10 +92,11 @@
                 <div class="col">
                   <input type="text" name="comment" class="form-control" placeholder="Last name" style="width: 100%;" value="{{rating.comment}}">
                 </div>
-                <button style="submit" class="badge badge-success">수정</a>
-                <button class="badge badge-danger modify-cancel">수정 취소</a>
+                <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</a>
+                <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정 취소</a>
               </div>
             </form>
+            
           </li>
       </div>
       {% endfor %}
@@ -104,79 +105,70 @@
 
     </div>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
+
+  
+    const modifyBtn = document.querySelectorAll('.modify-btn')
     const modifyForms = document.querySelectorAll('.modifyForm')
     const ratingForms = document.querySelectorAll('.ratingForm')
-    console.log(ratingForms)
-    const modifyBtns = document.querySelectorAll('.modify-btn')
-    const modifyCancel = document.querySelectorAll('.modify-cancel')
-    for (let i = 0; i < ratingForms.length; i++){
-      modifyBtns[i].onclick = function(){
+   // const modifyCancel = document.querySelectorAll('.modify-cancel')
+
+    modifyBtn.forEach(btn => {
+      btn.addEventListener('click', function(event) {
+        const ratingId = event.target.dataset.id
+        console.log(ratingId)
+        const myModify = document.querySelector(`#modifyForm-${ratingId}`)
+        const myRating = document.querySelector(`#ratingForm-${ratingId}`)
         for (let j = 0; j < ratingForms.length; j++){
           modifyForms[j].style.display = 'none'
           ratingForms[j].style.display = 'block'
         }
-      modifyForms[i].style.display = 'block'
-      ratingForms[i].style.display = 'none'
-      return false
-      }
-      modifyCancel[i].onclick = function(){
-        modifyForms[i].style.display = 'none'
-        ratingForms[i].style.display = 'block'
+        myModify.style.display = 'block'
+        myRating.style.display = 'none'
         return false
-      }
-    }
-
-     const likeButtons = document.querySelectorAll('.like-button')   
-     likeButtons.forEach(button => {     
-       button.addEventListener('click', function(event) {       
-         const articleId = event.target.dataset.id       
-         axios.defaults.xsrfCookieName = 'csrftoken'       
-         axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-  </script>
-
-  {% comment %} <script src="https://kit.fontawesome.com/caed28bd65.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
-  <script>
-    const app = new Vue({
-      el : '#app',
-      data: {
-        ratingList : [],
-      },
-      computed: {
-        computedRatingList: function(){
-          this.$session.start()
-          const computedRatings = this.$session.get('ratinsg')
-          return computedRatings
-        }
-      } 
+      })
     })
 
-    const sendRating = document.querySelector('.create_rating')
-    const my_comment = document.querySelector('#comment')
-    const my_score = document.querySelector('#score')
-
-    sendRating.onclick = function(event){
-      const movieId = event.target.dataset.id
-      console.log(my_comment.value)
-      console.log(my_score.value)
-      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-      const csrftoken = Cookies.get('csrftoken');
-      axios({
-        method: 'POST',
-        url: `http://127.0.0.1:8000/movies/rating_create/${movieId}/`,
-        headers: {
-            'X-CSRFToken': csrftoken,
-          },
-        data: {
-          comment: my_comment.value,
-          score : my_score.value
-        }
-      });
+    const modifyCancel = function(ratingId){
+      const myModify = document.querySelector(`#modifyForm-${ratingId}`)
+      const myRating = document.querySelector(`#ratingForm-${ratingId}`)
+      myModify.style.display = 'none'
+      myRating.style.display = 'block'
+      return false
     }
-  </script> {% endcomment %}
+
+    const likeButtons = document.querySelectorAll('.like-button')   
+    likeButtons.forEach(button => {
+      button.addEventListener('click', function(event) {       
+      const movieId = event.target.dataset.id
+      //console.log(movieId)
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+      axios.defaults.xsrfCookieName = 'csrftoken'       
+      axios.defaults.xsrfHeaderName = 'X-CSRFToken' 
+      axios.post(`/movies/like/${movieId}/`)       
+        .then(response => {      
+          console.log(response)
+          // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
+        document.querySelector(`#like-count-${movieId}`).innerText = `이 영화를 좋아하는 사람 : ${response.data.count}명`
+        console.log(response.data.count)         
+      if (response.data.liked) {
+          event.target.className = 'fas fa-heart-broken like-button'
+          event.target.style.color = 'black'
+          event.target.innerText = '싫은데요'
+        }
+      else{
+        event.target.className = 'fas fa-heart like-button'
+        event.target.style.color = 'crimson'
+        event.target.innerText = '좋아요'
+      }
+    })
+    .catch(error => console.log(error))
+    })
+  })
+  </script>
+
+ 
 </body>
 </html>
 
