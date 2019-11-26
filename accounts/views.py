@@ -5,6 +5,7 @@ from .forms import CustomUserCreationForm, MessageForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import Message
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
 
 # Create your views here.
@@ -81,16 +82,20 @@ def user_detail(request, user_pk):
     context = {'user': user}
     return render(request, 'accounts/user_detail.html', context)
 
-@login_required
+@login_required 
 def follow(request, user_pk):
-    follower = request.user
-    followed = get_object_or_404(get_user_model(), pk=user_pk)
-    if followed != follower:
-        if follower.followings.filter(pk=user_pk).exists():
-            followed.followers.remove(follower)
+    if request.is_ajax():       
+        user = get_object_or_404(get_user_model(), pk=user_pk)       
+        if user.follow_user.filter(pk=request.user.pk).exists():           
+            user.follow_user.remove(request.user)           
+            isFollow = False  # 이미 좋아할 시 false 반환     
         else:
-            followed.followers.add(follower)
-    return redirect('accounts:user_detail', user_pk)
+            user.follow_user.add(request.user)           
+            isFollow = True  # 새로 좋아할 시 true 반환
+        context = {'isFollow': isFollow, 'follower_count': user.follow_user.count(), 'following_count': user.followings.count(),}       
+        return JsonResponse(context)     
+    else:        
+        return HttpResponseBadRequest  
 
 
     
