@@ -8,7 +8,7 @@ from pprint import pprint
 from .models import Movie, Genre, Rating
 import random
 from .forms import RatingForm, MovieModifyForm, CustomRatingForm
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 
 
@@ -83,6 +83,8 @@ def rating_create(request, movie_pk):
 def rating_modify(request, movie_pk, rating_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     rating = get_object_or_404(Rating, pk=rating_pk, movie_id=movie_pk)
+    if rating.user != request.user:
+        return redirect('movies:movie_detail', movie_pk)
     if request.method == 'POST':
         form = RatingForm(request.POST, instance=rating)
         form.comment = request.POST.get('comment')
@@ -126,18 +128,17 @@ def movie_delete(request, movie_pk):
     if request.user.username != 'admin':
         return redirect('movies:movie_detail', movie_pk)
 
-@login_required
-def movie_like(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    user = request.user
-
-    if movie.like_users.filter(pk=user.pk).exists():
-        movie.like_users.remove(user)
-        liked = False
-    else:
-        movie.like_users.add(user)
-        liked = True
-    
-    context = {'liked': liked, 'count': movie.like_users.count()}
-    return JsonResponse(context)
-         
+@login_required 
+def like(request, movie_pk):     
+    if request.is_ajax():       
+        movie = get_object_or_404(Movie, pk=movie_pk)       
+        if movie.like_users.filter(pk=request.user.pk).exists():           
+            movie.like_users.remove(request.user)           
+            liked = False  # 이미 좋아할 시 false 반환     
+        else:
+            movie.like_users.add(request.user)           
+            liked = True  # 새로 좋아할 시 true 반환
+        context = {'liked': liked, 'count': movie.like_users.count(),}       
+        return JsonResponse(context)     
+    else:        
+        return HttpResponseBadRequest  
