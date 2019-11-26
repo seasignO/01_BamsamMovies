@@ -19,42 +19,83 @@
       좋아하는 영화 정보
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% comment %} {% for movie in user.like_movies.all %}
+      {% for movie in user.like_movies.all %}
         <a class="dropdown-item" href="{% url 'movies:movie_detail' movie.pk %}">{{movie.title}}</a>
-      {% endfor %} {% endcomment %}
+      {% endfor %}
     </div>
   </div>
 
   <div class="dropdown mt-3 d-inline-block">
-    {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="following-{{user.pk}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       팔로잉 {{user.followings.all|length}}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% for following in user.followings.all  %}
         <a class="dropdown-item" href="{% url 'accounts:user_detail' following.pk%}"> {{following}}</a>
       {% endfor %}
-    </div> {% endcomment %}
+    </div>
   </div>
 
   <div class="dropdown d-inline">
-    {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      팔로워 {{user.follow_user.all|length}}명
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="follower-{{user.pk}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      팔로워 {{ user.follow_user.count }}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% for follower in user.follow_user.all %}
         <a class="dropdown-item" href="{% url 'accounts:user_detail' follower.pk%}">{{follower}}</a>
       {% endfor %}
-    </div> {% endcomment %}
+    </div>
   </div>
   
   <hr>
 
-  {% if request.user in user.followe_user.all %}
-    <p>이미 팔로우 중인 유저입니다.</p>
-    <a class="btn btn-danger" href="{% url 'accounts:follow' user.pk %}" role="button">unfollow</a>
-  {% else %}
-     <a class="btn btn-primary" href="{% url 'accounts:follow' user.pk %}" role="button">follow</a>
+  {% if request.user != user %}
+    {% if request.user in user.follow_user.all %}
+      {% comment %} <p>이미 팔로우 중인 유저입니다.</p> {% endcomment %}
+      <p class="btn btn-danger follow-button" href="{% url 'accounts:follow' user.pk %}" role="button" data-id="{{user.pk}}">unfollow</a>
+    {% else %}
+      <p class="btn btn-primary follow-button" href="{% url 'accounts:follow' user.pk %}" role="button" data-id="{{user.pk}}">follow</a>
+    {% endif %}
   {% endif %}
 
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+const follow = document.querySelectorAll('.follow-button')   
+    follow.forEach(button => {
+      button.addEventListener('click', function(event) { 
+      //console.log(event)      
+      const userId = event.target.dataset.id
+      //console.log(movieId)
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+      axios.defaults.xsrfCookieName = 'csrftoken'       
+      axios.defaults.xsrfHeaderName = 'X-CSRFToken' 
+      axios.post(`/accounts/follow/${userId}/`)       
+        .then(response => {      
+          //console.log(response)
+          // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
+        document.querySelector(`#follower-${userId}`).innerText = `팔로워 : ${response.data.follower_count}명`
+        document.querySelector(`#following-${userId}`).innerText = `팔로잉 : ${response.data.following_count}명`
+        //console.log(response.data.follower_count)         
+        //console.log(response)
+      if (response.data.isFollow) {
+          
+          //event.target.className = 'fas fa-heart-broken like-button'
+          //event.target.style.color = 'black'
+          
+          event.target.className = 'btn btn-danger follow-button'
+          event.target.innerText = 'unfollow'
+        }
+      else{
+        //event.target.className = 'fas fa-heart like-button'
+        //event.target.style.color = 'crimson'
+        
+        event.target.className = 'btn btn-primary follow-button'
+        event.target.innerText = 'follow'
+      }
+    })
+    .catch(error => console.log(error))
+    })
+  })
+</script>
 {% endblock content %}
