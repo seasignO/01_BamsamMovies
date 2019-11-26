@@ -39,6 +39,9 @@ def genre_page(request):
     context = {'mes': mes, 'random_movies': random_movies}
     return render(request, 'movies/genre_choice.html', context)
 
+def main(request):
+    return render(request, 'movies/main.html')
+
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     form = RatingForm()
@@ -141,4 +144,5 @@ def like(request, movie_pk):
         context = {'liked': liked, 'count': movie.like_users.count(),}       
         return JsonResponse(context)     
     else:        
-        return HttpResponseBadRequest  
+        return HttpResponseBadRequest
+
