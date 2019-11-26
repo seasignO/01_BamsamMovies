@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #262425;">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="{% url 'movies:main' %}">
     <img src="{% static 'movies/images/font_logo.png' %}" alt="logo" style="width: 150px;">
     {% if user.is_authenticated %}
       　{{ user }}님
