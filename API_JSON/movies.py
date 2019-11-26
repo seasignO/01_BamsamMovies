@@ -47,8 +47,8 @@ for i in range(len(movies)):
     summary = response_dict["overview"]
     poster_url = response_dict["poster_path"]
     backdrop_url = response_dict["backdrop_path"]
-    come_out = response_dict["release_date"]  
-    audience = response_dict["popularity"]
+    come_out = response_dict["release_date"]
+    audience = response_dict["popularity"] * 1000
     
     genres = []
     tmps = response_dict["genres"]
@@ -80,7 +80,24 @@ for i in range(len(movies)):
         teaser = response_dict["results"][0]["key"]
     else:
         teaser = ""
-        
+
+    # ## actor
+    # url_actor = f'http://api.themoviedb.org/3/movie/{movie_id}/casts?api_key={api_key}'
+
+    # response = requests.get(url_actor)
+    # response_dict = response.json
+    # tmp_casts = response_dict["cast"]
+    # cnt = 0
+    # casts = []
+    # # pprint(response_dict['cast'])
+    # for cast in tmp_casts:
+    #     if cnt == 5:
+    #         break
+    #     name = cast["name"]
+    #     cnt += 1
+    
+
+
     movie_tmp['fields'] = {
         'title': title,
         'original_title': original_title,
@@ -91,7 +108,7 @@ for i in range(len(movies)):
         'come_out': come_out,  
         'audience': audience,
         'director': director,
-        # 'genres': genres,
+        'genres': genres,
     }
     result.append(movie_tmp)
 

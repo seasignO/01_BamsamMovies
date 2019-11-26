@@ -10,8 +10,15 @@
             "backdrop_url": "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg",
             "teaser": "3WUw9thZR4k",
             "come_out": "2019-11-20",
-            "audience": 435.669,
-            "director": "Chris Buck"
+            "audience": 405.248,
+            "director": "Chris Buck",
+            "genres": [
+                12,
+                16,
+                35,
+                10751,
+                10402
+            ]
         }
     },
     {
@@ -26,7 +33,12 @@
             "teaser": "naYHg7lcS1Q",
             "come_out": "2019-06-28",
             "audience": 641.918,
-            "director": "Jon Watts"
+            "director": "Jon Watts",
+            "genres": [
+                28,
+                12,
+                878
+            ]
         }
     },
     {
@@ -40,8 +52,13 @@
             "backdrop_url": "/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg",
             "teaser": "5jKxSmqWyP8",
             "come_out": "2019-10-02",
-            "audience": 275.986,
-            "director": "Todd Phillips"
+            "audience": 225.59,
+            "director": "Todd Phillips",
+            "genres": [
+                80,
+                53,
+                18
+            ]
         }
     },
     {
@@ -55,8 +72,13 @@
             "backdrop_url": "/nGJpQCAn2NKeDoEflLI5DIvsqoQ.jpg",
             "teaser": "dXoAkZ3t9Q8",
             "come_out": "2019-07-25",
-            "audience": 239.787,
-            "director": "Quentin Tarantino"
+            "audience": 208.363,
+            "director": "Quentin Tarantino",
+            "genres": [
+                18,
+                35,
+                53
+            ]
         }
     },
     {
@@ -70,23 +92,12 @@
             "backdrop_url": "/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg",
             "teaser": "WkQ8AJWohIU",
             "come_out": "2019-07-12",
-            "audience": 242.03,
-            "director": "Jon Favreau"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 645541,
-        "fields": {
-            "title": "존과 맥의 요상한 우주여행",
-            "original_title": "Ellipse",
-            "summary": "우주비행사 존과 반려견 맥이 우주비행 중 불시착한 행성을 탈출하기 위해 고군분투하는 과정을 그린 영화",
-            "poster_url": "/4I0CQfnMy6sRR7QhgqsXR16TmIs.jpg",
-            "backdrop_url": "/sxPycUAaLJJGq2lhhgzR96ePaO0.jpg",
-            "teaser": "",
-            "come_out": "2019-11-05",
-            "audience": 175.094,
-            "director": "Joe Bland"
+            "audience": 234.537,
+            "director": "Jon Favreau",
+            "genres": [
+                12,
+                18
+            ]
         }
     },
     {
@@ -100,8 +111,30 @@
             "backdrop_url": "/riTANvQ8GKmQbgtC1ps3OfkU43A.jpg",
             "teaser": "eE4GPPnG1Mw",
             "come_out": "2019-10-23",
-            "audience": 180.963,
-            "director": "Tim Miller"
+            "audience": 200.244,
+            "director": "Tim Miller",
+            "genres": [
+                28,
+                878
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 645541,
+        "fields": {
+            "title": "존과 맥의 요상한 우주여행",
+            "original_title": "Ellipse",
+            "summary": "우주비행사 존과 반려견 맥이 우주비행 중 불시착한 행성을 탈출하기 위해 고군분투하는 과정을 그린 영화",
+            "poster_url": "/4I0CQfnMy6sRR7QhgqsXR16TmIs.jpg",
+            "backdrop_url": "/sxPycUAaLJJGq2lhhgzR96ePaO0.jpg",
+            "teaser": "",
+            "come_out": "2019-11-05",
+            "audience": 153.548,
+            "director": "Joe Bland",
+            "genres": [
+                878
+            ]
         }
     },
     {
@@ -115,8 +148,12 @@
             "backdrop_url": "/8moTOzunF7p40oR5XhlDvJckOSW.jpg",
             "teaser": "CBxQdsfreSU",
             "come_out": "2019-09-04",
-            "audience": 166.693,
-            "director": "Andy Muschietti"
+            "audience": 120.694,
+            "director": "Andy Muschietti",
+            "genres": [
+                27,
+                18
+            ]
         }
     },
     {
@@ -130,8 +167,13 @@
             "backdrop_url": "/iGnCzXEx0cFlUbpyAMeHwHWhPhx.jpg",
             "teaser": "5NQxsLR8bwc",
             "come_out": "2019-08-09",
-            "audience": 151.644,
-            "director": "Takashi Ōtsuka"
+            "audience": 132.623,
+            "director": "Takashi Ōtsuka",
+            "genres": [
+                16,
+                28,
+                12
+            ]
         }
     },
     {
@@ -146,7 +188,11 @@
             "teaser": "ACPkdwESgfI",
             "come_out": "2019-10-02",
             "audience": 149.472,
-            "director": "Ang Lee"
+            "director": "Ang Lee",
+            "genres": [
+                28,
+                53
+            ]
         }
     },
     {
@@ -160,8 +206,12 @@
             "backdrop_url": "/ygWKYTu7OnZKF9H5NsgjL9iURGV.jpg",
             "teaser": "",
             "come_out": "2019-06-20",
-            "audience": 261.433,
-            "director": "John Herzfeld"
+            "audience": 366.006,
+            "director": "John Herzfeld",
+            "genres": [
+                28,
+                53
+            ]
         }
     },
     {
@@ -175,8 +225,11 @@
             "backdrop_url": "/k2WyDw2NTUIWnuEs5gT7wgrCQg6.jpg",
             "teaser": "ZcQ1lini5Rw",
             "come_out": "2019-08-21",
-            "audience": 133.409,
-            "director": "Ric Roman Waugh"
+            "audience": 115.463,
+            "director": "Ric Roman Waugh",
+            "genres": [
+                28
+            ]
         }
     },
     {
@@ -190,23 +243,14 @@
             "backdrop_url": "/a1MlbLBk5Sy6YvMbSuKfwGlDVlb.jpg",
             "teaser": "",
             "come_out": "2006-06-08",
-            "audience": 132.003,
-            "director": "John Lasseter"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 486589,
-        "fields": {
-            "title": "레드슈즈",
-            "original_title": "Red Shoes 2019",
-            "summary": "사건 사고가 끊이지 않는 동화의 섬. 사라진 아빠를 찾던 화이트 왕국의 공주는 우연히 마법구두를 신고 이전과 완벽하게 다른 ‘레드슈즈’로 거듭난다. 한편, 초록색 난쟁이가 된 일곱 왕자들은 우연히 자신들의 집에 머물게 된 '레드슈즈’가 저주를 풀 유일한 희망이라 생각해 그녀를 돕기 시작하고, 영원한 아름다움을 꿈꾸는 왕비 ‘레지나’는 마법구두를 신고 성을 빠져나간 ‘레드슈즈’를 쫓기 시작하는데…",
-            "poster_url": "/3yZ54uGQ4HxEbpNVO565mU1xagp.jpg",
-            "backdrop_url": "/bga3i5jcejBekr2FCGJga1fYCh.jpg",
-            "teaser": "f8KJe8VOwmU",
-            "come_out": "2019-07-25",
-            "audience": 96.42,
-            "director": "Hong Sung-ho"
+            "audience": 85.717,
+            "director": "John Lasseter",
+            "genres": [
+                16,
+                12,
+                35,
+                10751
+            ]
         }
     },
     {
@@ -220,8 +264,13 @@
             "backdrop_url": "/a0xTB1vBxMGt6LGG4N7k1wO9lfL.jpg",
             "teaser": "",
             "come_out": "2019-11-14",
-            "audience": 111.163,
-            "director": "Elizabeth Banks"
+            "audience": 86.21,
+            "director": "Elizabeth Banks",
+            "genres": [
+                28,
+                12,
+                35
+            ]
         }
     },
     {
@@ -234,84 +283,14 @@
             "poster_url": "/ok4jQwrA54NGuw0qyGgVGCVe9H.jpg",
             "backdrop_url": "/n3UanIvmnBlH531pykuzNs4LbH6.jpg",
             "teaser": "k6uo3eHbGUI",
-            "come_out": "2019-10-10",
-            "audience": 98.487,
-            "director": "James Mangold"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 384018,
-        "fields": {
-            "title": "분노의 질주: 홉스 & 쇼",
-            "original_title": "Fast & Furious Presents: Hobbs & Shaw",
-            "summary": "이상한 약물에 의해 강력한 파워를 얻게 된 아나키스트 브릭스턴 로어(이드리스 엘바)는 인류를 천천히, 그리고 영원히 다른 존재로 바꿔버릴 수 있는 생화학무기를 손에 넣고 자신은 진화형 인간이 된다. 그런데 데카드 쇼(제이슨 스타뎀)의 동생이자 M16 요원인 해티 쇼(바네사 커비)가 치명적인 병원균이 들어 있는 실린더를 브릭스턴의 손에서 훔쳐 달아난다. 양국으로부터 해티의 행방을 찾아달라는 명령을 받은 루크(드웨인 존슨)와 데카드는 유전자 조작으로 사실상 파괴 불가능한 존재가 되어버린 브릭스턴을 상대로 힘겨운 싸움도 이겨나가야 하는데...",
-            "poster_url": "/vr11CuzFEdNyjIZxVt4bQ9p6iyf.jpg",
-            "backdrop_url": "/qAhedRxRYWZAgZ8O8pHIl6QHdD7.jpg",
-            "teaser": "8qg9A_vUH38",
-            "come_out": "2019-08-01",
-            "audience": 99.127,
-            "director": "David Leitch"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 449924,
-        "fields": {
-            "title": "엽문 4",
-            "original_title": "葉問4",
-            "summary": "",
-            "poster_url": "/mAWBfTDAmfpvQGMVFuzuVl49N1P.jpg",
-            "backdrop_url": "/ekP6EVxL81lZ4ivcqPsoZ72rY0h.jpg",
-            "teaser": "",
-            "come_out": "2019-12-20",
-            "audience": 97.922,
-            "director": "Wilson Yip"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 420817,
-        "fields": {
-            "title": "알라딘",
-            "original_title": "Aladdin",
-            "summary": "알라딘(메나 마수드)은 전광석화 같은 손놀림과 타고난 삼십육계 줄행랑을 고루 갖춘 아그라바 왕국의 좀도둑이다. 원숭이 친구 아부를 대동한 채 굶주림에 고통받는 아이들을 못 본 척하지 않는 게 그의 인간적인 매력. 어느 날 아그라바 왕국을 다스리는 술탄이 애지중지하는 딸 자스민 공주(나오미 스콧)가 백성들을 살피기 위해 성 밖으로 나왔다가 빵을 훔쳤다는 누명을 쓰게 된다. 마침 그 광경을 목격한 알라딘은 자스민 공주를 위기에서 구해준다. 자스민 공주가 왕궁에서 일하는 시녀인 줄 알고 그녀를 보러 성 안에 들어간 알라딘은 재상 자파에게 붙잡히고 마는데...",
-            "poster_url": "/cELHkolvQLCDGXiuZLJ2XzvynCt.jpg",
-            "backdrop_url": "/rVqY0Bo4Npf6EIONUROxjYAJfmD.jpg",
-            "teaser": "KrM3vS5sy2w",
-            "come_out": "2019-05-22",
-            "audience": 124.963,
-            "director": "Guy Ritchie"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 476631,
-        "fields": {
-            "title": "바비: 돌핀 매직",
-            "original_title": "Barbie: Dolphin Magic",
-            "summary": "언제나 남을 돕는 바비. 그러나 새로 사귄 인어 친구가 격는 곤경은 전혀 새로운 차원이었지. 저 깊은 바닷속 세상의 일이거든. 바비와 친구들의 짜릿한 모험, 기대해도 좋아!",
-            "poster_url": "/3HbGrs1V1QS9kxjzPagMZaSxhKK.jpg",
-            "backdrop_url": "/5Sbv4UlC6M2Jsf3t1Bw88LUSwyU.jpg",
-            "teaser": "",
-            "come_out": "2017-10-13",
-            "audience": 176.673,
-            "director": "Conrad Helten"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 453075,
-        "fields": {
-            "title": "어느 여름날 밤에",
-            "original_title": "어느 여름날 밤에",
-            "summary": "2013년 겨울, 철책선 인근 초소에서 인민군 용준과 재성이 격한 섹스를 나누고 있다. 섹스 장면이 상급자에게 적발된다. 결국 재성을 두고 용준은 탈북을 결심한다. 목숨을 걸고 북에서 탈출하여 자유의 땅을 밝은 용준, 남한 남자인 태규를 만나게 된다. 태규와 사귄 지 2년 즈음이 지났지만, 용준은 자꾸만 북을 그리워한다. 탈북을 한지 2년 넘은 어느 날, 탈북과 동시에 헤어졌던 재성이 한국으로 넘어온다, 과거의 연인이었던 재성과 현재의 연인이었던 태규를 두고 용준은 갈등한다. 그 갈등은 오해를 낳고, 그 오해는 세 사람을 고통으로 몰아 넣는다.  - (2016년 제6회 서울프라이드영화제)",
-            "poster_url": "/bKdk8hNlsGYDPXPEPRKtUjcwiQx.jpg",
-            "backdrop_url": "/1oQcW3xi7IFbInWnhgG1Eir4RAL.jpg",
-            "teaser": "OsN4MPdwQ_U",
-            "come_out": "2017-04-06",
-            "audience": 174.397,
-            "director": "Kim Hun"
+            "come_out": "2019-11-13",
+            "audience": 95.149,
+            "director": "James Mangold",
+            "genres": [
+                18,
+                36,
+                28
+            ]
         }
     },
     {
@@ -326,7 +305,92 @@
             "teaser": "hmNWWWm9-LM",
             "come_out": "2019-11-21",
             "audience": 99.897,
-            "director": "Monika Mitchell"
+            "director": "Monika Mitchell",
+            "genres": [
+                10749,
+                35
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 384018,
+        "fields": {
+            "title": "분노의 질주: 홉스 & 쇼",
+            "original_title": "Fast & Furious Presents: Hobbs & Shaw",
+            "summary": "이상한 약물에 의해 강력한 파워를 얻게 된 아나키스트 브릭스턴 로어(이드리스 엘바)는 인류를 천천히, 그리고 영원히 다른 존재로 바꿔버릴 수 있는 생화학무기를 손에 넣고 자신은 진화형 인간이 된다. 그런데 데카드 쇼(제이슨 스타뎀)의 동생이자 M16 요원인 해티 쇼(바네사 커비)가 치명적인 병원균이 들어 있는 실린더를 브릭스턴의 손에서 훔쳐 달아난다. 양국으로부터 해티의 행방을 찾아달라는 명령을 받은 루크(드웨인 존슨)와 데카드는 유전자 조작으로 사실상 파괴 불가능한 존재가 되어버린 브릭스턴을 상대로 힘겨운 싸움도 이겨나가야 하는데...",
+            "poster_url": "/vr11CuzFEdNyjIZxVt4bQ9p6iyf.jpg",
+            "backdrop_url": "/qAhedRxRYWZAgZ8O8pHIl6QHdD7.jpg",
+            "teaser": "8qg9A_vUH38",
+            "come_out": "2019-08-01",
+            "audience": 87.338,
+            "director": "David Leitch",
+            "genres": [
+                28,
+                12,
+                35
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 449924,
+        "fields": {
+            "title": "엽문 4",
+            "original_title": "葉問4",
+            "summary": "",
+            "poster_url": "/mAWBfTDAmfpvQGMVFuzuVl49N1P.jpg",
+            "backdrop_url": "/ekP6EVxL81lZ4ivcqPsoZ72rY0h.jpg",
+            "teaser": "",
+            "come_out": "2019-12-20",
+            "audience": 76.9,
+            "director": "Wilson Yip",
+            "genres": [
+                28,
+                18,
+                36
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 486589,
+        "fields": {
+            "title": "레드슈즈",
+            "original_title": "Red Shoes and the Seven Dwarfs",
+            "summary": "사건 사고가 끊이지 않는 동화의 섬. 사라진 아빠를 찾던 화이트 왕국의 공주는 우연히 마법구두를 신고 이전과 완벽하게 다른 ‘레드슈즈’로 거듭난다. 한편, 초록색 난쟁이가 된 일곱 왕자들은 우연히 자신들의 집에 머물게 된 '레드슈즈’가 저주를 풀 유일한 희망이라 생각해 그녀를 돕기 시작하고, 영원한 아름다움을 꿈꾸는 왕비 ‘레지나’는 마법구두를 신고 성을 빠져나간 ‘레드슈즈’를 쫓기 시작하는데…",
+            "poster_url": "/3yZ54uGQ4HxEbpNVO565mU1xagp.jpg",
+            "backdrop_url": "/bga3i5jcejBekr2FCGJga1fYCh.jpg",
+            "teaser": "f8KJe8VOwmU",
+            "come_out": "2019-07-25",
+            "audience": 81.228,
+            "director": "Hong Sung-ho",
+            "genres": [
+                16,
+                10749
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 420817,
+        "fields": {
+            "title": "알라딘",
+            "original_title": "Aladdin",
+            "summary": "알라딘(메나 마수드)은 전광석화 같은 손놀림과 타고난 삼십육계 줄행랑을 고루 갖춘 아그라바 왕국의 좀도둑이다. 원숭이 친구 아부를 대동한 채 굶주림에 고통받는 아이들을 못 본 척하지 않는 게 그의 인간적인 매력. 어느 날 아그라바 왕국을 다스리는 술탄이 애지중지하는 딸 자스민 공주(나오미 스콧)가 백성들을 살피기 위해 성 밖으로 나왔다가 빵을 훔쳤다는 누명을 쓰게 된다. 마침 그 광경을 목격한 알라딘은 자스민 공주를 위기에서 구해준다. 자스민 공주가 왕궁에서 일하는 시녀인 줄 알고 그녀를 보러 성 안에 들어간 알라딘은 재상 자파에게 붙잡히고 마는데...",
+            "poster_url": "/cELHkolvQLCDGXiuZLJ2XzvynCt.jpg",
+            "backdrop_url": "/rVqY0Bo4Npf6EIONUROxjYAJfmD.jpg",
+            "teaser": "KrM3vS5sy2w",
+            "come_out": "2019-05-22",
+            "audience": 119.84,
+            "director": "Guy Ritchie",
+            "genres": [
+                12,
+                14,
+                10749,
+                35,
+                10751
+            ]
         }
     },
     {
@@ -340,8 +404,90 @@
             "backdrop_url": "/mlxKite1x1PgmIhJgAxNS9eHmH8.jpg",
             "teaser": "",
             "come_out": "2019-11-08",
-            "audience": 83.866,
-            "director": "Sergio Pablos"
+            "audience": 68.673,
+            "director": "Sergio Pablos",
+            "genres": [
+                16,
+                10751,
+                12,
+                35
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 476631,
+        "fields": {
+            "title": "바비: 돌핀 매직",
+            "original_title": "Barbie: Dolphin Magic",
+            "summary": "언제나 남을 돕는 바비. 그러나 새로 사귄 인어 친구가 격는 곤경은 전혀 새로운 차원이었지. 저 깊은 바닷속 세상의 일이거든. 바비와 친구들의 짜릿한 모험, 기대해도 좋아!",
+            "poster_url": "/3HbGrs1V1QS9kxjzPagMZaSxhKK.jpg",
+            "backdrop_url": "/5Sbv4UlC6M2Jsf3t1Bw88LUSwyU.jpg",
+            "teaser": "",
+            "come_out": "2017-10-13",
+            "audience": 148.183,
+            "director": "Conrad Helten",
+            "genres": [
+                16,
+                12,
+                10751,
+                14
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 453075,
+        "fields": {
+            "title": "어느 여름날 밤에",
+            "original_title": "어느 여름날 밤에",
+            "summary": "2013년 겨울, 철책선 인근 초소에서 인민군 용준과 재성이 격한 섹스를 나누고 있다. 섹스 장면이 상급자에게 적발된다. 결국 재성을 두고 용준은 탈북을 결심한다. 목숨을 걸고 북에서 탈출하여 자유의 땅을 밝은 용준, 남한 남자인 태규를 만나게 된다. 태규와 사귄 지 2년 즈음이 지났지만, 용준은 자꾸만 북을 그리워한다. 탈북을 한지 2년 넘은 어느 날, 탈북과 동시에 헤어졌던 재성이 한국으로 넘어온다, 과거의 연인이었던 재성과 현재의 연인이었던 태규를 두고 용준은 갈등한다. 그 갈등은 오해를 낳고, 그 오해는 세 사람을 고통으로 몰아 넣는다.  - (2016년 제6회 서울프라이드영화제)",
+            "poster_url": "/bKdk8hNlsGYDPXPEPRKtUjcwiQx.jpg",
+            "backdrop_url": "/1oQcW3xi7IFbInWnhgG1Eir4RAL.jpg",
+            "teaser": "OsN4MPdwQ_U",
+            "come_out": "2017-04-06",
+            "audience": 225.467,
+            "director": "Kim Hun",
+            "genres": [
+                18
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 522938,
+        "fields": {
+            "title": "람보: 라스트 워",
+            "original_title": "Rambo: Last Blood",
+            "summary": "36년간 수많은 전쟁터의 중심에서 치열하게 싸운 '존 람보'. 지옥 같은 전쟁 트라우마에서 벗어나 평화로운 시간을 보내는 것도 잠시, 딸처럼 여겼던 옆집 소녀가 멕시코 카르텔에게 납치된다. ‘람보’는 자신의 전투 본능과 살인 무기를 총동원해 자비 없이 적들을 처단하기 시작하는데...",
+            "poster_url": "/5f1hwyCxTjOUnrT23n6skqQeUD9.jpg",
+            "backdrop_url": "/spYx9XQFODuqEVoPpvaJI1ksAVt.jpg",
+            "teaser": "aVDBL8k-nJk",
+            "come_out": "2019-09-19",
+            "audience": 77.892,
+            "director": "Adrian Grunberg",
+            "genres": [
+                28,
+                53
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 640882,
+        "fields": {
+            "title": "3022",
+            "original_title": "3022",
+            "summary": "",
+            "poster_url": "/7EKGHMsm3nv87wvlqD7HBZYgAeP.jpg",
+            "backdrop_url": "/ailBwpIwzUcNpuKSHtSwyqXAYCe.jpg",
+            "teaser": "",
+            "come_out": "2019-11-22",
+            "audience": 72.562,
+            "director": "John Suits",
+            "genres": [
+                878
+            ]
         }
     },
     {
@@ -355,23 +501,13 @@
             "backdrop_url": "/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
             "teaser": "xUDhdCsLkjU",
             "come_out": "2018-04-25",
-            "audience": 94.795,
-            "director": "Anthony Russo"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 540247,
-        "fields": {
-            "title": "다이노소어 월드",
-            "original_title": "Jurassic Galaxy",
-            "summary": "우주선 추락사고로 기이 행성에 모이게 된 데이즈, 마스턴, 플린, 게일은 저마다 각자의 사연을 갖고 생존자들 구출에 나선다. 기이한 행성에서 길을 잃은 이들은 탈출을 위해 왕복선을 찾아 나서게 되고, 희생자들이 속출하는 가운데 공룡의 습격을 받는다. 죽어 나가는 사람들과 남은 생존자들은 정체를 알 수 없는 레치와 대면하게 되고 레치는 방사성 물질의 중독되어 과거 자신의 동료들을 잡아먹고 이들의 목숨까지 위협하기 시작하는데…",
-            "poster_url": "/i9uwYUbg8aguaGJLsMjtDcODwPC.jpg",
-            "backdrop_url": "/sXSp6NSu3fl52jrAc5l7bUPEBWy.jpg",
-            "teaser": "",
-            "come_out": "2018-08-20",
-            "audience": 61.282,
-            "director": "Jon Kondelik"
+            "audience": 84.099,
+            "director": "Anthony Russo",
+            "genres": [
+                12,
+                28,
+                878
+            ]
         }
     },
     {
@@ -386,7 +522,11 @@
             "teaser": "",
             "come_out": "2011-02-23",
             "audience": 100.081,
-            "director": "Chema de la Peña"
+            "director": "Chema de la Peña",
+            "genres": [
+                36,
+                18
+            ]
         }
     },
     {
@@ -400,8 +540,13 @@
             "backdrop_url": "/ijiE9WoGSwSzM16zTxvUneJ8RXc.jpg",
             "teaser": "zVEMxQpC7Ok",
             "come_out": "2019-10-11",
-            "audience": 82.484,
-            "director": "Vince Gilligan"
+            "audience": 61.273,
+            "director": "Vince Gilligan",
+            "genres": [
+                80,
+                18,
+                53
+            ]
         }
     },
     {
@@ -415,23 +560,13 @@
             "backdrop_url": "/skvI4rYFrKXS73BJxWGH54Omlvv.jpg",
             "teaser": "uhVrmXrhqZY",
             "come_out": "2019-10-16",
-            "audience": 68.351,
-            "director": "Joachim Rønning"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 484641,
-        "fields": {
-            "title": "안나",
-            "original_title": "Anna",
-            "summary": "모스크바 시장에서 마트료시카를 판매하던 안나(사샤 루스)는 파리의 모델 에이전트로부터 스카우트 제의를 받는다. 우연한 기회로 파리에서 모델 활동을 하며 새로운 생활에 적응하는 듯한 안나. 하지만 이 모든 과정은 소련 비밀경찰 KGB의 지휘 아래 철저히 계획된 일이며, 안나 역시 각종 훈련과 테스트를 거친 KGB 정예 요원이다. 이중생활을 하며 KGB에서 내려주는 임무를 하나씩 수행해가는 안나의 목표는 오직 하나, 자유로운 삶이다. 자유를 위해 고군분투하는 안나 앞에 미국 CIA 요원 레너드(킬리언 머피)가 등장하며 여러 가지 사건과 관계에 얽히는데...",
-            "poster_url": "/A5HzidYQQrxuLqgM06MEemjm0Qc.jpg",
-            "backdrop_url": "/pIL9e5cN6RNugDCCLwn3stfb9HE.jpg",
-            "teaser": "FCLNuqMMjAs",
-            "come_out": "2019-06-19",
-            "audience": 73.47,
-            "director": "Luc Besson"
+            "audience": 59.846,
+            "director": "Joachim Rønning",
+            "genres": [
+                14,
+                10751,
+                12
+            ]
         }
     },
     {
@@ -445,23 +580,72 @@
             "backdrop_url": "/4iJfYYoQzZcONB9hNzg0J0wWyPH.jpg",
             "teaser": "",
             "come_out": "1977-05-25",
-            "audience": 64.103,
-            "director": "George Lucas"
+            "audience": 57.565,
+            "director": "George Lucas",
+            "genres": [
+                12,
+                28,
+                878
+            ]
         }
     },
     {
         "model": "movies.movie",
-        "pk": 522938,
+        "pk": 546554,
         "fields": {
-            "title": "람보: 라스트 워",
-            "original_title": "Rambo: Last Blood",
-            "summary": "36년간 수많은 전쟁터의 중심에서 치열하게 싸운 '존 람보'. 지옥 같은 전쟁 트라우마에서 벗어나 평화로운 시간을 보내는 것도 잠시, 딸처럼 여겼던 옆집 소녀가 멕시코 카르텔에게 납치된다. ‘람보’는 자신의 전투 본능과 살인 무기를 총동원해 자비 없이 적들을 처단하기 시작하는데...",
-            "poster_url": "/5f1hwyCxTjOUnrT23n6skqQeUD9.jpg",
-            "backdrop_url": "/spYx9XQFODuqEVoPpvaJI1ksAVt.jpg",
-            "teaser": "aVDBL8k-nJk",
-            "come_out": "2019-09-19",
-            "audience": 61.314,
-            "director": "Adrian Grunberg"
+            "title": "나이브스 아웃",
+            "original_title": "Knives Out",
+            "summary": "베스트셀러 미스터리 작가가 85세 생일에 숨진 채 발견된다. 그의 죽음의 원인을 파헤치기 위해 경찰과 함께 탐정 베노잇 블랑이 파견 되는데…",
+            "poster_url": "/6rthGOcMZgUUaWN4FGSTd3n3ovg.jpg",
+            "backdrop_url": "/cjTQSwcsfVdirSFSHNBXRGkxmWa.jpg",
+            "teaser": "0RicuHyiFpo",
+            "come_out": "2019-11-27",
+            "audience": 79.737,
+            "director": "Rian Johnson",
+            "genres": [
+                9648,
+                53,
+                35
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 484641,
+        "fields": {
+            "title": "안나",
+            "original_title": "Anna",
+            "summary": "모스크바 시장에서 마트료시카를 판매하던 안나(사샤 루스)는 파리의 모델 에이전트로부터 스카우트 제의를 받는다. 우연한 기회로 파리에서 모델 활동을 하며 새로운 생활에 적응하는 듯한 안나. 하지만 이 모든 과정은 소련 비밀경찰 KGB의 지휘 아래 철저히 계획된 일이며, 안나 역시 각종 훈련과 테스트를 거친 KGB 정예 요원이다. 이중생활을 하며 KGB에서 내려주는 임무를 하나씩 수행해가는 안나의 목표는 오직 하나, 자유로운 삶이다. 자유를 위해 고군분투하는 안나 앞에 미국 CIA 요원 레너드(킬리언 머피)가 등장하며 여러 가지 사건과 관계에 얽히는데...",
+            "poster_url": "/A5HzidYQQrxuLqgM06MEemjm0Qc.jpg",
+            "backdrop_url": "/pIL9e5cN6RNugDCCLwn3stfb9HE.jpg",
+            "teaser": "FCLNuqMMjAs",
+            "come_out": "2019-06-19",
+            "audience": 53.883,
+            "director": "Luc Besson",
+            "genres": [
+                53,
+                28
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 540247,
+        "fields": {
+            "title": "다이노소어 월드",
+            "original_title": "Jurassic Galaxy",
+            "summary": "우주선 추락사고로 기이 행성에 모이게 된 데이즈, 마스턴, 플린, 게일은 저마다 각자의 사연을 갖고 생존자들 구출에 나선다. 기이한 행성에서 길을 잃은 이들은 탈출을 위해 왕복선을 찾아 나서게 되고, 희생자들이 속출하는 가운데 공룡의 습격을 받는다. 죽어 나가는 사람들과 남은 생존자들은 정체를 알 수 없는 레치와 대면하게 되고 레치는 방사성 물질의 중독되어 과거 자신의 동료들을 잡아먹고 이들의 목숨까지 위협하기 시작하는데…",
+            "poster_url": "/i9uwYUbg8aguaGJLsMjtDcODwPC.jpg",
+            "backdrop_url": "/sXSp6NSu3fl52jrAc5l7bUPEBWy.jpg",
+            "teaser": "",
+            "come_out": "2018-08-20",
+            "audience": 62.0,
+            "director": "Jon Kondelik",
+            "genres": [
+                878,
+                28,
+                12
+            ]
         }
     },
     {
@@ -475,8 +659,12 @@
             "backdrop_url": "/r3LHZUzgQg0SvaaaDcubsIgTtK9.jpg",
             "teaser": "",
             "come_out": "2019-04-03",
-            "audience": 89.483,
-            "director": "Lou Jeunet"
+            "audience": 55.527,
+            "director": "Lou Jeunet",
+            "genres": [
+                36,
+                18
+            ]
         }
     },
     {
@@ -490,8 +678,14 @@
             "backdrop_url": "/j8uPZSPjKYzHlN2B4NhPQVWWZ5x.jpg",
             "teaser": "",
             "come_out": "2019-08-21",
-            "audience": 60.516,
-            "director": "Matt Bettinelli-Olpin"
+            "audience": 112.444,
+            "director": "Matt Bettinelli-Olpin",
+            "genres": [
+                27,
+                53,
+                9648,
+                35
+            ]
         }
     },
     {
@@ -505,8 +699,14 @@
             "backdrop_url": "/8yjqnpOfuFQg3qLRl9Ca1NgIBB5.jpg",
             "teaser": "GhRi_BiaT0k",
             "come_out": "2019-01-31",
-            "audience": 57.664,
-            "director": "Robert Rodriguez"
+            "audience": 54.509,
+            "director": "Robert Rodriguez",
+            "genres": [
+                28,
+                878,
+                53,
+                12
+            ]
         }
     },
     {
@@ -521,7 +721,12 @@
             "teaser": "F1xhDf1hX5w",
             "come_out": "2019-05-30",
             "audience": 60.824,
-            "director": "Bong Joon-ho"
+            "director": "Bong Joon-ho",
+            "genres": [
+                53,
+                18,
+                35
+            ]
         }
     },
     {
@@ -535,53 +740,13 @@
             "backdrop_url": "/stemLQMLDrlpfIlZ5OjllOPT8QX.jpg",
             "teaser": "lcoOPX6jSP0",
             "come_out": "2019-05-15",
-            "audience": 64.891,
-            "director": "Chad Stahelski"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 499701,
-        "fields": {
-            "title": "도라와 잃어버린 황금의 도시",
-            "original_title": "Dora and the Lost City of Gold",
-            "summary": "10대 탐험가 도라가 친구들을 이끌고 모험에 나선다. 도라는 부모님을 구하고, 잃어버린 황금의 도시에 얽힌 미스테리를 풀어야 한다.",
-            "poster_url": "/xvYCZ740XvngXK0FNeSNVTJJJ5v.jpg",
-            "backdrop_url": "/61sbyO47yIpsMFyLhY1MWcqjg1Q.jpg",
-            "teaser": "PNaxOZ0Bmso",
-            "come_out": "2019-08-08",
-            "audience": 55.254,
-            "director": "James Bobin"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 301528,
-        "fields": {
-            "title": "토이 스토리 4",
-            "original_title": "Toy Story 4",
-            "summary": "앤디와 작별한 우디(톰 행크스)는 새로운 주인 보니와의 생활에 적응 중이다. 보니는 처음 간 유치원에서 불안한 마음을 달래고자 포크를 가지고 새 장난감 포키(토니 헤일)를 만든다. 쓰레기에서 장난감으로 거듭난 포키는 자꾸 쓰레기통으로 도망치려 하지만 우디는 보니를 위해 포키를 돌봐주기로 한다. 어느 날 가족여행으로 함께 떠난 놀이공원에서 포키가 납치되고, 포키를 구하기 위한 모험을 하던 중 우디는 우연히 오래 전 헤어진 친구 보핍(애니 파츠)을 만난다. 우디는 주인 없이 자유로운 삶을 살고 있는 보핍을 보며 마음이 흔들리기 시작하는데...",
-            "poster_url": "/1yzeZgUaiZfCBdze7y0HcWxVUHS.jpg",
-            "backdrop_url": "/m67smI1IIMmYzCl9axvKNULVKLr.jpg",
-            "teaser": "PjsXhr2LPOY",
-            "come_out": "2019-06-19",
-            "audience": 56.105,
-            "director": "Josh Cooley"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 501907,
-        "fields": {
-            "title": "어 뷰티풀 데이 인 더 네이버후드",
-            "original_title": "A Beautiful Day in the Neighborhood",
-            "summary": "",
-            "poster_url": "/tC3oqkvF6E1RzaTBMb7IivcLx96.jpg",
-            "backdrop_url": "/wfPR0NQsM4RkLPpWLCbuyNgKC3k.jpg",
-            "teaser": "",
-            "come_out": "2019-11-22",
-            "audience": 48.993,
-            "director": "Marielle Heller"
+            "audience": 57.826,
+            "director": "Chad Stahelski",
+            "genres": [
+                28,
+                53,
+                80
+            ]
         }
     },
     {
@@ -595,8 +760,12 @@
             "backdrop_url": "/iJlGxN0p1suzloBGvvBu3QSSlhT.jpg",
             "teaser": "4hkqJslR5bg",
             "come_out": "2014-10-22",
-            "audience": 61.621,
-            "director": "Chad Stahelski"
+            "audience": 49.212,
+            "director": "Chad Stahelski",
+            "genres": [
+                28,
+                53
+            ]
         }
     },
     {
@@ -610,8 +779,33 @@
             "backdrop_url": "/cN9Nbwh66TRcj2gBE8cSEZulsx3.jpg",
             "teaser": "bbh1NIpDo-c",
             "come_out": "2013-11-27",
-            "audience": 62.293,
-            "director": "Chris Buck"
+            "audience": 58.901,
+            "director": "Chris Buck",
+            "genres": [
+                16,
+                12,
+                10751
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 499701,
+        "fields": {
+            "title": "도라와 잃어버린 황금의 도시",
+            "original_title": "Dora and the Lost City of Gold",
+            "summary": "10대 탐험가 도라가 친구들을 이끌고 모험에 나선다. 도라는 부모님을 구하고, 잃어버린 황금의 도시에 얽힌 미스테리를 풀어야 한다.",
+            "poster_url": "/xvYCZ740XvngXK0FNeSNVTJJJ5v.jpg",
+            "backdrop_url": "/61sbyO47yIpsMFyLhY1MWcqjg1Q.jpg",
+            "teaser": "PNaxOZ0Bmso",
+            "come_out": "2019-08-08",
+            "audience": 51.952,
+            "director": "James Bobin",
+            "genres": [
+                12,
+                35,
+                10751
+            ]
         }
     },
     {
@@ -625,8 +819,11 @@
             "backdrop_url": "/1nm0sk8UUx9jHCTHuMKe2jkt4Pn.jpg",
             "teaser": "trqSKPutkPQ",
             "come_out": "2019-10-30",
-            "audience": 55.21,
-            "director": "Mike Flanagan"
+            "audience": 44.482,
+            "director": "Mike Flanagan",
+            "genres": [
+                27
+            ]
         }
     },
     {
@@ -640,8 +837,14 @@
             "backdrop_url": "/oQWWth5AOtbWG9o8SCAviGcADed.jpg",
             "teaser": "bwiuWc0DNHc",
             "come_out": "2016-05-18",
-            "audience": 43.829,
-            "director": "Bryan Singer"
+            "audience": 29.487,
+            "director": "Bryan Singer",
+            "genres": [
+                28,
+                12,
+                878,
+                14
+            ]
         }
     },
     {
@@ -655,8 +858,35 @@
             "backdrop_url": "/hqkIcbrOHL86UncnHIsHVcVmzue.jpg",
             "teaser": "5k2hEJ98cQU",
             "come_out": "2008-07-16",
-            "audience": 53.995,
-            "director": "Christopher Nolan"
+            "audience": 40.352,
+            "director": "Christopher Nolan",
+            "genres": [
+                18,
+                28,
+                80,
+                53
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 522162,
+        "fields": {
+            "title": "미드웨이",
+            "original_title": "Midway",
+            "summary": "1941년 진주만 공습 이후, 전 세계를 향한 일본의 야욕이 거세지고, 역사상 최대 규모의 미국 본토 공격을 계획한다. 미군은 진주만 다음 일본의 공격 목표가 어디인지 암호를 해독하기 위해 애쓰고, 동시에 긴박하게 전열을 정비해 나간다. 가까스로 두 번째 타겟이 ‘미드웨이’라는 것을 알아낸 미국은 반격을 준비하지만, 절대적으로 불리한 상황이다. 전 세계의 역사를 바꾼 위대한 전투의 이야기가 지금부터 시작된다!",
+            "poster_url": "/8jmrgSjbVr8JP4WQzrGw2d2t4kk.jpg",
+            "backdrop_url": "/1ZSjrBUHP2jm1QlQEyLGufL289q.jpg",
+            "teaser": "",
+            "come_out": "2019-11-06",
+            "audience": 42.237,
+            "director": "Roland Emmerich",
+            "genres": [
+                10752,
+                36,
+                28,
+                18
+            ]
         }
     },
     {
@@ -671,7 +901,12 @@
             "teaser": "8-LUH0OJKgg",
             "come_out": "2019-04-24",
             "audience": 58.322,
-            "director": "Anthony Russo"
+            "director": "Anthony Russo",
+            "genres": [
+                12,
+                878,
+                28
+            ]
         }
     },
     {
@@ -685,8 +920,30 @@
             "backdrop_url": "/aZ1ZqJ4uO1RK5gU5jRsO4qG7rJo.jpg",
             "teaser": "k3qYIvNJ2r8",
             "come_out": "2019-11-01",
-            "audience": 55.08,
-            "director": "Martin Scorsese"
+            "audience": 51.288,
+            "director": "Martin Scorsese",
+            "genres": [
+                80,
+                36
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 501907,
+        "fields": {
+            "title": "어 뷰티풀 데이 인 더 네이버후드",
+            "original_title": "A Beautiful Day in the Neighborhood",
+            "summary": "",
+            "poster_url": "/tC3oqkvF6E1RzaTBMb7IivcLx96.jpg",
+            "backdrop_url": "/wfPR0NQsM4RkLPpWLCbuyNgKC3k.jpg",
+            "teaser": "",
+            "come_out": "2019-11-22",
+            "audience": 47.313,
+            "director": "Marielle Heller",
+            "genres": [
+                18
+            ]
         }
     },
     {
@@ -700,8 +957,13 @@
             "backdrop_url": "/hziiv14OpD73u9gAak4XDDfBKa2.jpg",
             "teaser": "vtJ6eZRanHc",
             "come_out": "2001-11-16",
-            "audience": 57.372,
-            "director": "Chris Columbus"
+            "audience": 42.657,
+            "director": "Chris Columbus",
+            "genres": [
+                12,
+                14,
+                10751
+            ]
         }
     },
     {
@@ -715,8 +977,14 @@
             "backdrop_url": "/aJn9XeesqsrSLKcHfHP4u5985hn.jpg",
             "teaser": "UI2opSniclI",
             "come_out": "2017-04-19",
-            "audience": 95.369,
-            "director": "James Gunn"
+            "audience": 95.623,
+            "director": "James Gunn",
+            "genres": [
+                28,
+                12,
+                35,
+                878
+            ]
         }
     },
     {
@@ -731,7 +999,34 @@
             "teaser": "",
             "come_out": "",
             "audience": 17.512,
-            "director": ""
+            "director": "",
+            "genres": [
+                28,
+                12,
+                878
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 301528,
+        "fields": {
+            "title": "토이 스토리 4",
+            "original_title": "Toy Story 4",
+            "summary": "앤디와 작별한 우디(톰 행크스)는 새로운 주인 보니와의 생활에 적응 중이다. 보니는 처음 간 유치원에서 불안한 마음을 달래고자 포크를 가지고 새 장난감 포키(토니 헤일)를 만든다. 쓰레기에서 장난감으로 거듭난 포키는 자꾸 쓰레기통으로 도망치려 하지만 우디는 보니를 위해 포키를 돌봐주기로 한다. 어느 날 가족여행으로 함께 떠난 놀이공원에서 포키가 납치되고, 포키를 구하기 위한 모험을 하던 중 우디는 우연히 오래 전 헤어진 친구 보핍(애니 파츠)을 만난다. 우디는 주인 없이 자유로운 삶을 살고 있는 보핍을 보며 마음이 흔들리기 시작하는데...",
+            "poster_url": "/1yzeZgUaiZfCBdze7y0HcWxVUHS.jpg",
+            "backdrop_url": "/m67smI1IIMmYzCl9axvKNULVKLr.jpg",
+            "teaser": "PjsXhr2LPOY",
+            "come_out": "2019-06-19",
+            "audience": 48.178,
+            "director": "Josh Cooley",
+            "genres": [
+                12,
+                16,
+                35,
+                10751,
+                14
+            ]
         }
     },
     {
@@ -745,8 +1040,14 @@
             "backdrop_url": "/3DmxSJ08m9wwbxwbwHzA4dunGNO.jpg",
             "teaser": "DKDT4ruL2DE",
             "come_out": "2015-06-23",
-            "audience": 47.354,
-            "director": "Alan Taylor"
+            "audience": 48.948,
+            "director": "Alan Taylor",
+            "genres": [
+                878,
+                28,
+                53,
+                12
+            ]
         }
     },
     {
@@ -760,8 +1061,13 @@
             "backdrop_url": "/9QusGjxcYvfPD1THg6oW3RLeNn7.jpg",
             "teaser": "N7uu8v34HU8",
             "come_out": "2018-12-07",
-            "audience": 51.203,
-            "director": "James Wan"
+            "audience": 40.901,
+            "director": "James Wan",
+            "genres": [
+                28,
+                12,
+                14
+            ]
         }
     },
     {
@@ -775,8 +1081,13 @@
             "backdrop_url": "/cjRUhKyt2Jo3V1KNzc5tpPNfccG.jpg",
             "teaser": "PzpZ4aHMXVg",
             "come_out": "2019-06-05",
-            "audience": 69.168,
-            "director": "Simon Kinberg"
+            "audience": 50.928,
+            "director": "Simon Kinberg",
+            "genres": [
+                878,
+                28,
+                12
+            ]
         }
     },
     {
@@ -790,8 +1101,52 @@
             "backdrop_url": "/rp5dh6D0MLOIIVHkugv6Z8gBLwg.jpg",
             "teaser": "",
             "come_out": "1990-10-03",
-            "audience": 82.573,
-            "director": "Nils Gaup"
+            "audience": 49.544,
+            "director": "Nils Gaup",
+            "genres": [
+                12,
+                10751
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 122,
+        "fields": {
+            "title": "반지의 제왕: 왕의 귀환",
+            "original_title": "The Lord of the Rings: The Return of the King",
+            "summary": "사우론이 인간들의 마지막 요새인 곤도르를 향해 야욕을 드러내고 있는 한편, 아라곤은 쇠락해가고 있는 곤도르의 재건을 위해 왕위 계승을 신중하게 결정지어야만 하는 상황. 이제 중간대륙의 미래는 그의 어깨에 달려있는 것. 사우론이 이끄는 어둠의 군대와의 마지막 전투를 위해 간달프는 곤도르에 흩어져 있던 병사들을 모으고, 로한의 왕 세오덴에게 도움을 받기도 하지만 사우론의 군대에 비하면 열세를 면치 못한다. 그러나 그들은 중간대륙을 사우론의 야욕으로부터 지키려는 사명감과, 마지막 반지 운반자에게 임무를 끝낼 기회를 주기 위해 어둠의 군대를 향해 돌진하게 되는데...",
+            "poster_url": "/tAXXuEAKLk2mOEIJzwajJQEnVZu.jpg",
+            "backdrop_url": "/8BPZO0Bf8TeAy8znF43z8soK3ys.jpg",
+            "teaser": "",
+            "come_out": "2003-12-01",
+            "audience": 39.391,
+            "director": "Peter Jackson",
+            "genres": [
+                12,
+                14,
+                28
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 181812,
+        "fields": {
+            "title": "스타워즈: 라이즈 오브 스카이워커",
+            "original_title": "Star Wars: The Rise of Skywalker",
+            "summary": "",
+            "poster_url": "/opENUWyvrxvsXrRM3qq4wmJDCo2.jpg",
+            "backdrop_url": "/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg",
+            "teaser": "XhtlHGBIP8U",
+            "come_out": "2019-12-18",
+            "audience": 45.254,
+            "director": "J.J. Abrams",
+            "genres": [
+                28,
+                12,
+                878
+            ]
         }
     },
     {
@@ -805,8 +1160,14 @@
             "backdrop_url": "/n0Yk3pEix6EvMfcFxpTQKMUtl6V.jpg",
             "teaser": "",
             "come_out": "2019-11-01",
-            "audience": 58.14,
-            "director": "Wash Westmoreland"
+            "audience": 35.288,
+            "director": "Wash Westmoreland",
+            "genres": [
+                18,
+                9648,
+                10749,
+                53
+            ]
         }
     },
     {
@@ -820,83 +1181,13 @@
             "backdrop_url": "/lFwykSz3Ykj1Q3JXJURnGUTNf1o.jpg",
             "teaser": "-nMTzdo-E1w",
             "come_out": "2019-01-03",
-            "audience": 58.689,
-            "director": "Dean DeBlois"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 535292,
-        "fields": {
-            "title": "21 브릿지",
-            "original_title": "21 Bridges",
-            "summary": "뉴욕 맨해튼 중심에서 벌어진 경찰 연쇄 살해 사건, 범인을 잡기 위해 베테랑 경찰 ‘데이비스’는 극단의 조치를 취한다. 주어진 시간은 단 3시간! 모든 수단과 방법을 동원해 놈들을 잡아야 한다.",
-            "poster_url": "/7DCo9UmXMLrltUwIz19F8f1p04W.jpg",
-            "backdrop_url": "/blUCzzkFNWrur18J0BvIYBdbquv.jpg",
-            "teaser": "",
-            "come_out": "2019-10-24",
-            "audience": 47.909,
-            "director": "Brian Kirk"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 122917,
-        "fields": {
-            "title": "호빗: 다섯 군대 전투",
-            "original_title": "The Hobbit: The Battle of the Five Armies",
-            "summary": "빌보 배긴스와 참나무 방패 소린, 난쟁이 족이 떠난 거대한 여정의 끝에 난쟁이 족은 원래 자신들의 터전이던 에레보르에 있는 엄청난 보물을 되찾지만 이는 무시무시한 용 스마우그가 호수마을의 무기력한 주민들을 공격하게 되는 결과를 낳는다. 소린은 탐욕에 서서히 눈이 멀어 우정과 명예를 저버린 채 왕의 보물 아르켄스톤을 찾는다. 암흑의 군주 사우론은 오크 군대를 보내 외로운 산에 기습 공격을 감행한다. 마침내 다섯 군대의 전투가 시작되고 빌보는 본인과 친구들의 목숨을 걸고 싸워야만 하는데...",
-            "poster_url": "/6MKC4xwo4JhaVvblsGdUgjKYFbS.jpg",
-            "backdrop_url": "/qhH3GyIfAnGv1pjdV3mw03qAilg.jpg",
-            "teaser": "_MJISxvLmVo",
-            "come_out": "2014-12-10",
-            "audience": 61.202,
-            "director": "Peter Jackson"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 546554,
-        "fields": {
-            "title": "나이브스 아웃",
-            "original_title": "Knives Out",
-            "summary": "베스트셀러 미스터리 작가가 85세 생일에 숨진 채 발견된다. 그의 죽음의 원인을 파헤치기 위해 경찰과 함께 탐정 베노잇 블랑이 파견 되는데…",
-            "poster_url": "/6rthGOcMZgUUaWN4FGSTd3n3ovg.jpg",
-            "backdrop_url": "/cjTQSwcsfVdirSFSHNBXRGkxmWa.jpg",
-            "teaser": "0RicuHyiFpo",
-            "come_out": "2019-11-27",
-            "audience": 64.019,
-            "director": "Rian Johnson"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 528888,
-        "fields": {
-            "title": "내 이름은 돌러마이트",
-            "original_title": "Dolemite Is My Name",
-            "summary": "할리우드에선 아무도 안 써준다고? 그럼 스스로 스타가 되는 수밖에. 돌러마이트라는 선정적이고 코믹한 캐릭터로 무대를 휩쓴 루디. 그는 돌러마이트를 영화로 만들면 흑인 관객을 끌어모을 수 있다고 확신한다. 코미디, 관능, 액션! 이렇게 재밌는데 망할 리가 있나. 할리우드를 뒤집으러 그가 간다.",
-            "poster_url": "/uoAqJg7ZSmftnBGOkupU1ySZQU0.jpg",
-            "backdrop_url": "/8FuiFasbeFQj24Vqx6JqSCqj5lO.jpg",
-            "teaser": "hQtihtxzUw0",
-            "come_out": "2019-09-07",
-            "audience": 52.48,
-            "director": "Craig Brewer"
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 521777,
-        "fields": {
-            "title": "굿 보이즈",
-            "original_title": "Good Boys",
-            "summary": "같은 학년의 여자애를 멀리서 짝사랑하는 Max(Jacob Tremblay), 전형적인 반항아 헤어스타일과 귀를 뚫은 귀걸이를 하고 군복 야상을 입고 다니며 터프한 척 하지만 실제로는 학교 뮤지컬에서 노래를 부르는 것이 꿈인 Thor(Brady Noon), 덩치는 크지만 순진하고 착한 Lucas(Keith L. Williams) 세 명이 영화의 주인공들이다. The Beanbag Boys라고 자칭하면서 어릴 때부터 친하게 지내온 이 세 명은 같은 학년에서 제일 터프하고 인기 있는 아이의 집에서 벌어지는 키스 파티에 초대를 받는다.",
-            "poster_url": "/tximyCXMEnWIIyOy9STkOduUprG.jpg",
-            "backdrop_url": "/6Xsz9KHQmCcIcj3CoWQq5eLtVoT.jpg",
-            "teaser": "",
-            "come_out": "2019-08-14",
-            "audience": 42.307,
-            "director": "Gene Stupnitsky"
+            "audience": 40.457,
+            "director": "Dean DeBlois",
+            "genres": [
+                16,
+                10751,
+                12
+            ]
         }
     }
 ]
