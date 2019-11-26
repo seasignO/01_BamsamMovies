@@ -50,22 +50,12 @@
       </div>
 
       {% if request.user.is_authenticated %}
-      {% comment %} <label for="comment">리뷰</label>
-      <input type="text" name="" id="comment" value="">
-      <label for="score">점수</label>
-      <input type="number" name="" id="score" value="">
-      <a class="btn btn-primary create_rating" data-id={{movie.pk}}>평점 남기기</a> {% endcomment %}
-      {% comment %} <form action="{% url 'movies:rating_create' movie.pk %}" method="POST" id="createForm"> {% endcomment %}
-        {% comment %} {% bootstrap_form form %}{% csrf_token %}
-        <button style="submit" class="btn btn-primary">submit!</button>
-      </form> {% endcomment %}
-        
-        <form action="" @submit.prevent=addRating({{movie.pk}})>
-          <input type="number" min="1" max="10" v-model="ratingScore" value="" id=""/>
-          <input type="text" v-model="ratingComment" value="" id=""/>
+        <form action="{% url 'movies:rating_create' movie.pk%}" method="POST">
+          {% csrf_token %}
+          <input type="number" name="score" min="1" max="10"/>
+          <input type="text" name="comment" value="" id=""/>
           <button type="submit" class="btn btn-primary">작성하기</button>
         </form>
-        {ratingComment}
       {% else %}
       <br>
       <div style="text-align: center;">
@@ -76,6 +66,7 @@
       리뷰 목록 <span>{{ratings | length}}</span>개의 rating
       <ul class="list-group">
         {% for rating in ratings %}
+        <div v-for="rating in ratings" v-bind:key="rating.id">
         <div id="">
           <div class="{{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -115,6 +106,7 @@
 
           </li>
         </div>
+        </div>
         {% endfor %}
       </ul>
     </div>
@@ -123,39 +115,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
-    const app = new Vue({
-      el: '#app',
-      delimiters: ['{', '}'],
-      data: {
-        ratingList: [],
-        ratingComment: '',
-        ratingScore: 0,
-        moviePk: 0,
-      },
-      methods: {
-        addRating: function(movieId) {
-          const requestForm = new FormData()
-          requestForm.append('comment', this.ratingComment)
-          requestForm.append('score', this.ratingScore)
-
-          axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-          axios.defaults.xsrfCookieName = 'csrftoken'
-          axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-          axios.post(`/movies/addRating/${movieId}/`, requestForm)
-          .then(response => {
-            console.log(response.data)
-          })
-        },
-      },
-      //computed: {
-        //ratingComputed: {
-          
-       // }
-      //}
-    })
-
-
-
     const modifyBtn = document.querySelectorAll('.modify-btn')
     const modifyForms = document.querySelectorAll('.modifyForm')
     const ratingForms = document.querySelectorAll('.ratingForm')

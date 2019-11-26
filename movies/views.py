@@ -73,6 +73,7 @@ def rating_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'POST':
         form = RatingForm(request.POST)
+        print(form)
         if form.is_valid():
             t_form = form.save(commit=False)
             t_form.user = request.user
