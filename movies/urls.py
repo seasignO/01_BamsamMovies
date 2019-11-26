@@ -12,5 +12,6 @@ urlpatterns = [
     path('rating_modify/<int:movie_pk>/<int:rating_pk>/', views.rating_modify, name="rating_modify"),
     path('like/<int:movie_pk>/', views.like, name='like'),
     path('main/', views.main, name='main'),
+    path('addRating/<int:movie_pk>/', views.addRating, name='addRating'),
 
 ]
