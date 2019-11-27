@@ -39,6 +39,7 @@ def genre_page(request):
     context = {'mes': mes, 'random_movies': random_movies}
     return render(request, 'movies/genre_choice.html', context)
 
+@login_required
 def main(request):
     movies = []
     movie_ids = [movie.id for movie in Movie.objects.all()]

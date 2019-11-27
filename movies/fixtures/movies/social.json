@@ -1,0 +1,47 @@
+[
+{
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+        "provider": "google",
+        "name": "Google Login",
+        "client_id": "153925964602-s03h2ngi5o23jo6ra29nd413vkcsm8l6.apps.googleusercontent.com",
+        "secret": "v5sw-gBDiVRd5HX8jdeYvWk6",
+        "key": "",
+        "sites": [
+            3,
+            2
+        ]
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 2,
+    "fields": {
+        "provider": "naver",
+        "name": "Naver Login",
+        "client_id": "cn4dImQlhbQzBQJiDDch",
+        "secret": "dk069kCbLM",
+        "key": "",
+        "sites": [
+            3,
+            2
+        ]
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 3,
+    "fields": {
+        "provider": "kakao",
+        "name": "Kakao Login",
+        "client_id": "d98ec03e234f6d4081243a7c877bd21e",
+        "secret": "V2qap3JarKyNwf4wZxecFtSNQ0Yr06NQ",
+        "key": "",
+        "sites": [
+            3,
+            2
+        ]
+    }
+}
+]

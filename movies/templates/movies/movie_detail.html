@@ -183,7 +183,7 @@
       axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
       axios.defaults.xsrfCookieName = 'csrftoken'
       axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-      axios.post(liekUrl)
+      axios.post(likeUrl)
         .then(response => {
           console.log(response)
           // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
