@@ -9,6 +9,11 @@ class CustomUserCreationForm(UserCreationForm):
         model = get_user_model()
         fields = UserCreationForm.Meta.fields
 
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = get_user_model()
+        fields = ('first_name', 'last_name',)
+
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message

@@ -130,14 +130,37 @@
       <button class="btn btn-primary rightLst"> ></button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <br /><br /><br />
-      <hr />
-      <p>Settings</p>
-      <p>Change data items for xs,sm,md and lg display items respectively. Ex:data-items="1,3,5,6"</p>
-      <p>Change data slide for slides per click Ex:data-slide="1"</p>
+  
+
+  <div class="dropdown text-center mt-5">
+    <button id="genreDropDown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      장르 고르기
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      {% for genre in allGenres %}
+        <button class="dropdown-item genreChoice" 
+                type="button" 
+                data-id="{{genre.id}}"
+                data-name="{{genre.name}}">{{genre.name}}</button>
+      {% endfor %}
     </div>
+  </div>
+  <div class="temp">
+    {% for genre, movies in allGenres.items %}
+     {{genre}} - {{movies}}
+    {% endfor %}
+  </div>  
+
+
+  <div id="selectMovies">
+    {% for movie in allMovies %}
+      <div class="card selectedMovie" style="width: 18rem; display: none;" data-id="{{movie.id}}">
+        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{movie.title}}</h5>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 {% comment %} </div> {% endcomment %}
 
@@ -145,6 +168,20 @@
 
 {% block script %}
 <script type="text/javascript">
+  const genreBtns = document.querySelectorAll('.genreChoice')
+  genreBtns.forEach(btn => {
+    btn.addEventListener('click', function(event) {
+      const genreName = event.target.dataset.name
+      const genreId = event.target.dataset.id
+      const dropDown = document.querySelector('#genreDropDown')
+      dropDown.innerText = genreName
+      const num = 4
+      const selectedMovie = document.querySelectorAll('.selectedMovie')
+      console.log(selectedMovie)
+
+    })
+  })
+
   const teaserBtns = document.querySelectorAll('.teaser')
   teaserBtns.forEach(btn =>{
     btn.addEventListener('click', function(event) {

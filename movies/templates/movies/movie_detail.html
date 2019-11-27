@@ -149,6 +149,17 @@
       </div>
     </div>
 
+    <div>
+      {% for cast in casts  %}
+        <div class="card" style="width: 18rem;">
+          <img src="https://image.tmdb.org/t/p/original{{cast.profile_path}}" class="card-img-top" alt="{{cast.name}}">
+          <div class="card-body">
+            <h5 class="card-title">{{cast.name}}</h5>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
   </div>
 </div>
 {% endblock content %}
