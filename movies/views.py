@@ -58,15 +58,21 @@ def main(request):
                 randomPoster = movie.poster_url
             movies.append(movie)
             nums.remove(num)
-    print('randomTeaser : ', randomTeaser)
-    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster}       
+
+    allMovies = Movie.objects.all()
+    allGenres = {}
+    for genre in Genre.objects.all():
+        allGenres[genre] = genre.movies.all()
+    print(allGenres)
+    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 'allMovies': allMovies, 'allGenres': allGenres}       
     return render(request, 'movies/main.html', context)
 
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
+    casts = movie.cast_set.all()
     form = RatingForm()
     ratings = movie.ratings_set.all()
-    context = {'movie': movie, 'form': form, 'ratings': ratings}
+    context = {'movie': movie, 'form': form, 'ratings': ratings, 'casts': casts}
     return render(request, 'movies/movie_detail.html', context)
 
 # @login_required
@@ -134,7 +140,7 @@ def rating_delete(request, movie_pk, rating_pk):
 @login_required
 def movie_modify(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    if request.user.username != 'admin':
+    if not request.user.is_superuser:
         return redirect('movies:movie_detail', movie_pk)
     
     if request.method == 'POST':

@@ -1,10 +1,10 @@
 from IPython import embed
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login, logout as auth_logout, get_user_model
-from .forms import CustomUserCreationForm, MessageForm
+from .forms import CustomUserCreationForm, MessageForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .models import Message
+from .models import Message, Movie
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
 
@@ -71,6 +71,7 @@ def send_message(request):
     context = {'form': form}
     return render(request, 'accounts/auth_form.html', context)
 
+@login_required
 def read_message(request, message_pk):
     message = get_object_or_404(Message, pk=message_pk)
     if message.is_read == False:
@@ -97,5 +98,27 @@ def follow(request, user_pk):
     else:        
         return HttpResponseBadRequest  
 
+@login_required
+def manage_choice(request):
+    if request.user.is_superuser:
+        users = get_user_model().objects.all()
+        movies = Movie.objects.all()
+        context = {'users': users, 'movies': movies}
+        return render(request, 'accounts/manage_choice.html', context)
+    else:
+        return redirect('movies:main')
+
+@login_required
+def user_modify(request, user_pk):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:manage_choice')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    context = { 'form': form }
+    return render(request, 'accounts/user_modify.html', context)
 
     
