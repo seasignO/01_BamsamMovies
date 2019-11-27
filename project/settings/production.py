@@ -7,4 +7,4 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bamsam.pr73cnh8mn.ap-northeast-2.elasticbeanstalk.com']
