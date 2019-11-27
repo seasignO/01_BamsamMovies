@@ -99,142 +99,34 @@
 
 <p>한쪽에 포스터, 한쪽에 포스터와 자세히 보러가기</p>
 
-<div class="container">
+  <div class="d-flex justify-content-around">
+    <iframe id="mainTeaser" width="600" height="480" src="http://www.youtube.com/embed/{{randomTeaser}}?autoplay=1" frameborder="0">
+    </iframe>
+
+    <div class="card" style="width: 18rem;">
+      <img id="posterImage" src="https://image.tmdb.org/t/p/original{{randomPoster}}" class="card-img-top" alt="...">
+      <a href="#" class="btn btn-primary">더 보러가기</a>
+    </div>
+  </div>
+
   <div class="row">
     <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
       <div class="MultiCarousel-inner">
-        <div class="item">
-          <div class="pad15 rounded">
-            <p class="lead card">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
+        {% for movie in movies %}
+          <div class="item">
+            <div class="pad15 rounded">
+              <img class="{{movie.teaser}} teaser" 
+              src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" 
+              alt="" style="height: 200px;" 
+              data-teaserid="{{movie.teaser}}" 
+              data-posterid="{{movie.poster_url}}">
+            </div>
           </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
-        <div class="item">
-          <div class="pad15">
-            <p class="lead">Multi Item Carousel</p>
-            <p>₹ 1</p>
-            <p>₹ 6000</p>
-            <p>50% off</p>
-          </div>
-        </div>
+        {% endfor %}
+       
       </div>
-      <button class="btn btn-primary leftLst">
-        <</button> <button class="btn btn-primary rightLst">>
-      </button>
+      <button class="btn btn-primary leftLst"> < </button> 
+      <button class="btn btn-primary rightLst"> ></button>
     </div>
   </div>
   <div class="row">
@@ -246,11 +138,26 @@
       <p>Change data slide for slides per click Ex:data-slide="1"</p>
     </div>
   </div>
-</div>
+{% comment %} </div> {% endcomment %}
 
 {% endblock content %}
 
 {% block script %}
+<script type="text/javascript">
+  const teaserBtns = document.querySelectorAll('.teaser')
+  teaserBtns.forEach(btn =>{
+    btn.addEventListener('click', function(event) {
+        console.log(event)
+        const teaserId = event.target.dataset.teaserid
+        const posterId = event.target.dataset.posterid
+        let mainTeaser = document.querySelector('#mainTeaser')
+        let posterImage = document.querySelector('#posterImage')
+        mainTeaser.src = `http://www.youtube.com/embed/${teaserId}?autoplay=1`
+        posterImage.src = `https://image.tmdb.org/t/p/original${posterId}`
+    })
+  }) 
+</script>
+
 <script>
   $(document).ready(function () {
     var itemsMainDiv = ('.MultiCarousel');

@@ -40,7 +40,26 @@ def genre_page(request):
     return render(request, 'movies/genre_choice.html', context)
 
 def main(request):
-    return render(request, 'movies/main.html')
+    movies = []
+    movie_ids = [movie.id for movie in Movie.objects.all()]
+    l = len(movie_ids)
+    nums = list(range(1, l-1))
+    randomTeaser = ''
+    randomPoster = ''
+    while len(movies) < 10:
+        if not nums:
+            break
+        num = random.choice(nums)
+        movie = get_object_or_404(Movie, pk=movie_ids[num])
+        if movie.teaser:
+            if len(movies) == 0:
+                randomTeaser = movie.teaser
+                randomPoster = movie.poster_url
+            movies.append(movie)
+            nums.remove(num)
+    print('randomTeaser : ', randomTeaser)
+    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster}       
+    return render(request, 'movies/main.html', context)
 
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
