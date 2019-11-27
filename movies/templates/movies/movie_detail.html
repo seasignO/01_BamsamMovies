@@ -1,72 +1,100 @@
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block css %}
+<script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
-</head>
+<style>
+  html,
+  body {
+    position: relative;
+    height: 100%;
+  }
 
-<body>
-  {{request.user}}
-  <div id="app">
-    <div class="container">
-      <div class="card text-center mx-auto" style="width: 45rem;">
-        <div class="card-header">
-          <img src="{{movie.poster_url}}" alt="movie_poster" style="height:500px;">
-          <hr>
-          <h3>{{movie.title}}</h3>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title d-inline">장르 :</h5>
-          {% for genre in movie.genres.all  %}
-          <h5 class="card-title d-inline">'{{genre}}' </h5>
-          {% endfor %}
-          <h5 class="card-title mt-1">관객 : {{movie.audience}}</h5>
-          <h5 class="card-title"></h5>
-          <p class="card-text">{{ movie.summary }}</p>
-          <br>
-          {% if request.user in movie.like_users.all %}
-          <i class="fas fa-heart-broken like-button" style="color: black;" data-id="{{ movie.pk }}">싫은데요</i>
-          {% else %}
-          <i class="fas fa-heart like-button" style="color: crimson;" data-id="{{ movie.pk }}">좋아요</i>
-          {% endif %}
-          <span class="" style="" id="like-count-{{ movie.pk }}">이 영화를 좋아하는 사람 : {{ movie.like_users.count }}명</span>
-        </div>
-        <div class="card-footer">
-          {% if request.user.username == "admin" %}
-          <a href="{% url 'movies:movie_modify' movie.pk %}" class="btn btn-success">영화 수정</a>
-          <form action="" style="display:inline;">
-            <input type="submit" href="#" class="btn btn-warning movie-delete" value="영화 삭제">
-          </form>
-          {% endif %}
-        </div>
+  body {
+    background-color: #1a1b1c;
+    height: 100%;
+    {% comment %} background-image: url({% static 'movies/images/bg2.png' %}); {% endcomment %}
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 10%,
+    10%;
+    background-position: center;
+    background-attachment: fixed;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+{% comment %} {{request.user}} {% endcomment %}
+<div id="app">
+  <div class="container">
+    <div class="card text-center mx-auto" style="width: 45rem;">
+      <div class="card-header">
+        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="movie_poster" style="height:500px;">
+        <hr>
+        <h3>{{movie.title}}</h3>
       </div>
-
-      {% if request.user.is_authenticated %}
-        <form action="{% url 'movies:rating_create' movie.pk%}" method="POST">
-          {% csrf_token %}
-          <input type="number" name="score" min="1" max="10"/>
-          <input type="text" name="comment" value="" id=""/>
-          <button type="submit" class="btn btn-primary">작성하기</button>
+      <div class="card-body text-center">
+        <h5 class="card-title d-inline">장르 :</h5>
+        {% for genre in movie.genres.all  %}
+        <h5 class="card-title d-inline">'{{genre}}' </h5>
+        {% endfor %}
+        <h5 class="card-title mt-1">관객 : {{movie.audience}}</h5>
+        <h5 class="card-title"></h5>
+        <p class="card-text">{{ movie.summary }}</p>
+        <br>
+        {% if request.user in movie.like_users.all %}
+        <i class="fas fa-heart-broken like-button" style="color: black;" data-id="{{ movie.pk }}">싫은데요</i>
+        {% else %}
+        <i class="fas fa-heart like-button" style="color: crimson;" data-id="{{ movie.pk }}">좋아요</i>
+        {% endif %}
+        <span class="" style="" id="like-count-{{ movie.pk }}">이 영화를 좋아하는 사람 : {{ movie.like_users.count }}명</span>
+      </div>
+      <div class="card-footer">
+        {% if request.user.username == "admin" %}
+        <a href="{% url 'movies:movie_modify' movie.pk %}" class="btn btn-success">영화 수정</a>
+        <form action="" style="display:inline;">
+          <input type="submit" href="#" class="btn btn-warning movie-delete" value="영화 삭제">
         </form>
-      {% else %}
-      <br>
-      <div style="text-align: center;">
-        <a href="{% url 'accounts:login' %}"><b>평점을 남기려면 로그인해주세요.</b> </a>
+        {% endif %}
       </div>
-      {% endif %}
-      <br><br>
-      리뷰 목록 <span>{{ratings | length}}</span>개의 rating
-      <ul class="list-group">
-        {% for rating in ratings %}
-        <div v-for="rating in ratings" v-bind:key="rating.id">
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'movies:rating_create' movie.pk%}" method="POST">
+      {% csrf_token %}
+      <div class="mt-5">
+        {% comment %} <p class="mb-2 text-warning" style="display: inline-block;"><b>{{request.user}}　</b></p>
+        <input type="number" name="score" min="1" max="10" />
+        <input type="text" name="comment" value="" id="" />
+        <button type="submit" class="btn btn-primary">작성하기</button> {% endcomment %}
+
+        <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; margin: auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
+          </div>
+          <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default" style="width: 60%;">
+          <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default">
+          <div class="input-group-append">
+            <button class="btn btn-danger" type="submit">작성하기</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    {% else %}
+    <br>
+    <div style="text-align: center;">
+      <a href="{% url 'accounts:login' %}"><b>평점을 남기려면 로그인해주세요.</b> </a>
+    </div>
+    {% endif %}
+    <br><br>
+    리뷰 목록 <span>{{ratings | length}}</span>개의 rating
+    <ul class="list-group">
+      {% for rating in ratings %}
+      <div v-for="rating in ratings" v-bind:key="rating.id">
         <div id="">
           <div class="{{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -106,75 +134,73 @@
 
           </li>
         </div>
-        </div>
-        {% endfor %}
-      </ul>
-    </div>
+      </div>
+      {% endfor %}
+    </ul>
   </div>
+</div>
+{% endblock content %}
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script type="text/javascript">
-    const modifyBtn = document.querySelectorAll('.modify-btn')
-    const modifyForms = document.querySelectorAll('.modifyForm')
-    const ratingForms = document.querySelectorAll('.ratingForm')
-    // const modifyCancel = document.querySelectorAll('.modify-cancel')
+{% block script %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+  const modifyBtn = document.querySelectorAll('.modify-btn')
+  const modifyForms = document.querySelectorAll('.modifyForm')
+  const ratingForms = document.querySelectorAll('.ratingForm')
+  // const modifyCancel = document.querySelectorAll('.modify-cancel')
 
-    modifyBtn.forEach(btn => {
-      btn.addEventListener('click', function (event) {
-        const ratingId = event.target.dataset.id
-        console.log(ratingId)
-        const myModify = document.querySelector(`#modifyForm-${ratingId}`)
-        const myRating = document.querySelector(`#ratingForm-${ratingId}`)
-        for (let j = 0; j < ratingForms.length; j++) {
-          modifyForms[j].style.display = 'none'
-          ratingForms[j].style.display = 'block'
-        }
-        myModify.style.display = 'block'
-        myRating.style.display = 'none'
-        return false
-      })
-    })
-
-    const modifyCancel = function (ratingId) {
+  modifyBtn.forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      const ratingId = event.target.dataset.id
+      console.log(ratingId)
       const myModify = document.querySelector(`#modifyForm-${ratingId}`)
       const myRating = document.querySelector(`#ratingForm-${ratingId}`)
-      myModify.style.display = 'none'
-      myRating.style.display = 'block'
+      for (let j = 0; j < ratingForms.length; j++) {
+        modifyForms[j].style.display = 'none'
+        ratingForms[j].style.display = 'block'
+      }
+      myModify.style.display = 'block'
+      myRating.style.display = 'none'
       return false
-    }
-
-    const likeButtons = document.querySelectorAll('.like-button')
-    likeButtons.forEach(button => {
-      button.addEventListener('click', function (event) {
-        const movieId = event.target.dataset.id
-        //console.log(movieId)
-        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-        axios.defaults.xsrfCookieName = 'csrftoken'
-        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-        axios.post(`/movies/like/${movieId}/`)
-          .then(response => {
-            console.log(response)
-            // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
-            document.querySelector(`#like-count-${movieId}`).innerText =
-              `이 영화를 좋아하는 사람 : ${response.data.count}명`
-            console.log(response.data.count)
-            if (response.data.liked) {
-              event.target.className = 'fas fa-heart-broken like-button'
-              event.target.style.color = 'black'
-              event.target.innerText = '싫은데요'
-            } else {
-              event.target.className = 'fas fa-heart like-button'
-              event.target.style.color = 'crimson'
-              event.target.innerText = '좋아요'
-            }
-          })
-          .catch(error => console.log(error))
-      })
     })
-  </script>
+  })
 
+  const modifyCancel = function (ratingId) {
+    const myModify = document.querySelector(`#modifyForm-${ratingId}`)
+    const myRating = document.querySelector(`#ratingForm-${ratingId}`)
+    myModify.style.display = 'none'
+    myRating.style.display = 'block'
+    return false
+  }
 
-</body>
-
-</html>
+  const likeButtons = document.querySelectorAll('.like-button')
+  likeButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+      const movieId = event.target.dataset.id
+      //console.log(movieId)
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+      axios.defaults.xsrfCookieName = 'csrftoken'
+      axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+      axios.post(`/movies/like/${movieId}/`)
+        .then(response => {
+          console.log(response)
+          // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
+          document.querySelector(`#like-count-${movieId}`).innerText =
+            `이 영화를 좋아하는 사람 : ${response.data.count}명`
+          console.log(response.data.count)
+          if (response.data.liked) {
+            event.target.className = 'fas fa-heart-broken like-button'
+            event.target.style.color = 'black'
+            event.target.innerText = '싫은데요'
+          } else {
+            event.target.className = 'fas fa-heart like-button'
+            event.target.style.color = 'crimson'
+            event.target.innerText = '좋아요'
+          }
+        })
+        .catch(error => console.log(error))
+    })
+  })
+</script>
+{% endblock script %}

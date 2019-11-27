@@ -19,16 +19,30 @@
 
     background-attachment: fixed;
   }
+
+  .form-group {
+    display: inline-block;
+    {% comment %} margin: 10px; {% endcomment %}
+  }
+
+  .form-control {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  label {
+    margin: auto;
+  }
 </style>
 <div style="margin-top: 45px;">
   <img src="{% static 'movies/images/logo_neon.png' %}" alt="logo" style="width: 300px; margin: auto; display: block;">
 </div>
-<div class="row" style="margin-top: 27px; margin-bottom: 10px;">
+<div class="row" style="margin-top: 27px; margin-bottom: 20px;">
   <div class="card-block special-card mx-auto rounded border border-warning"
     style="width: 30rem; background-color: rgba(245, 245, 245, 0.4);">
     <form action="" method="POST">
       {% csrf_token %}
-      <div class="mx-3 my-3">
+      <div class="mx-3 mt-2 text-warning">
         <b>{% bootstrap_form form %}</b>
       </div>
       <hr>
