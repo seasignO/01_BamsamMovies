@@ -22,7 +22,6 @@ class Movie(models.Model):
     audience = models.FloatField(null=True)
     director = models.CharField(max_length=50)
     genres = models.ManyToManyField(Genre, related_name='movies')
-    # casts = models.ManyToManyField(Cast)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
 
