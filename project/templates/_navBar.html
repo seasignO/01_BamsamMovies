@@ -20,17 +20,17 @@
       {% if user.is_authenticated %}
         {% if user.is_staff %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:manage_choice' %}">Manage</a>
+            <a class="nav-link manage" href="{% url 'accounts:manage_choice' %}">Manage</a>
           </li>
         {% endif %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+          <a class="nav-link logout" href="{% url 'accounts:logout' %}">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:user_detail' request.user.pk %}" href="">Profile</a>
+          <a class="nav-link userDetail" href="{% url 'accounts:user_detail' request.user.pk %}" href="">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:my_message' %}">My Message <p class="rounded-circle text-light px-2" style="display: inline-block; background-color: red; margin:0;">{{ userMessages | length }}</p></a>
+          <a class="nav-link myMessage" href="{% url 'accounts:my_message' %}">My Message <p class="rounded-circle text-light px-2 messageCount" style="display: inline-block; background-color: red; margin:0;"></p></a>
         </li>
       {% else %}
         <li class="nav-item">
