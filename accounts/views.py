@@ -112,7 +112,7 @@ def read_message(request, message_pk):
 
 @login_required
 def manage_choice(request):
-    if request.user.is_superuser:
+    if request.user.is_staff:
         users = get_user_model().objects.all()
         movies = Movie.objects.all()
         context = {'users': users, 'movies': movies}
@@ -122,6 +122,8 @@ def manage_choice(request):
 
 @login_required
 def user_modify(request, user_pk):
+    if not request.user.is_staff:
+        return redirect('movies:main')
     if request.method == 'POST':
         form = CustomUserChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
