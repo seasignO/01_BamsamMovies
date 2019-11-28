@@ -99,14 +99,16 @@ def follow(request, user_pk):
     else:        
         return HttpResponseBadRequest
 
-# @login_required
-# def read_message(request, message_pk):
-#     if request.is_ajax():
-#         message = get_object_or_404(Message, pk=message_pk)
-#         if message.is_read == False:
-#             message
-#     else:
-#         return HttpResponseBadRequest  
+@login_required
+def read_message(request, message_pk):
+    if request.is_ajax():
+        message = get_object_or_404(Message, pk=message_pk)
+        if message.is_read == False:
+            message.is_read = True
+        context = {}
+        return JsonResponse(context)
+    else:
+        return HttpResponseBadRequest  
 
 @login_required
 def manage_choice(request):
