@@ -10,6 +10,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
   <style>
     body {
       background-color: black;
@@ -42,9 +43,9 @@
   {% include '_navBar.html' %}
 
   <div class="container">
-
-    <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#">SEND MESSAGE</a>
-    <i class="fas fa-envelope-open-text"></i>
+    <div class="">
+      <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#"><i class="fas fa-envelope-open-text" style="font-size: 20px; padding-top: 5px;"></i> SEND MESSAGE</a>
+    </div>
     <br>
     <p style="color: white;">읽지 않은 메세지 : {{unread | length}}</p>
     <ul class="list-group list-group-flush">
@@ -66,7 +67,6 @@
         </li>
       {% endfor %}
     </ul>
-
     <div id="modal" class="modal text-center my-auto" tabindex="-1" role="dialog">
       <form action="{% url 'accounts:send_message' %}" method="POST" id="messageForm">
         {% csrf_token %}
@@ -99,10 +99,8 @@
         </div>
       </form>
     </div>
-    
   </div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
   <script type="text/javascript">
     const messageCount = document.querySelector('.messageCount')
     const messages = document.querySelectorAll(`.mes`)
