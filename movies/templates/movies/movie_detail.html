@@ -981,9 +981,11 @@
       <div class="card-body text-center rounded" style="background-color: rgba(250, 250, 250, 0.2); margin: 0 80px; ">
         <h5 class="card-title d-inline"><b>GENRE</b> <br></h5>
         {% for genre in movie.genres.all  %}
-        <h5 class="card-title d-inline">'{{genre}}' </h5>
+        <h5 class="card-title d-inline">{{genre}}, </h5>
         {% endfor %}
-        <h5 class="card-title mt-1"><b>AUDIENCE</b> : {{movie.audience}}</h5>
+        <br>
+        <br>
+        <h5 class="card-title mt-1"><b>AUDIENCE</b><br>{{movie.audience}}</h5>
         <hr>
         <p class="cardtext">{{ movie.summary }}</p>
         <br>
@@ -1055,10 +1057,6 @@
 {% block content2 %}
 
 
-
-
-
-{% comment %} {% endcomment %}
 <div>
   <div>
     <div class="text-center mt-3">
@@ -1069,11 +1067,6 @@
     <form action="{% url 'movies:rating_create' movie.pk%}" method="POST">
       {% csrf_token %}
       <div class="mt-5">
-        {% comment %} <p class="mb-2 text-warning" style="display: inline-block;"><b>{{request.user}}　</b></p>
-        <input type="number" name="score" min="1" max="10" />
-        <input type="text" name="comment" value="" id="" />
-        <button type="submit" class="btn btn-primary">작성하기</button> {% endcomment %}
-
         <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; margin: auto;">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
@@ -1096,211 +1089,212 @@
     {% endif %}
     <br><br>
     리뷰 목록 <span>{{ratings | length}}</span>개의 rating
-    <ul class="list-group">
+
+    <div>
       {% for rating in ratings %}
-
-      <div v-for="rating in ratings" v-bind:key="rating.id">
-          <div class="{{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="{% url 'accounts:user_detail' rating.user.pk %}">{{rating.user}}</a> {{rating.comment}}
-              <div>
-                <span class="badge badge-primary badge-pill">{{rating.score}}점</span>
-                {% if rating.user == request.user %}
-                <a href="#" class="badge badge-success modify-btn" data-id="{{rating.pk}}"
-                  onclick="return false;">수정</a>
-                <form action="{% url 'movies:rating_delete' movie.pk rating.pk %}" style="display:inline;" method="POST">
-                  {% csrf_token %}
-                  <button style="submit" class="badge badge-danger rating-delete">삭제</a>
-                </form>
-                {% comment %} <a class="btn btn-danger" href="{% url 'movies:rating_delete' movie.pk rating.pk %}">리뷰
-                  삭제</a> {% endcomment %}
-                {% endif %}
-              </div>
-            </li>
+      {% if rating.user == request.user %}
+      <div class="text-right {{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
+        <div class="talk-bubble tri-right round right-in text-right my-2">
+          <div class="talktext">
+            <div class="title">{{rating.user}} #{{rating.score}}점</div>
+            <p>{{rating.comment}}</p>
           </div>
-          <li class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;"
-            class="list-group-item">
-            <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
-              {% csrf_token %}
-              <div class="form-row">
-                <div class="">
-                  <input type="number" name="score" class="form-control" placeholder="First name" style="width:100px;"
-                    value="{{rating.score}}">
+          <a href="#" class="badge badge-success modify-btn" data-id="{{rating.pk}}" onclick="return false;">수정</a>
+          <form action="{% url 'movies:rating_delete' movie.pk rating.pk %}" style="display:inline;" method="POST">
+            {% csrf_token %}
+            <button style="submit" class="badge badge-danger rating-delete">삭제</a>
+          </form>
+        </div>
+      </div>
+
+      <div class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;" class="list-group-item">
+        <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="mt-5">
+              <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:right;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
                 </div>
-                <div class="col">
-                  <input type="text" name="comment" class="form-control" placeholder="Last name" style="width: 100%;"
-                    value="{{rating.comment}}">
+                <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
+                <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
+                <div class="input-group-append">
+                  <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</button>
+                  <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정
+                    취소</button>
                 </div>
-                <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</a>
-                  <button class="badge badge-danger modify-cancel"
-                    onclick="modifyCancel({{rating.pk}}); return false;">수정 취소</a>
               </div>
-            </form>
-
-          </li>
-        </div>
+            </div>
+          </form>
       </div>
+
+    
+      {% else %}
+
+      <div class="talk-bubble tri-right left-in round my-2 {{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
+        <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
+          <div class="talktext">
+            <div class="title">
+              <a href="{% url 'accounts:user_detail' rating.user.pk %}"
+                style="text-decoration:none; color: white;">{{rating.user}}</a> #{{rating.score}}점
+            </div>
+            <p>{{rating.comment}}</p>
+          </div>
+        </form>
+      </div>
+      <div class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;" class="list-group-item">
+        <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="mt-5">
+              <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:left;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
+                </div>
+                <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
+                <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
+                <div class="input-group-append">
+                  <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</button>
+                  <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정
+                    취소</button>
+                </div>
+              </div>
+            </div>
+          </form>
+      </div>
+      {% endif %}
       {% endfor %}
-    </ul>
+    </div>
+
+
   </div>
-  {% comment %} {% endcomment %}
-  <div>
-    <div class="talk-bubble tri-right left-in round my-2">
-      <div class="talktext">
-        <div class="title">comment #01</div>
-        <p>And now using .round we can smooth the sides down. Also uses .btm-left to show a triangle at the bottom
-          flush
-          to the left.</p>
-      </div>
-    </div>
-    <br>
-    <div class="text-right">
-      <div class="talk-bubble tri-right round right-in text-right my-2">
-        <div class="talktext">
-          <div class="title">comment #01</div>
-          <p>Moving our way back up the right side indented. Uses .round and .right-in</p>
-        </div>
-        {% comment %} {% endcomment %}
-      </div>
-    </div>
-  </div>
-  {% comment %} <div class="dropdown">
-    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-  </div> {% endcomment %}
-</div>
 
 
 
-{% endblock content2 %}
+  {% endblock content2 %}
 
-{% block script %}
-<script>
-  var a = document.getElementsByClassName("a");
-  var cfImg = document.getElementsByClassName("coverflow__image")
+  {% block script %}
+  <script>
+    var a = document.getElementsByClassName("a");
+    var cfImg = document.getElementsByClassName("coverflow__image")
 
-  var scaleI = 0;
-  for (scaleI; scaleI < a.length; scaleI++) {
-    if (scaleI === 3) {
-      continue;
-    } else {
-      a[scaleI].style.cursor = "default";
-      a[scaleI].addEventListener("click", prevDef);
-    }
-  }
-
-  function prevDef(e) {
-    e.preventDefault();
-  }
-
-  function forScale(coverflowPos) {
-    for (scaleI = 0; scaleI < a.length; scaleI++) {
-      a[scaleI].style.cursor = "default";
-      a[scaleI].addEventListener("click", prevDef);
-    }
-    for (scaleI = 0; scaleI < cfImg.length; scaleI++) {
-      if (cfImg[scaleI].getAttribute("data-coverflow-index") == coverflowPos) {
-        cfImg[scaleI].parentElement.style.cursor = "pointer";
-        cfImg[scaleI].parentElement.removeEventListener("click", prevDef);
-      }
-    }
-  }
-  //end added by Chase
-
-  function setupCoverflow(coverflowContainer) {
-    var coverflowContainers;
-
-    if (typeof coverflowContainer !== "undefined") {
-      if (Array.isArray(coverflowContainer)) {
-        coverflowContainers = coverflowContainer;
+    var scaleI = 0;
+    for (scaleI; scaleI < a.length; scaleI++) {
+      if (scaleI === 3) {
+        continue;
       } else {
-        coverflowContainers = [coverflowContainer];
+        a[scaleI].style.cursor = "default";
+        a[scaleI].addEventListener("click", prevDef);
       }
-    } else {
-      coverflowContainers = Array.prototype.slice.apply(document.getElementsByClassName('coverflow'));
     }
 
-    coverflowContainers.forEach(function (containerElement) {
-      var coverflow = {};
-      var prevArrows, nextArrows;
+    function prevDef(e) {
+      e.preventDefault();
+    }
 
-      //capture coverflow elements
-      coverflow.container = containerElement;
-      coverflow.images = Array.prototype.slice.apply(containerElement.getElementsByClassName('coverflow__image'));
-      coverflow.position = Math.floor(coverflow.images.length / 2) + 1;
-
-      //set indicies on images
-      coverflow.images.forEach(function (coverflowImage, i) {
-        coverflowImage.dataset.coverflowIndex = i + 1;
-      });
-
-      //set initial position
-      coverflow.container.dataset.coverflowPosition = coverflow.position;
-
-      //get prev/next arrows
-      prevArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("prev-arrow"));
-      nextArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("next-arrow"));
-
-      //add event handlers
-      function setPrevImage() {
-        coverflow.position = Math.max(1, coverflow.position - 1);
-        coverflow.container.dataset.coverflowPosition = coverflow.position;
-        //call the functin forScale added
-        forScale(coverflow.position);
+    function forScale(coverflowPos) {
+      for (scaleI = 0; scaleI < a.length; scaleI++) {
+        a[scaleI].style.cursor = "default";
+        a[scaleI].addEventListener("click", prevDef);
       }
-
-      function setNextImage() {
-        coverflow.position = Math.min(coverflow.images.length, coverflow.position + 1);
-        coverflow.container.dataset.coverflowPosition = coverflow.position;
-        //call the function Chase added
-        forScale(coverflow.position);
-      }
-
-      function jumpToImage(evt) {
-        coverflow.position = Math.min(coverflow.images.length, Math.max(1, evt.target.dataset.coverflowIndex));
-        coverflow.container.dataset.coverflowPosition = coverflow.position;
-        //start added by Chase
-        setTimeout(function () {
-          forScale(coverflow.position);
-        }, 1);
-        //end added by Chase
-      }
-
-      function onKeyPress(evt) {
-        switch (evt.which) {
-          case 37: //left arrow
-            setPrevImage();
-            break;
-          case 39: //right arrow
-            setNextImage();
-            break;
+      for (scaleI = 0; scaleI < cfImg.length; scaleI++) {
+        if (cfImg[scaleI].getAttribute("data-coverflow-index") == coverflowPos) {
+          cfImg[scaleI].parentElement.style.cursor = "pointer";
+          cfImg[scaleI].parentElement.removeEventListener("click", prevDef);
         }
       }
-      prevArrows.forEach(function (prevArrow) {
-        prevArrow.addEventListener('click', setPrevImage);
+    }
+    //end added by Chase
+
+    function setupCoverflow(coverflowContainer) {
+      var coverflowContainers;
+
+      if (typeof coverflowContainer !== "undefined") {
+        if (Array.isArray(coverflowContainer)) {
+          coverflowContainers = coverflowContainer;
+        } else {
+          coverflowContainers = [coverflowContainer];
+        }
+      } else {
+        coverflowContainers = Array.prototype.slice.apply(document.getElementsByClassName('coverflow'));
+      }
+
+      coverflowContainers.forEach(function (containerElement) {
+        var coverflow = {};
+        var prevArrows, nextArrows;
+
+        //capture coverflow elements
+        coverflow.container = containerElement;
+        coverflow.images = Array.prototype.slice.apply(containerElement.getElementsByClassName('coverflow__image'));
+        coverflow.position = Math.floor(coverflow.images.length / 2) + 1;
+
+        //set indicies on images
+        coverflow.images.forEach(function (coverflowImage, i) {
+          coverflowImage.dataset.coverflowIndex = i + 1;
+        });
+
+        //set initial position
+        coverflow.container.dataset.coverflowPosition = coverflow.position;
+
+        //get prev/next arrows
+        prevArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("prev-arrow"));
+        nextArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("next-arrow"));
+
+        //add event handlers
+        function setPrevImage() {
+          coverflow.position = Math.max(1, coverflow.position - 1);
+          coverflow.container.dataset.coverflowPosition = coverflow.position;
+          //call the functin forScale added
+          forScale(coverflow.position);
+        }
+
+        function setNextImage() {
+          coverflow.position = Math.min(coverflow.images.length, coverflow.position + 1);
+          coverflow.container.dataset.coverflowPosition = coverflow.position;
+          //call the function Chase added
+          forScale(coverflow.position);
+        }
+
+        function jumpToImage(evt) {
+          coverflow.position = Math.min(coverflow.images.length, Math.max(1, evt.target.dataset.coverflowIndex));
+          coverflow.container.dataset.coverflowPosition = coverflow.position;
+          //start added by Chase
+          setTimeout(function () {
+            forScale(coverflow.position);
+          }, 1);
+          //end added by Chase
+        }
+
+        function onKeyPress(evt) {
+          switch (evt.which) {
+            case 37: //left arrow
+              setPrevImage();
+              break;
+            case 39: //right arrow
+              setNextImage();
+              break;
+          }
+        }
+        prevArrows.forEach(function (prevArrow) {
+          prevArrow.addEventListener('click', setPrevImage);
+        });
+        nextArrows.forEach(function (nextArrow) {
+          nextArrow.addEventListener('click', setNextImage);
+        });
+        coverflow.images.forEach(function (image) {
+          image.addEventListener('click', jumpToImage);
+        });
+        window.addEventListener('keyup', onKeyPress);
       });
-      nextArrows.forEach(function (nextArrow) {
-        nextArrow.addEventListener('click', setNextImage);
-      });
-      coverflow.images.forEach(function (image) {
-        image.addEventListener('click', jumpToImage);
-      });
-      window.addEventListener('keyup', onKeyPress);
-    });
-  }
+    }
 
-  setupCoverflow();
-</script>
-<script>
+    setupCoverflow();
+  </script>
+  <script>
 
-</script>
+  </script>
 
 
 
@@ -1313,66 +1307,66 @@
 
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script type="text/javascript">
-  const modifyBtn = document.querySelectorAll('.modify-btn')
-  const modifyForms = document.querySelectorAll('.modifyForm')
-  const ratingForms = document.querySelectorAll('.ratingForm')
-  // const modifyCancel = document.querySelectorAll('.modify-cancel')
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    const modifyBtn = document.querySelectorAll('.modify-btn')
+    const modifyForms = document.querySelectorAll('.modifyForm')
+    const ratingForms = document.querySelectorAll('.ratingForm')
+    // const modifyCancel = document.querySelectorAll('.modify-cancel')
+    console.log(modifyForms)
+    modifyBtn.forEach(btn => {
+      btn.addEventListener('click', function (event) {
+        const ratingId = event.target.dataset.id
+        console.log(ratingId)
+        const myModify = document.querySelector(`#modifyForm-${ratingId}`)
+        const myRating = document.querySelector(`#ratingForm-${ratingId}`)
+        for (let j = 0; j < ratingForms.length; j++) {
+          modifyForms[j].style.display = 'none'
+          ratingForms[j].style.display = 'block'
+        }
+        myModify.style.display = 'block'
+        myRating.style.display = 'none'
+        return false
+      })
+    })
 
-  modifyBtn.forEach(btn => {
-    btn.addEventListener('click', function (event) {
-      const ratingId = event.target.dataset.id
-      console.log(ratingId)
+    const modifyCancel = function (ratingId) {
       const myModify = document.querySelector(`#modifyForm-${ratingId}`)
       const myRating = document.querySelector(`#ratingForm-${ratingId}`)
-      for (let j = 0; j < ratingForms.length; j++) {
-        modifyForms[j].style.display = 'none'
-        ratingForms[j].style.display = 'block'
-      }
-      myModify.style.display = 'block'
-      myRating.style.display = 'none'
+      myModify.style.display = 'none'
+      myRating.style.display = 'block'
       return false
-    })
-  })
+    }
 
-  const modifyCancel = function (ratingId) {
-    const myModify = document.querySelector(`#modifyForm-${ratingId}`)
-    const myRating = document.querySelector(`#ratingForm-${ratingId}`)
-    myModify.style.display = 'none'
-    myRating.style.display = 'block'
-    return false
-  }
-
-  const likeButtons = document.querySelectorAll('.like-button')
-  likeButtons.forEach(button => {
-    button.addEventListener('click', function (event) {
-      const movieId = event.target.dataset.id
-      //console.log(movieId)
-      const likeUrl = `/movies/like/${movieId}/`
-      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-      axios.defaults.xsrfCookieName = 'csrftoken'
-      axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-      axios.post(likeUrl)
-        .then(response => {
-          console.log(response)
-          // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
-          document.querySelector(`#like-count-${movieId}`).innerText =
-            ` ${response.data.count}명`
-          console.log(response.data.count)
-          if (response.data.liked) {
-            event.target.className = 'fas fa-heart like-button'
-            event.target.style.color = 'crimson'
-            event.target.innerText = ' 좋아요 :'
-          } else {
-            event.target.className = 'fas fa-heart like-button'
-            event.target.style.color = 'white'
-            event.target.innerText = ' 좋아요 :'
-          }
-        })
-        .catch(error => console.log(error))
+    const likeButtons = document.querySelectorAll('.like-button')
+    likeButtons.forEach(button => {
+      button.addEventListener('click', function (event) {
+        const movieId = event.target.dataset.id
+        //console.log(movieId)
+        const likeUrl = `/movies/like/${movieId}/`
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+        axios.post(likeUrl)
+          .then(response => {
+            console.log(response)
+            // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
+            document.querySelector(`#like-count-${movieId}`).innerText =
+              ` ${response.data.count}명`
+            console.log(response.data.count)
+            if (response.data.liked) {
+              event.target.className = 'fas fa-heart like-button'
+              event.target.style.color = 'crimson'
+              event.target.innerText = ' 좋아요 :'
+            } else {
+              event.target.className = 'fas fa-heart like-button'
+              event.target.style.color = 'white'
+              event.target.innerText = ' 좋아요 :'
+            }
+          })
+          .catch(error => console.log(error))
+      })
     })
-  })
-</script>
-{% endblock script %}
+  </script>
+  {% endblock script %}
