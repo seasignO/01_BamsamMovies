@@ -7,7 +7,8 @@
 {% endcomment %}
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap&subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
 <style>
   html,
   body {
@@ -17,77 +18,6 @@
 
   body {
     background-color: #1a1b1c;
-
-      {
-      % comment %
-    }
-
-    height: 100%;
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-image: url({% static 'movies/images/logo2.png' %});
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-size: cover;
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-repeat: no-repeat;
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-position: 10%,
-    10%;
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-position: center;
-
-      {
-      % endcomment %
-    }
-
-      {
-      % comment %
-    }
-
-    background-attachment: fixed;
-
-      {
-      % endcomment %
-    }
   }
 
 
@@ -139,7 +69,7 @@
   }
 
   .nav {
-    background-image: url({% static 'movies/images/logo2-2.png' %});
+    background-image: url({% static 'movies/images/logo2-3.png' %});
     background-color: #1a1b1c;
     height: 36%;
     background-size: cover;
@@ -227,12 +157,12 @@
   {% for genre, movies in allGenres.items %}
   <div class="{{genre}}-seletedGenre">
     {% for movie in genre.movies.all %}
-    <div class="card-block special-card mx-2 my-3 {{genre}} {{movie}} selectedMovie"
+    <div class="card mx-2 my-3 {{genre}} {{movie}} selectedMovie"
       style="width: 18; display: none; font-size: 10px;" data-id="{{movie.id}}" value="{{movie.title}}">
       <a class="text-light text-center text-decoration-none" href="{% url 'movies:movie_detail' movie.pk %}">
         <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}"
           style="width: 210px; height: 290px;">
-        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-title rounded-bottom py-2 text-dark" style="background-color: rgba(250, 250, 250, 0.5); font-size: 20px; font-family: 'Black Han Sans';,'Noto Sans KR', sans-serif;, 'Nanum Myeongjo', serif;">{{movie.title}}</p>
       </a>
     </div>
     {% endfor %}
@@ -241,7 +171,7 @@
 </div>
 
 
-<div id="showMovies" class="row">
+<div id="showMovies" class="row" style="margin-bottom: 100px;">
 </div>
 
 {% comment %} </div> {% endcomment %}
