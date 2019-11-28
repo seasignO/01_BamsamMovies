@@ -26,7 +26,7 @@
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       {% for user in users %}
-      <a class="dropdown-item" href="{% url 'accounts:user_modify' user.pk %}">{{user}}</a>
+      <a class="dropdown-item" href="{% url 'accounts:user_detail' user.pk %}">{{user}}</a>
       {% endfor %}
     </div>
   </div>

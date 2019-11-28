@@ -70,13 +70,13 @@
           style="background-color: rgba(250, 250, 250, 0.8);">
           {% if message.is_read %}
             <a href="{% url 'accounts:user_detail' message.send.id %}" class="read_mes" style="text-decoration: none; color: black;" 
-              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" onclick="return false;">
+              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" data-isRead="{{message.is_read}}"  onclick="return false;">
               <b>{{message.send}}</b> | {{ message.comment}}
             </a>
 
           {% else %}
             <a href="#" class="{{message.pk}} mes" style="text-decoration: none; color: red;" 
-              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" onclick="return false;">
+              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" data-isRead="{{message.is_read}}" onclick="return false;">
               <b>{{message.send}}</b> | {{ message.comment}}
             </a>
           {% endif %}
@@ -137,7 +137,13 @@
     const messages = document.querySelectorAll(`.mes`)
     messages.forEach(button => {
       button.addEventListener('click', function(event) {
-        console.log(event)
+        //console.log(button)
+        //console.log(event)
+        if (event.target.dataset.isread == true) {
+          console.log('읽음')
+          return false
+        }
+        else {
         const messageId = event.target.dataset.id
         const userId = event.target.dataset.userid
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
@@ -158,6 +164,7 @@
             unread.innerText = `읽지 않은 메세지 : ${response.data.noReadMessages}`
           })
         return false
+        }
       })
     })
 
