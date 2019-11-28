@@ -4,7 +4,7 @@
 
 {% block css %}
 <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="style.css">
+
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap&subset=korean" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
 <style>
@@ -979,7 +979,7 @@
         <h1 style="font-family: 'Black Han Sans', sans-serif;">{{movie.title}}</h1>
       </div>
       <div class="card-body text-center rounded" style="background-color: rgba(250, 250, 250, 0.2); margin: 0 80px; ">
-        <h5 class="card-title d-inline"><b>GENRE</b> :</h5>
+        <h5 class="card-title d-inline"><b>GENRE</b> <br></h5>
         {% for genre in movie.genres.all  %}
         <h5 class="card-title d-inline">'{{genre}}' </h5>
         {% endfor %}
@@ -1038,14 +1038,14 @@
 <section class="row">
   <div class="nine columns mx-auto">
     <div class="coverflow" style="padding: 0 500px;">
-      <a class="prev-arrow"></a>
+      <a class="prev-arrow a"></a>
       {% for cast in casts %}
       <div class="pic">
         <img src="https://image.tmdb.org/t/p/original{{cast.profile_path}}"
           class="card-img-top coverflow__image rounded" alt="{{cast.name}}" style="width: 400px; height: 510px;">
       </div>
       {% endfor %}
-      <a class="next-arrow"></a>
+      <a class="next-arrow a"></a>
     </div>
   </div>
 </section>
@@ -1098,8 +1098,8 @@
     리뷰 목록 <span>{{ratings | length}}</span>개의 rating
     <ul class="list-group">
       {% for rating in ratings %}
+
       <div v-for="rating in ratings" v-bind:key="rating.id">
-        <div id="">
           <div class="{{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <a href="{% url 'accounts:user_detail' rating.user.pk %}">{{rating.user}}</a> {{rating.comment}}
@@ -1108,8 +1108,9 @@
                 {% if rating.user == request.user %}
                 <a href="#" class="badge badge-success modify-btn" data-id="{{rating.pk}}"
                   onclick="return false;">수정</a>
-                <form action="" style="display:inline;" method="POST">
-                  <a href="#" class="badge badge-danger rating-delete">삭제</a>
+                <form action="{% url 'movies:rating_delete' movie.pk rating.pk %}" style="display:inline;" method="POST">
+                  {% csrf_token %}
+                  <button style="submit" class="badge badge-danger rating-delete">삭제</a>
                 </form>
                 {% comment %} <a class="btn btn-danger" href="{% url 'movies:rating_delete' movie.pk rating.pk %}">리뷰
                   삭제</a> {% endcomment %}
@@ -1182,7 +1183,7 @@
 
 {% block script %}
 <script>
-  var a = document.getElementsByTagName("a");
+  var a = document.getElementsByClassName("a");
   var cfImg = document.getElementsByClassName("coverflow__image")
 
   var scaleI = 0;
