@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +11,17 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
+    body {
+      background-color: black;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 0, 0;
+      background-position: center;
+      background-attachment: fixed;
+      background-image: url('{% static 'movies/images/message.png' %}');
+    }
+
     .dimm {
       position: fixed;
       top: 0;
@@ -29,22 +42,23 @@
   {% include '_navBar.html' %}
   <div class="container">
 
-    <a id="sendBtn" class="btn btn-primary mt-3" href="#">메세지 보내기</a>
+    <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#">SEND MESSAGE</a>
+    <i class="fas fa-envelope-open-text"></i>
     <br>
 
     <ul class="list-group list-group-flush">
       {% for message in userMessages %}
       <input type="hidden" name="send_user" id="send_user" value="{{message.send}}">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-          {% if message.is_read %}
-            <a href="#" style="text-decoration: none; color: black;">
-              {{message.send}} / {{ message.comment}}
-            </a>
-          {% else %}
-            <a href="#" style="text-decoration: none; color: red;">
-              {{message.send}} / {{ message.comment}}
-            </a>
-          {% endif %}
+      <li class="list-group-item d-flex justify-content-between align-items-center rounded" style="background-color: rgba(250, 250, 250, 0.8);">
+        {% if message.is_read %}
+        <a href="#" style="text-decoration: none; color: black;">
+          <b>{{message.send}}</b> | {{ message.comment}}
+        </a>
+        {% else %}
+        <a href="#" style="text-decoration: none; color: red;">
+          <b>{{message.send}}</b> | {{ message.comment}}
+        </a>
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -63,13 +77,15 @@
             <div class="modal-body">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <select name="receive" class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                  <select name="receive" class="custom-select" id="inputGroupSelect04"
+                    aria-label="Example select with button addon">
                     {% for following in user.followings.all %}
-                      <option value="{{following.pk}}">{{following}}</option>
+                    <option value="{{following.pk}}">{{following}}</option>
                     {% endfor %}
                   </select>
                 </div>
-                <input type="text" name="comment" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" name="comment" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1">
               </div>
             </div>
             <div class="modal-footer">
@@ -96,7 +112,7 @@
       modal.style.zIndex = '1'
     }
 
-    submitBtn.onclick = function(){
+    submitBtn.onclick = function () {
       const messageForm = document.querySelector('#messageForm')
       messageForm.submit()
       modal.style.display = 'none'
