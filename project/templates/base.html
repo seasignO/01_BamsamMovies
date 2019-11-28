@@ -16,12 +16,17 @@
 
 	{% include '_navBar.html' %}
 
+	<div class="container">
+		{% block content %}
+		{% endblock content %}
+	</div>
+
 	{% block no_container %}
 	{% endblock no_container %}
 
 	<div class="container">
-		{% block content %}
-		{% endblock content %}
+		{% block content2 %}
+		{% endblock content2 %}
 	</div>
 
 	{% block script %}
