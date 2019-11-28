@@ -46,30 +46,31 @@ def signup(request):
 @login_required
 def my_message(request):
     user = request.user
-    messages = Message.objects.filter(receive=user)
-    context = {'user': user, 'messages': messages}
+    user_messages = Message.objects.filter(receive=user)
+    # followings = user.followings.all()
+    context = {'user': user, 'userMessages': user_messages, }
     return render(request, 'accounts/messages.html', context)
 
 @login_required
 def send_message(request):
     if request.method == 'POST':
-        receive = request.POST.get('receive')
-        send = request.POST.get('send')
-        content = request.POST.get('content')
-        movie = request.POST.get('movie') if request.POST.get('movie') else ' '
-        form = MessageForm()
-        form.receive = receive
-        form.send = send
-        form.content = content
-        form.movie = movie
-        form.is_read = False
+        form = MessageForm(request.POST)   
+        # form.receive = request.POST.get('receive')
+        receive_user = get_object_or_404(get_user_model(), pk=request.POST.get('receive'))
+        form.receive = receive_user
+        # form.comment = request.POST.get('comment')
+        print(request.POST.get('comment'))
+        # form.movie = request.POST.get('movie') if request.POST.get('movie') else ' '
+        print(form)
+        # print(form)
         if form.is_valid():
-            form.save()
+            print('유효성 통과')
+            t_form = form.save(commit=False)
+            t_form.send = request.user
+            t_form.is_read = False
+            t_form.save()
+    return redirect('accounts:my_message')
 
-    else:
-        form = MessageForm()
-    context = {'form': form}
-    return render(request, 'accounts/auth_form.html', context)
 
 @login_required
 def read_message(request, message_pk):
@@ -96,7 +97,16 @@ def follow(request, user_pk):
         context = {'isFollow': isFollow, 'follower_count': user.follow_user.count(), 'following_count': user.followings.count(),}       
         return JsonResponse(context)     
     else:        
-        return HttpResponseBadRequest  
+        return HttpResponseBadRequest
+
+# @login_required
+# def read_message(request, message_pk):
+#     if request.is_ajax():
+#         message = get_object_or_404(Message, pk=message_pk)
+#         if message.is_read == False:
+#             message
+#     else:
+#         return HttpResponseBadRequest  
 
 @login_required
 def manage_choice(request):

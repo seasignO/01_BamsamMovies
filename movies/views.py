@@ -47,6 +47,7 @@ def main(request):
     nums = list(range(1, l-1))
     randomTeaser = ''
     randomPoster = ''
+    movieId = ''
     while len(movies) < 10:
         if not nums:
             break
@@ -56,6 +57,7 @@ def main(request):
             if len(movies) == 0:
                 randomTeaser = movie.teaser
                 randomPoster = movie.poster_url
+                movieId = movie.pk
             movies.append(movie)
             nums.remove(num)
 
@@ -63,8 +65,8 @@ def main(request):
     allGenres = {}
     for genre in Genre.objects.all():
         allGenres[genre] = genre.movies.all()
-    print(allGenres)
-    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 'allMovies': allMovies, 'allGenres': allGenres}       
+    # print(allGenres)
+    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 'allMovies': allMovies, 'allGenres': allGenres, 'movieId': movieId}       
     return render(request, 'movies/main.html', context)
 
 def movie_detail(request, movie_pk):

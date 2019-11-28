@@ -97,8 +97,6 @@
   <h1 class="text-center text-warning border-bottom border-right px-3 border-warning pb-3" style="margin-top: 35px; display: inline-block;">MOVIE LIST</h1>
 </div>
 
-<p>한쪽에 포스터, 한쪽에 포스터와 자세히 보러가기</p>
-
   <div class="d-flex justify-content-around">
     <div>
       <iframe id="mainTeaser" width="600" height="480" src="http://www.youtube.com/embed/{{randomTeaser}}?autoplay=1" frameborder="0">
@@ -106,7 +104,7 @@
     </div>
     <div class="card" style="width: 18rem;">
       <img id="posterImage" src="https://image.tmdb.org/t/p/original{{randomPoster}}" class="card-img-top" alt="...">
-      <a href="#" class="btn btn-primary">더 보러가기</a>
+      <a id="moreInfo" href="/movies/movie_detail/{{movieId}}/" class="btn btn-primary">더 보러가기</a>
     </div>
   </div>
 
@@ -120,7 +118,8 @@
               src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" 
               alt="" style="height: 200px;" 
               data-teaserid="{{movie.teaser}}" 
-              data-posterid="{{movie.poster_url}}">
+              data-posterid="{{movie.poster_url}}"
+              data-movieId = "{{movie.pk}}">
             </div>
           </div>
         {% endfor %}
@@ -131,7 +130,9 @@
     </div>
   </div>
   
-
+  <div class="text-center">
+    <p style="color: white;">영화 고르기</p>
+  </div>
   <div class="dropdown text-center mt-5">
     <button id="genreDropDown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       장르 고르기
@@ -141,26 +142,30 @@
         <button class="dropdown-item genreChoice" 
                 type="button" 
                 data-id="{{genre.id}}"
-                data-name="{{genre.name}}">{{genre.name}}</button>
+                data-name="{{genre.name}}">
+                {{genre.name}}
+        </button>
       {% endfor %}
     </div>
   </div>
-  <div class="temp">
+  <div class="allMovies">
     {% for genre, movies in allGenres.items %}
-     {{genre}} - {{movies}}
+      <div class="{{genre}}-seletedGenre">
+        {% for movie in genre.movies.all %}
+            <div class="card {{genre}} {{movie}} selectedMovie" style="width: 18rem; display: none;" data-id="{{movie.id}}" value="{{movie.title}}">
+              <a href="{% url 'movies:movie_detail' movie.pk %}">
+                <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}">
+                <h5 class="card-title">{{movie.title}}</h5>
+              </a>
+            </div>
+        {% endfor %}
+      </div>
     {% endfor %}
   </div>  
 
 
-  <div id="selectMovies">
-    {% for movie in allMovies %}
-      <div class="card selectedMovie" style="width: 18rem; display: none;" data-id="{{movie.id}}">
-        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}">
-        <div class="card-body">
-          <h5 class="card-title">{{movie.title}}</h5>
-        </div>
-      </div>
-    {% endfor %}
+  <div id="showMovies" class="d-flex justify-content-between">
+    
   </div>
 {% comment %} </div> {% endcomment %}
 
@@ -169,16 +174,53 @@
 {% block script %}
 <script type="text/javascript">
   const genreBtns = document.querySelectorAll('.genreChoice')
+  const allMovies = document.querySelectorAll('.selectedMovie')
+  const showMovies = document.querySelector('#showMovies')
+
   genreBtns.forEach(btn => {
     btn.addEventListener('click', function(event) {
+      if (showMovies.children.length != 0) {
+        while(showMovies.hasChildNodes()) {
+          showMovies.removeChild(showMovies.firstChild)
+        }
+      }
+      console.log(event.target.dataset.name)
       const genreName = event.target.dataset.name
+      const selectedGenre = document.querySelector(`.${genreName}-seletedGenre`)
+      console.log(selectedGenre)
+      if (selectedGenre == null) {
+        console.log('null')
+      } else {
+        const selectedMovie = selectedGenre.children
+        if (selectedMovie.length < 4) { // 길이가 4 이하인 경우
+          for (let i = 0; i < selectedMovie.length; i++){
+            const clone = selectedMovie[i].cloneNode(true)
+            showMovies.appendChild(clone)
+            showMovies.children[i].style.display = 'block'
+          }
+        } else {
+          const randomNums = []
+          const movieLen = selectedMovie.length
+        
+          while (randomNums.length < 4) {
+            const num = Math.floor(Math.random() * (movieLen-1))
+            if (!randomNums.includes(num)) {
+              randomNums.push(num)
+            }
+          }
+          console.log(randomNums)
+          for (let i = 0; i < 4; i++){ // 4 이상인 경우
+            const clone = selectedMovie[randomNums[i]].cloneNode(true)
+            showMovies.appendChild(clone)
+            showMovies.children[i].style.display = 'block'
+          }
+        }
+
+      }
+      
       const genreId = event.target.dataset.id
       const dropDown = document.querySelector('#genreDropDown')
       dropDown.innerText = genreName
-      const num = 4
-      const selectedMovie = document.querySelectorAll('.selectedMovie')
-      console.log(selectedMovie)
-
     })
   })
 
@@ -188,10 +230,15 @@
         console.log(event)
         const teaserId = event.target.dataset.teaserid
         const posterId = event.target.dataset.posterid
+        const movieId = event.target.dataset.movieid
+        console.log(movieId)
         let mainTeaser = document.querySelector('#mainTeaser')
         let posterImage = document.querySelector('#posterImage')
+        let moreInfo = document.querySelector('#moreInfo')
         mainTeaser.src = `http://www.youtube.com/embed/${teaserId}?autoplay=1`
         posterImage.src = `https://image.tmdb.org/t/p/original${posterId}`
+        moreInfo.href = `/movies/movie_detail/${movieId}/`
+        
     })
   }) 
 </script>

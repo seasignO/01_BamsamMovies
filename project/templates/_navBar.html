@@ -30,7 +30,7 @@
           <a class="nav-link" href="">My Movie</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:my_message' %}">My Message[{{ messages|length }}]</a>
+          <a class="nav-link" href="{% url 'accounts:my_message' %}">My Message[{{ userMessages | length }}]</a>
         </li>
       {% else %}
         <li class="nav-item">
