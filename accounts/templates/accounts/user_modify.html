@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
+
+{% block css %}
+<style>
+  body {
+    background-color: black;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0, 0;
+    background-position: center;
+    background-attachment: fixed;
+    background-image: url('{% static 'movies/images/biglogo.png' %}');
+  }
+</style>
+{% endblock css %}
+
 {% block content %}
+<div class="text-light">
+  <h1></h1>
   <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
     <button>수정 완료</button>
   </form>
+</div>
 {% endblock content %}

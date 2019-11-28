@@ -1,28 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+  body {
+    background-color: black;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0, 0;
+    background-position: center;
+    background-attachment: fixed;
+    background-image: url('{% static 'movies/images/biglogo.png' %}');
+  }
+</style>
+{% endblock css %}
+
 {% block content %}
-  <div class="users_dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="list mt-5">
+  <div class="users_dropdown mt-4">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       유저 목록
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       {% for user in users %}
-        <a class="dropdown-item" href="{% url 'accounts:user_modify' user.pk %}">{{user}}</a>
+      <a class="dropdown-item" href="{% url 'accounts:user_modify' user.pk %}">{{user}}</a>
       {% endfor %}
     </div>
   </div>
 
-  <div class="movies_dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+  <div class="movies_dropdown mt-4">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       영화 목록
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       {% for movie in movies %}
-        <a class="dropdown-item" href="{% url 'movies:movie_modify' movie.pk %}">{{movie.title}}</a>
+      <a class="dropdown-item" href="{% url 'movies:movie_modify' movie.pk %}">{{movie.title}}</a>
       {% endfor %}
     </div>
   </div>
-
+</div>
 
 {% endblock content %}
