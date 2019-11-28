@@ -987,6 +987,8 @@
         <br>
         <h5 class="card-title mt-1"><b>AUDIENCE</b><br>{{movie.audience}}</h5>
         <hr>
+        <img src="https://image.tmdb.org/t/p/original{{movie.backdrop_url}}" style="width: 500px" alt="backdrop">
+        <hr>
         <p class="cardtext">{{ movie.summary }}</p>
         <br>
         <p class="btn btn-dark font-weight-bold">
@@ -1084,11 +1086,15 @@
     {% else %}
     <br>
     <div style="text-align: center;">
-      <a href="{% url 'accounts:login' %}"><b>평점을 남기려면 로그인해주세요.</b> </a>
+      <a class="text-dark p-2 rounded" style="background-color:rgba(250, 250, 250, 0.7);"
+        href="{% url 'accounts:login' %}"><b>평점을 남기려면 로그인해주세요.</b> </a>
     </div>
     {% endif %}
     <br><br>
-    리뷰 목록 <span>{{ratings | length}}</span>개의 rating
+    <div class="text-center">
+      <p class="text-warning px-4 py-1 rounded-pill" style="display:inline-block; background-color:rgba(0, 0, 0, 0.6);">
+        리뷰 목록 | <span>{{ratings | length}}</span> 개의 리뷰</p>
+    </div>
 
     <div>
       {% for rating in ratings %}
@@ -1096,40 +1102,47 @@
       <div class="text-right {{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
         <div class="talk-bubble tri-right round right-in text-right my-2">
           <div class="talktext">
-            <div class="title">{{rating.user}} #{{rating.score}}점</div>
+            <div class="title">
+              <p style="display: inline-block; margin-right: 5px;">{{rating.user}}</p>
+              <p class="rounded px-2" style="display: inline-block; background-color: rgba(250, 250, 250, 0.4);">
+                {{rating.score}}점 </p>
+            </div>
             <p>{{rating.comment}}</p>
           </div>
-          <a href="#" class="badge badge-success modify-btn" data-id="{{rating.pk}}" onclick="return false;">수정</a>
-          <form action="{% url 'movies:rating_delete' movie.pk rating.pk %}" style="display:inline;" method="POST">
-            {% csrf_token %}
-            <button style="submit" class="badge badge-danger rating-delete">삭제</a>
-          </form>
+          <div class="mr-4 mb-2">
+            <a href="#" class="badge badge-secondary modify-btn" data-id="{{rating.pk}}" onclick="return false;">수정</a>
+            <form action="{% url 'movies:rating_delete' movie.pk rating.pk %}" style="display:inline;" method="POST">
+              {% csrf_token %}
+              <button style="submit" class="badge badge-secondary rating-delete">삭제</button>
+            </form>
+          </div>
         </div>
       </div>
 
       <div class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;" class="list-group-item">
         <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
-            {% csrf_token %}
-            <div class="mt-5">
-              <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:right;">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
-                </div>
-                <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
-                <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
-                <div class="input-group-append">
-                  <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</button>
-                  <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정
-                    취소</button>
-                </div>
+          {% csrf_token %}
+          <div class="mt-5">
+            <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:right;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
+              </div>
+              <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
+              <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
+              <div class="input-group-append">
+                <button style="submit" class="badge badge-secondary" data-id="{{rating.pk}}">수정</button>
+                <button class="badge badge-secondary modify-cancel"
+                  onclick="modifyCancel({{rating.pk}}); return false;">수정
+                  취소</button>
               </div>
             </div>
-          </form>
+          </div>
+        </form>
       </div>
 
-    
+
       {% else %}
 
       <div class="talk-bubble tri-right left-in round my-2 {{rating.pk}} ratingForm" id="ratingForm-{{rating.pk}}">
@@ -1137,7 +1150,9 @@
           <div class="talktext">
             <div class="title">
               <a href="{% url 'accounts:user_detail' rating.user.pk %}"
-                style="text-decoration:none; color: white;">{{rating.user}}</a> #{{rating.score}}점
+                style="text-decoration:none; color: white;">{{rating.user}}</a>
+              <p class="rounded px-2" style="display: inline-block; background-color: rgba(250, 250, 250, 0.4);">
+                {{rating.score}}점</p>
             </div>
             <p>{{rating.comment}}</p>
           </div>
@@ -1145,24 +1160,24 @@
       </div>
       <div class="{{rating.pk}} modifyForm" id="modifyForm-{{rating.pk}}" style="display:none;" class="list-group-item">
         <form action="{% url 'movies:rating_modify' movie.pk rating.pk %}" method="POST">
-            {% csrf_token %}
-            <div class="mt-5">
-              <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:left;">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
-                </div>
-                <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
-                <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
-                <div class="input-group-append">
-                  <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</button>
-                  <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정
-                    취소</button>
-                </div>
+          {% csrf_token %}
+          <div class="mt-5">
+            <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; float:left;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
+              </div>
+              <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" style="width: 35%;" value="{{rating.comment}}">
+              <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" placeholder="평점" value="{{rating.score}}">
+              <div class="input-group-append">
+                <button style="submit" class="badge badge-success" data-id="{{rating.pk}}">수정</button>
+                <button class="badge badge-danger modify-cancel" onclick="modifyCancel({{rating.pk}}); return false;">수정
+                  취소</button>
               </div>
             </div>
-          </form>
+          </div>
+        </form>
       </div>
       {% endif %}
       {% endfor %}
