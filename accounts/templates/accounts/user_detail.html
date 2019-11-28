@@ -21,18 +21,18 @@
 {% endcomment %}
 <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.3); margin-top: 100px;">
   {% if request.user.is_staff %}
-  <button type="button" class="btn btn-dark" onclick="location.href='{% url 'accounts:user_modify' user.pk %}'">유저 정보
+  <button type="button" class="btn btn-dark" onclick="location.href='{% url 'accounts:user_modify' detail_user.pk %}'">유저 정보
     수정</button>
   {% endif %}
-  <h1 class="display-4 text-light text-right font-weight-bold mr-4 mb-3 border-bottom pb-2">{{user}}</h1>
-  <h2 class="text-light text-right font-weight-bold mr-4 mb-3 border-bottom pb-2">{{user.first_name}}{{user.last_name}}</h2>
+  <h1 class="display-4 text-light text-right font-weight-bold mr-4 mb-3 border-bottom pb-2">{{detail_user}}</h1>
+  <h2 class="text-light text-right font-weight-bold mr-4 mb-3 border-bottom pb-2">{{detail_user.last_name}}{{detail_user.first_name}}</h2>
   <hr class="my-4">
   <div class="dropdown">
     <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       평점 정보</button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for rating in user.rating_set.all %}
+      {% for rating in detail_user.rating_set.all %}
       <a class="dropdown-item" href="{% url 'movies:movie_detail' rating.movie.pk %}">{{rating.score}} /
         {{rating.movie}}</a>
       {% endfor %}
@@ -48,7 +48,7 @@
       좋아하는 영화 정보
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for movie in user.movie_set.all %}
+      {% for movie in detail_user.movie_set.all %}
       <a class="dropdown-item" href="{% url 'movies:movie_detail' movie.pk %}">{{movie.title}}</a>
       {% endfor %}
     </div>
@@ -57,11 +57,11 @@
   <div class="dropdown mt-3 d-inline-block mr-3">
     <button class="btn btn-primary dropdown-toggle" type="button" id="following-{{user.pk}}" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      FOLLOWING | {{user.followings.all|length}}명
+      FOLLOWING | {{detail_user.followings.all|length}}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for following in user.followings.all  %}
-      <a class="dropdown-item" href="{% url 'accounts:user_detail' following.pk%}"> {{following}}</a>
+      {% for following in detail_user.followings.all  %}
+      <a class="dropdown-item" href="{% url 'accounts:user_detail' following.pk %}"> {{following}}</a>
       {% endfor %}
     </div>
   </div>
@@ -69,10 +69,10 @@
   <div class="dropdown d-inline">
     <button class="btn btn-primary dropdown-toggle" type="button" id="follower-{{user.pk}}" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      FOLLOWER | {{ user.follow_user.count }}명
+      FOLLOWER | {{ detail_user.follow_user.count }}명
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for follower in user.follow_user.all %}
+      {% for follower in detail_user.follow_user.all %}
       <a class="dropdown-item" href="{% url 'accounts:user_detail' follower.pk%}">{{follower}}</a>
       {% endfor %}
     </div>
@@ -80,14 +80,14 @@
 
   <hr>
 
-  {% if request.user != user %}
-  {% if request.user in user.follow_user.all %}
+  {% if request.user != detail_user %}
+  {% if request.user in detail_user.follow_user.all %}
   {% comment %} <p>이미 팔로우 중인 유저입니다.</p> {% endcomment %}
-  <p class="btn btn-danger follow-button" href="{% url 'accounts:follow' user.pk %}" role="button"
-    data-id="{{user.pk}}">unfollow</a>
+  <p class="btn btn-danger follow-button" href="{% url 'accounts:follow' detail_user.pk %}" role="button"
+    data-id="{{detail_user.pk}}">unfollow</a>
     {% else %}
-    <p class="btn btn-primary follow-button" href="{% url 'accounts:follow' user.pk %}" role="button"
-      data-id="{{user.pk}}">follow</a>
+    <p class="btn btn-primary follow-button" href="{% url 'accounts:follow' detail_user.pk %}" role="button"
+      data-id="{{detail_user.pk}}">follow</a>
       {% endif %}
       {% endif %}
 
