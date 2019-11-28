@@ -66,7 +66,7 @@ def main(request):
 
     for genre in Genre.objects.all():
         allGenres[genre] = genre.movies.all()
-    # print(allGenres)
+    
     context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 
                 'allMovies': allMovies, 'allGenres': allGenres, 'movieId': movieId,
             }       

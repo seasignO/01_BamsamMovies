@@ -46,4 +46,9 @@ class Rating(models.Model):
     def __str__(self):
         return self.comment
     
-
+class Message(models.Model):
+    receive = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="send")
+    send = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receive")
+    comment = models.TextField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
+    is_read = models.BooleanField()
