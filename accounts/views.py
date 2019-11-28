@@ -116,17 +116,18 @@ def manage_choice(request):
 
 @login_required
 def user_modify(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
     if not request.user.is_staff:
         return redirect('movies:main')
     if request.method == 'POST':
-        form = CustomUserChangeForm(data=request.POST, instance=request.user)
+        form = CustomUserChangeForm(data=request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect('accounts:manage_choice')
     else:
-        form = CustomUserChangeForm(instance=request.user)
+        form = CustomUserChangeForm(instance=user)
 
-    context = { 'form': form }
+    context = { 'form': form, 'change_user': user}
     return render(request, 'accounts/user_modify.html', context)
 
     
