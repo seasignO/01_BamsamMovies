@@ -10,6 +10,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
   <style>
     body {
       background-color: black;
@@ -41,11 +42,10 @@
 <body>
   {% include '_navBar.html' %}
   <div class="container">
-
-    <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#">SEND MESSAGE</a>
-    <i class="fas fa-envelope-open-text"></i>
+    <div class="">
+      <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#"><i class="fas fa-envelope-open-text" style="font-size: 20px; padding-top: 5px;"></i> SEND MESSAGE</a>
+    </div>
     <br>
-
     <ul class="list-group list-group-flush">
       {% for message in userMessages %}
       <input type="hidden" name="send_user" id="send_user" value="{{message.send}}">
@@ -53,17 +53,16 @@
         style="background-color: rgba(250, 250, 250, 0.8);">
         {% if message.is_read %}
         <a href="#" style="text-decoration: none; color: black;">
-          <b>{{message.send}}</b> | {{ message.comment}}
+          <b>{{message.send}}</b> | <p class="text-dark" style="display: inline-block; margin: 0;"><b>{{ message.comment}}</b></p>
         </a>
         {% else %}
         <a href="#" style="text-decoration: none; color: red;">
-          <b>{{message.send}}</b> | {{ message.comment}}
+          <b>{{message.send}}</b> | <p class="text-dark" style="display: inline-block; margin: 0;"><b>{{ message.comment}}</b></p>
         </a>
         {% endif %}
       </li>
       {% endfor %}
     </ul>
-
     <div id="modal" class="modal text-center my-auto" tabindex="-1" role="dialog">
       <form action="{% url 'accounts:send_message' %}" method="POST" id="messageForm">
         {% csrf_token %}
@@ -96,10 +95,8 @@
         </div>
       </form>
     </div>
-    
   </div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
   <script type="text/javascript">
     const modal = document.querySelector('#modal')
     const sendBtn = document.querySelector('#sendBtn')
