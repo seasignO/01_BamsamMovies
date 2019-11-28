@@ -1,8 +1,8 @@
 from IPython import embed
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login as auth_login, logout as auth_logout, get_user_model
+from django.contrib.auth import login as auth_login, logout as auth_logout, get_user_model, update_session_auth_hash
 from .forms import CustomUserCreationForm, MessageForm, CustomUserChangeForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Message, Movie
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
@@ -71,8 +71,8 @@ def send_message(request):
 
 @login_required
 def user_detail(request, user_pk):
-    user = get_object_or_404(get_user_model(), pk=user_pk)
-    context = {'user': user}
+    detail_user = get_object_or_404(get_user_model(), pk=user_pk)
+    context = {'detail_user': detail_user}
     return render(request, 'accounts/user_detail.html', context)
 
 @login_required 
@@ -123,6 +123,7 @@ def user_modify(request, user_pk):
         return redirect('movies:main')
     if request.method == 'POST':
         form = CustomUserChangeForm(data=request.POST, instance=user)
+        form.password = user.password
         if form.is_valid():
             form.save()
             return redirect('accounts:manage_choice')
@@ -133,3 +134,18 @@ def user_modify(request, user_pk):
     return render(request, 'accounts/user_modify.html', context)
 
     
+@login_required
+def change_password(request):
+    # change_user = get_object_or_404(get_user_model())
+    if not request.user.is_staff:
+        return redirect('movies:main')
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('accounts:manage_choice')
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {'form': form}
+    return render(request, 'accounts/user_modify.html', context)
