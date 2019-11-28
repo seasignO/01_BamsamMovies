@@ -63,10 +63,12 @@ def main(request):
 
     allMovies = Movie.objects.all()
     allGenres = {}
+    print(unread)
     for genre in Genre.objects.all():
         allGenres[genre] = genre.movies.all()
     # print(allGenres)
-    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 'allMovies': allMovies, 'allGenres': allGenres, 'movieId': movieId}       
+    context = {'movies': movies, 'randomTeaser': randomTeaser, 'randomPoster': randomPoster, 'allMovies': allMovies, 'allGenres': allGenres, 'movieId': movieId,
+            }       
     return render(request, 'movies/main.html', context)
 
 def movie_detail(request, movie_pk):

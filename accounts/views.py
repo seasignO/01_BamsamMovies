@@ -47,22 +47,19 @@ def signup(request):
 def my_message(request):
     user = request.user
     user_messages = Message.objects.filter(receive=user)
+    unread = Message.objects.filter(receive=user.pk, is_read=False)
     # followings = user.followings.all()
-    context = {'user': user, 'userMessages': user_messages, }
+    context = { 'user': user, 'userMessages': user_messages, 'unread': unread }
     return render(request, 'accounts/messages.html', context)
 
 @login_required
 def send_message(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)   
-        # form.receive = request.POST.get('receive')
+       
         receive_user = get_object_or_404(get_user_model(), pk=request.POST.get('receive'))
         form.receive = receive_user
-        # form.comment = request.POST.get('comment')
-        print(request.POST.get('comment'))
-        # form.movie = request.POST.get('movie') if request.POST.get('movie') else ' '
-        print(form)
-        # print(form)
+       
         if form.is_valid():
             print('유효성 통과')
             t_form = form.save(commit=False)
@@ -94,12 +91,19 @@ def follow(request, user_pk):
         return HttpResponseBadRequest
 
 @login_required
-def read_message(request, message_pk):
+def read_message(request, message_pk, user_pk):
     if request.is_ajax():
-        message = get_object_or_404(Message, pk=message_pk)
+        message = get_object_or_404(Message, pk=message_pk,)
+        print(message)
         if message.is_read == False:
-            message.is_read = True
-        context = {}
+            message.is_read = not message.is_read
+            message.save()
+            read = True
+        else:
+            read = False
+        print(message)
+        noReadMessages = Message.objects.filter(receive_id=request.user.pk, is_read=False)
+        context = {'read': read, 'noReadMessages': len(noReadMessages)}
         return JsonResponse(context)
     else:
         return HttpResponseBadRequest  
