@@ -1,83 +1,104 @@
+{% extends 'base.html' %}
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% block css %}
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
   <style>
+
     body {
-      background-color: black;
-      height: 100%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 0, 0;
-      background-position: center;
-      background-attachment: fixed;
-      background-image: url('{% static 'movies/images/message.png' %}');
-    }
+        background-color: black;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 0, 0;
+        background-position: center;
+        background-attachment: fixed;
+        background-image: url('{% static 'movies/images/message.png' %}');
+      }
 
     .dimm {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: block;
-    }
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: block;
+      }
 
     #modal {
       display: none;
     }
+
+    .nav {
+      background-image: url({% static 'movies/images/logo2-3.png' %});
+      background-color: #1a1b1c;
+      height: 36%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 10%, 10%;
+      background-position: center;
+    }
   </style>
-</head>
 
-<body>
-  {% include '_navBar.html' %}
+{% endblock css %}
 
-  <div class="container">
+{% block content2 %}
+
+  <nav class="nav"></nav>
+
+  <div class="">
+
     <div class="">
       <a id="sendBtn" class="btn btn-warning mt-5 mr-3 mb-5" href="#"><i class="fas fa-envelope-open-text" style="font-size: 20px; padding-top: 5px;"></i> SEND MESSAGE</a>
     </div>
+
     <br>
-    <p style="color: white;">읽지 않은 메세지 : {{unread | length}}</p>
+
+    <p id="unread" style="color: white;">읽지 않은 메세지 : {{ unread | length }}</p>
+
+
     <ul class="list-group list-group-flush">
       {% for message in userMessages %}
         <input type="hidden" name="send_user" id="send_user" value="{{message.send}}">
         <li class="list-group-item d-flex justify-content-between align-items-center rounded"
           style="background-color: rgba(250, 250, 250, 0.8);">
           {% if message.is_read %}
-          <a href="#" class="read_mes" style="text-decoration: none; color: black;" 
-            data-id="{{message.pk}}" data-userId="{{request.user.pk}}">
-            <b>{{message.send}}</b> | {{ message.comment}}
-          </a>
+            <a href="{% url 'accounts:user_detail' message.send.id %}" class="read_mes" style="text-decoration: none; color: black;" 
+              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" onclick="return false;">
+              <b>{{message.send}}</b> | {{ message.comment}}
+            </a>
+
           {% else %}
-          <a href="#" class="{{message.pk}} mes" style="text-decoration: none; color: red;" 
-            data-id="{{message.pk}}" data-userId="{{request.user.pk}}">
-            <b>{{message.send}}</b> | {{ message.comment}}
-          </a>
+            <a href="#" class="{{message.pk}} mes" style="text-decoration: none; color: red;" 
+              data-id="{{message.pk}}" data-userId="{{request.user.pk}}" onclick="return false;">
+              <b>{{message.send}}</b> | {{ message.comment}}
+            </a>
           {% endif %}
         </li>
       {% endfor %}
     </ul>
+
+
     <div id="modal" class="modal text-center my-auto" tabindex="-1" role="dialog">
+
       <form action="{% url 'accounts:send_message' %}" method="POST" id="messageForm">
         {% csrf_token %}
         <div class="modal-dialog" role="document">
           <div class="modal-content">
+
             <div class="modal-header">
               <h5 class="modal-title">메세지 보내기</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+
             <div class="modal-body">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -92,14 +113,24 @@
                   aria-describedby="basic-addon1">
               </div>
             </div>
+
             <div class="modal-footer">
               <button id="submitBtn" class="btn btn-primary">메세지 보내기</button>
             </div>
+
           </div>
         </div>
       </form>
+
     </div>
+
+
   </div>
+
+{% endblock content2 %}
+
+
+{% block script %}
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
     const messageCount = document.querySelector('.messageCount')
@@ -116,13 +147,17 @@
         axios.post(readMessageUrl)
           .then(response => {
             console.log(response)
-            document.querySelector('.messageCount').innerText = response.data.noReadMessages
+
             if (response.data.read) {
               event.target.style.color = 'black'
             } else {
               event.target.style.color = 'red'
             }
+
+            const unread = document.querySelector('#unread')
+            unread.innerText = `읽지 않은 메세지 : ${response.data.noReadMessages}`
           })
+        return false
       })
     })
 
@@ -153,6 +188,4 @@
       dimm.style.display = 'none'
     }
   </script>
-</body>
-
-</html>
+{% endblock script %}
