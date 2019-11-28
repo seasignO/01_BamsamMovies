@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block css %}
 <script src="https://kit.fontawesome.com/0638859061.js" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap&subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
 <style>
   html,
   body {
@@ -14,13 +17,952 @@
   body {
     background-color: #1a1b1c;
     height: 100%;
-    {% comment %} background-image: url({% static 'movies/images/bg2.png' %}); {% endcomment %}
+
+    background-image: url({% static 'movies/images/bg5.jpg' %});
+
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 10%,
-    10%;
+      10%;
     background-position: center;
     background-attachment: fixed;
+    font-family: 'Noto Sans KR', sans-serif;
+    ,
+    'Nanum Myeongjo',
+    serif;
+  }
+
+
+
+
+
+
+
+
+
+  /* container */
+  .container {
+      {
+      % comment %
+    }
+
+    padding: 5% 5%;
+
+      {
+      % endcomment %
+    }
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px
+  }
+
+  /* CSS talk bubble */
+  .talk-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    width: 400px;
+    height: auto;
+    background-color: rgba(252, 128, 126, 0.7);
+    background: rgba(252, 128, 126, 0.7);
+    color: white;
+  }
+
+  .border {
+    border: 8px solid #fff;
+  }
+
+  .round {
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+
+  }
+
+
+
+
+  .tri-right.border.left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: 30px;
+    bottom: auto;
+    border: 20px solid;
+    border-color: rgba(252, 128, 126, 0.7) rgba(252, 128, 126, 0.7) transparent transparent;
+  }
+
+  .tri-right.left-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -24px;
+    right: auto;
+    top: 38px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: rgba(252, 128, 126, 0.7) rgba(252, 128, 126, 0.7) transparent transparent;
+  }
+
+  .tri-right.right-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -24px;
+    top: 38px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: rgba(252, 128, 126, 0.7) transparent transparent rgba(252, 128, 126, 0.7);
+  }
+
+
+  /* talk bubble contents */
+  .talktext {
+    padding: 1em;
+    text-align: left;
+    line-height: 1.5em;
+  }
+
+  .talktext p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .coverflow {
+    position: relative;
+    height: 600px;
+    padding-left: 200px;
+    padding-right: 200px;
+
+    overflow: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+  }
+
+  .coverflow__image {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 400px;
+    height: 600px;
+    -webkit-transition: all 350ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: all 350ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .coverflow__image[data-coverflow-index] {
+    position: absolute;
+    left: 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+  }
+
+  .coverflow__image[data-coverflow-index]:before {
+    content: " ";
+    z-index: 1;
+    position: absolute;
+    top: 300px;
+    width: 100%;
+    height: 10%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 5;
+    -webkit-transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 4;
+    -webkit-transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 3;
+    -webkit-transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 2;
+    -webkit-transform: translateX(640px) scale(-0.4) rotateY(-45deg);
+    transform: translateX(640px) scale(-0.4) rotateY(-45deg);
+    opacity: -0.66667;
+  }
+
+  .coverflow[data-coverflow-position="1"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 1;
+    -webkit-transform: translateX(730px) scale(-0.55) rotateY(-45deg);
+    transform: translateX(730px) scale(-0.55) rotateY(-45deg);
+    opacity: -0.83333;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 5;
+    -webkit-transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 4;
+    -webkit-transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 3;
+    -webkit-transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="2"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 2;
+    -webkit-transform: translateX(640px) scale(-0.4) rotateY(-45deg);
+    transform: translateX(640px) scale(-0.4) rotateY(-45deg);
+    opacity: -0.66667;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 5;
+    -webkit-transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 4;
+    -webkit-transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="3"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 3;
+    -webkit-transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    transform: translateX(550px) scale(-0.25) rotateY(-45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 5;
+    -webkit-transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="4"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 4;
+    -webkit-transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    transform: translateX(460px) scale(-0.1) rotateY(-45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="5"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 5;
+    -webkit-transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    transform: translateX(370px) scale(0.05) rotateY(-45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 5;
+    -webkit-transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="6"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 6;
+    -webkit-transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    transform: translateX(280px) scale(0.2) rotateY(-45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 4;
+    -webkit-transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 5;
+    -webkit-transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="7"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 7;
+    -webkit-transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    transform: translateX(190px) scale(0.35) rotateY(-45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 3;
+    -webkit-transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 4;
+    -webkit-transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 5;
+    -webkit-transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="8"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 8;
+    -webkit-transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    transform: translateX(100px) scale(0.5) rotateY(-45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 2;
+    -webkit-transform: translateX(-1040px) scale(-0.4) rotateY(45deg);
+    transform: translateX(-1040px) scale(-0.4) rotateY(45deg);
+    opacity: -0.66667;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 3;
+    -webkit-transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 4;
+    -webkit-transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 5;
+    -webkit-transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .coverflow[data-coverflow-position="9"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 9;
+    -webkit-transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    transform: translateX(10px) scale(0.65) rotateY(-45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="1"] {
+    z-index: 1;
+    -webkit-transform: translateX(-1130px) scale(-0.55) rotateY(45deg);
+    transform: translateX(-1130px) scale(-0.55) rotateY(45deg);
+    opacity: -0.83333;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="2"] {
+    z-index: 2;
+    -webkit-transform: translateX(-1040px) scale(-0.4) rotateY(45deg);
+    transform: translateX(-1040px) scale(-0.4) rotateY(45deg);
+    opacity: -0.66667;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="3"] {
+    z-index: 3;
+    -webkit-transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    transform: translateX(-950px) scale(-0.25) rotateY(45deg);
+    opacity: -0.5;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="4"] {
+    z-index: 4;
+    -webkit-transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    transform: translateX(-860px) scale(-0.1) rotateY(45deg);
+    opacity: -0.33333;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="5"] {
+    z-index: 5;
+    -webkit-transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    transform: translateX(-770px) scale(0.05) rotateY(45deg);
+    opacity: -0.16667;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="6"] {
+    z-index: 6;
+    -webkit-transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    transform: translateX(-680px) scale(0.2) rotateY(45deg);
+    opacity: 0;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="7"] {
+    z-index: 7;
+    -webkit-transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    transform: translateX(-590px) scale(0.35) rotateY(45deg);
+    opacity: 0.16667;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="8"] {
+    z-index: 8;
+    -webkit-transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    transform: translateX(-500px) scale(0.5) rotateY(45deg);
+    opacity: 0.33333;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="9"] {
+    z-index: 9;
+    -webkit-transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    transform: translateX(-410px) scale(0.65) rotateY(45deg);
+    opacity: 0.5;
+  }
+
+  .coverflow[data-coverflow-position="10"] .coverflow__image[data-coverflow-index="10"] {
+    z-index: 10;
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    box-shadow: 0 1px 25px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .prev-arrow,
+  .next-arrow {
+    cursor: pointer;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    padding: 1.5rem 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 3rem;
+    line-height: 3rem;
+    background: transparent;
+    border-radius: 1rem;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-transition: color 200ms, background 200ms;
+    transition: color 200ms, background 200ms;
+  }
+
+  .prev-arrow:hover,
+  .next-arrow:hover,
+  .prev-arrow:focus,
+  .next-arrow:focus {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .prev-arrow {
+    left: 0%;
+  }
+
+  .prev-arrow:before {
+    content: "❮";
+  }
+
+  .next-arrow {
+    right: 0%;
+  }
+
+  .next-arrow:after {
+    content: "❯";
+  }
+
+
+
+
+
+
+
+
+
+
+  .glow {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #ba0431, 0 0 20px #d62b55, 0 0 30px #9c0010, 0 0 40px #e60073, 0 0 20px #e60073, 0 0 60px #ff1f57, 0 0 30px #cf1140;
+    }
+
+    to {
+      text-shadow: 0 0 20px #d62b55, 0 0 30px #ff4da6, 0 0 40px #9c0010, 0 0 50px #ff4da6, 0 0 30px #ff4da6, 0 0 70px #ff1f57, 0 0 30px #cf1140;
+    }
   }
 </style>
 {% endblock css %}
@@ -29,38 +971,100 @@
 {% comment %} {{request.user}} {% endcomment %}
 <div id="app">
   <div class="container">
-    <div class="card text-center mx-auto" style="width: 45rem;">
+    <div class="mt-5 card-block special-card mx-auto rounded text-center mx-auto text-light"
+      style="width: 45rem; background-color: rgba(0, 0, 0, 0.6); font-family: 'Noto Sans KR', sans-serif;, 'Nanum Myeongjo', serif;">
       <div class="card-header">
-        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="movie_poster" style="height:500px;">
+        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" alt="movie_poster" style="height:1000px;">
         <hr>
-        <h3>{{movie.title}}</h3>
+        <h1 style="font-family: 'Black Han Sans', sans-serif;">{{movie.title}}</h1>
       </div>
-      <div class="card-body text-center">
-        <h5 class="card-title d-inline">장르 :</h5>
+      <div class="card-body text-center rounded" style="background-color: rgba(250, 250, 250, 0.2); margin: 0 80px; ">
+        <h5 class="card-title d-inline"><b>GENRE</b> :</h5>
         {% for genre in movie.genres.all  %}
         <h5 class="card-title d-inline">'{{genre}}' </h5>
         {% endfor %}
-        <h5 class="card-title mt-1">관객 : {{movie.audience}}</h5>
-        <h5 class="card-title"></h5>
-        <p class="card-text">{{ movie.summary }}</p>
+        <h5 class="card-title mt-1"><b>AUDIENCE</b> : {{movie.audience}}</h5>
+        <hr>
+        <p class="cardtext">{{ movie.summary }}</p>
         <br>
-        {% if request.user in movie.like_users.all %}
-        <i class="fas fa-heart-broken like-button" style="color: black;" data-id="{{ movie.pk }}">싫은데요</i>
-        {% else %}
-        <i class="fas fa-heart like-button" style="color: crimson;" data-id="{{ movie.pk }}">좋아요</i>
-        {% endif %}
-        <span class="" style="" id="like-count-{{ movie.pk }}">이 영화를 좋아하는 사람 : {{ movie.like_users.count }}명</span>
+        <p class="btn btn-dark font-weight-bold">
+          {% if request.user in movie.like_users.all %}
+          <i class="fas fa-heart like-button" style="color: crimson;" data-id="{{ movie.pk }}"> 좋아요 : </i>
+          {% else %}
+          <i class="fas fa-heart like-button" style="color: white;" data-id="{{ movie.pk }}"> 좋아요 : </i>
+          {% endif %}
+          <span class="" style="" id="like-count-{{ movie.pk }}">{{ movie.like_users.count }}명</span>
+        </p>
       </div>
       <div class="card-footer">
         {% if request.user.username == "admin" %}
-        <a href="{% url 'movies:movie_modify' movie.pk %}" class="btn btn-success">영화 수정</a>
-        <form action="" style="display:inline;">
-          <input type="submit" href="#" class="btn btn-warning movie-delete" value="영화 삭제">
-        </form>
+        <div class="input-group-prepend mx-auto" style="display: inline-block;">
+          <a href="{% url 'movies:movie_modify' movie.pk %}" class="btn btn-outline-secondary">영화 수정</a>
+          <form action="" style="display:inline;">
+            <input type="submit" href="#" class="btn btn-outline-secondary movie-delete" value="영화 삭제">
+          </form>
+        </div>
         {% endif %}
       </div>
     </div>
 
+    {% comment %} {% endcomment %}
+  </div>
+</div>
+<div class="text-center my-3 mt-5">
+  <h1 class=" text-warning m-3 px-3 py-2 border-bottom border-right border-warning"
+    style="display: inline-block; background-color: rgba(0, 0, 0, 0.5);"> ACTOR </h1>
+</div>
+{% endblock content %}
+
+
+{% block no_container %}
+
+
+
+
+<div class="glow text-center m-5">
+  <div class="rounded p-3 border-bottom border-right border-danger"
+    style="display: inline-block; background-color: rgba(0, 0, 0, 0.7);">
+    <div style="color: #fff;">
+      {% for cast in casts %}
+      <p style="display: inline-block; font-family: 'Courier New';">{{cast.name}}</p><br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<section class="row">
+  <div class="nine columns mx-auto">
+    <div class="coverflow" style="padding: 0 500px;">
+      <a class="prev-arrow"></a>
+      {% for cast in casts %}
+      <div class="pic">
+        <img src="https://image.tmdb.org/t/p/original{{cast.profile_path}}"
+          class="card-img-top coverflow__image rounded" alt="{{cast.name}}" style="width: 400px; height: 510px;">
+      </div>
+      {% endfor %}
+      <a class="next-arrow"></a>
+    </div>
+  </div>
+</section>
+
+{% endblock no_container %}
+
+{% block content2 %}
+
+
+
+
+
+{% comment %} {% endcomment %}
+<div>
+  <div>
+    <div class="text-center mt-3">
+      <h1 class=" text-warning mt-3 px-3 py-2 border-bottom border-right border-warning"
+        style="display: inline-block; background-color: rgba(0, 0, 0, 0.5);"> REVIEW </h1>
+    </div>
     {% if request.user.is_authenticated %}
     <form action="{% url 'movies:rating_create' movie.pk%}" method="POST">
       {% csrf_token %}
@@ -70,14 +1074,14 @@
         <input type="text" name="comment" value="" id="" />
         <button type="submit" class="btn btn-primary">작성하기</button> {% endcomment %}
 
-        <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; margin: auto">
+        <div class="input-group mb-3 d-flex" style="width: 60%; display: inline-block; margin: auto;">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">{{request.user}}</span>
           </div>
           <input type="text" name="comment" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default" style="width: 60%;">
+            aria-describedby="inputGroup-sizing-default" style="width: 35%;" placeholder="후기를 남겨주세요.">
           <input type="number" name="score" min="1" max="10" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default">
+            aria-describedby="inputGroup-sizing-default" placeholder="평점">
           <div class="input-group-append">
             <button class="btn btn-danger" type="submit">작성하기</button>
           </div>
@@ -137,34 +1141,177 @@
       </div>
       {% endfor %}
     </ul>
-
-    <div class="dropdown">
-      <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  {% comment %} {% endcomment %}
+  <div>
+    <div class="talk-bubble tri-right left-in round my-2">
+      <div class="talktext">
+        <div class="title">comment #01</div>
+        <p>And now using .round we can smooth the sides down. Also uses .btm-left to show a triangle at the bottom
+          flush
+          to the left.</p>
       </div>
     </div>
-
-    <div>
-      {% for cast in casts  %}
-        <div class="card" style="width: 18rem;">
-          <img src="https://image.tmdb.org/t/p/original{{cast.profile_path}}" class="card-img-top" alt="{{cast.name}}">
-          <div class="card-body">
-            <h5 class="card-title">{{cast.name}}</h5>
-          </div>
+    <br>
+    <div class="text-right">
+      <div class="talk-bubble tri-right round right-in text-right my-2">
+        <div class="talktext">
+          <div class="title">comment #01</div>
+          <p>Moving our way back up the right side indented. Uses .round and .right-in</p>
         </div>
-      {% endfor %}
+        {% comment %} {% endcomment %}
+      </div>
     </div>
-
   </div>
+  {% comment %} <div class="dropdown">
+    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div> {% endcomment %}
 </div>
-{% endblock content %}
+
+
+
+{% endblock content2 %}
 
 {% block script %}
+<script>
+  var a = document.getElementsByTagName("a");
+  var cfImg = document.getElementsByClassName("coverflow__image")
+
+  var scaleI = 0;
+  for (scaleI; scaleI < a.length; scaleI++) {
+    if (scaleI === 3) {
+      continue;
+    } else {
+      a[scaleI].style.cursor = "default";
+      a[scaleI].addEventListener("click", prevDef);
+    }
+  }
+
+  function prevDef(e) {
+    e.preventDefault();
+  }
+
+  function forScale(coverflowPos) {
+    for (scaleI = 0; scaleI < a.length; scaleI++) {
+      a[scaleI].style.cursor = "default";
+      a[scaleI].addEventListener("click", prevDef);
+    }
+    for (scaleI = 0; scaleI < cfImg.length; scaleI++) {
+      if (cfImg[scaleI].getAttribute("data-coverflow-index") == coverflowPos) {
+        cfImg[scaleI].parentElement.style.cursor = "pointer";
+        cfImg[scaleI].parentElement.removeEventListener("click", prevDef);
+      }
+    }
+  }
+  //end added by Chase
+
+  function setupCoverflow(coverflowContainer) {
+    var coverflowContainers;
+
+    if (typeof coverflowContainer !== "undefined") {
+      if (Array.isArray(coverflowContainer)) {
+        coverflowContainers = coverflowContainer;
+      } else {
+        coverflowContainers = [coverflowContainer];
+      }
+    } else {
+      coverflowContainers = Array.prototype.slice.apply(document.getElementsByClassName('coverflow'));
+    }
+
+    coverflowContainers.forEach(function (containerElement) {
+      var coverflow = {};
+      var prevArrows, nextArrows;
+
+      //capture coverflow elements
+      coverflow.container = containerElement;
+      coverflow.images = Array.prototype.slice.apply(containerElement.getElementsByClassName('coverflow__image'));
+      coverflow.position = Math.floor(coverflow.images.length / 2) + 1;
+
+      //set indicies on images
+      coverflow.images.forEach(function (coverflowImage, i) {
+        coverflowImage.dataset.coverflowIndex = i + 1;
+      });
+
+      //set initial position
+      coverflow.container.dataset.coverflowPosition = coverflow.position;
+
+      //get prev/next arrows
+      prevArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("prev-arrow"));
+      nextArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("next-arrow"));
+
+      //add event handlers
+      function setPrevImage() {
+        coverflow.position = Math.max(1, coverflow.position - 1);
+        coverflow.container.dataset.coverflowPosition = coverflow.position;
+        //call the functin forScale added
+        forScale(coverflow.position);
+      }
+
+      function setNextImage() {
+        coverflow.position = Math.min(coverflow.images.length, coverflow.position + 1);
+        coverflow.container.dataset.coverflowPosition = coverflow.position;
+        //call the function Chase added
+        forScale(coverflow.position);
+      }
+
+      function jumpToImage(evt) {
+        coverflow.position = Math.min(coverflow.images.length, Math.max(1, evt.target.dataset.coverflowIndex));
+        coverflow.container.dataset.coverflowPosition = coverflow.position;
+        //start added by Chase
+        setTimeout(function () {
+          forScale(coverflow.position);
+        }, 1);
+        //end added by Chase
+      }
+
+      function onKeyPress(evt) {
+        switch (evt.which) {
+          case 37: //left arrow
+            setPrevImage();
+            break;
+          case 39: //right arrow
+            setNextImage();
+            break;
+        }
+      }
+      prevArrows.forEach(function (prevArrow) {
+        prevArrow.addEventListener('click', setPrevImage);
+      });
+      nextArrows.forEach(function (nextArrow) {
+        nextArrow.addEventListener('click', setNextImage);
+      });
+      coverflow.images.forEach(function (image) {
+        image.addEventListener('click', jumpToImage);
+      });
+      window.addEventListener('keyup', onKeyPress);
+    });
+  }
+
+  setupCoverflow();
+</script>
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
@@ -211,16 +1358,16 @@
           console.log(response)
           // 위에서 정의한 span 태그의 id값에 사용자가 좋아요를 누를 때마다 response.data.count의 값을 갱신시킴         
           document.querySelector(`#like-count-${movieId}`).innerText =
-            `이 영화를 좋아하는 사람 : ${response.data.count}명`
+            ` ${response.data.count}명`
           console.log(response.data.count)
           if (response.data.liked) {
-            event.target.className = 'fas fa-heart-broken like-button'
-            event.target.style.color = 'black'
-            event.target.innerText = '싫은데요'
-          } else {
             event.target.className = 'fas fa-heart like-button'
             event.target.style.color = 'crimson'
-            event.target.innerText = '좋아요'
+            event.target.innerText = ' 좋아요 :'
+          } else {
+            event.target.className = 'fas fa-heart like-button'
+            event.target.style.color = 'white'
+            event.target.innerText = ' 좋아요 :'
           }
         })
         .catch(error => console.log(error))
