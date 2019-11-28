@@ -96,11 +96,9 @@ def read_message(request, message_pk, user_pk):
         message = get_object_or_404(Message, pk=message_pk,)
         print(message)
         if message.is_read == False:
-            message.is_read = not message.is_read
+            message.is_read = True
             message.save()
-            read = True
-        else:
-            read = False
+        read = True
         print(message)
         noReadMessages = Message.objects.filter(receive_id=request.user.pk, is_read=False)
         context = {'read': read, 'noReadMessages': len(noReadMessages)}
