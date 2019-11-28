@@ -17,4 +17,4 @@ class CustomUserChangeForm(UserChangeForm):
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ('receive', 'comment', 'movie',)
+        fields = ('receive', 'comment',)
