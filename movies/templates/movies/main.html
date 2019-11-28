@@ -17,13 +17,77 @@
 
   body {
     background-color: #1a1b1c;
-    {% comment %} height: 100%; {% endcomment %}
-    {% comment %} background-image: url({% static 'movies/images/logo2.png' %}); {% endcomment %}
-    {% comment %} background-size: cover; {% endcomment %}
-    {% comment %} background-repeat: no-repeat; {% endcomment %}
-    {% comment %} background-position: 10%, 10%; {% endcomment %}
-    {% comment %} background-position: center; {% endcomment %}
-    {% comment %} background-attachment: fixed; {% endcomment %}
+
+      {
+      % comment %
+    }
+
+    height: 100%;
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-image: url({% static 'movies/images/logo2.png' %});
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-size: cover;
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-repeat: no-repeat;
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-position: 10%,
+    10%;
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-position: center;
+
+      {
+      % endcomment %
+    }
+
+      {
+      % comment %
+    }
+
+    background-attachment: fixed;
+
+      {
+      % endcomment %
+    }
   }
 
 
@@ -82,94 +146,107 @@
     background-repeat: no-repeat;
     background-position: 10%, 10%;
     background-position: center;
-    {% comment %} background-attachment: fixed; {% endcomment %}
+
+      {
+      % comment %
+    }
+
+    background-attachment: fixed;
+
+      {
+      % endcomment %
+    }
   }
   }
 </style>
 {% endblock css %}
 
 {% block no_container %}
-<nav class="nav">　</nav>
+<nav class="nav"> </nav>
 {% endblock no_container %}
 
-{% block content %}
+{% block content2 %}
 <div class="text-center">
-  <h1 class="text-center text-warning border-bottom border-right px-3 border-warning pb-3" style="margin-top: 35px; display: inline-block;">MOVIE LIST</h1>
+  <h1 class="text-center text-warning border-bottom border-right px-3 border-warning pb-3"
+    style="margin-top: 80px; margin-bottom: 50px; display: inline-block;">MOVIE LIST</h1>
 </div>
 
-  <div class="d-flex justify-content-around">
-    <div>
-      <iframe id="mainTeaser" width="600" height="480" src="http://www.youtube.com/embed/{{randomTeaser}}?autoplay=1" frameborder="0">
-      </iframe>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <img id="posterImage" src="https://image.tmdb.org/t/p/original{{randomPoster}}" class="card-img-top" alt="...">
-      <a id="moreInfo" href="/movies/movie_detail/{{movieId}}/" class="btn btn-primary">더 보러가기</a>
-    </div>
+<div class="d-flex justify-content-around" style="width: 100%; height: 100%; margin-bottom: 20px;">
+  <div style="width: 90%; height: 70%;" class="text-center">
+    <iframe id="mainTeaser" style="width: 55vw; height: 55vh"
+      src="http://www.youtube.com/embed/{{randomTeaser}}?autoplay=1" frameborder="0">
+    </iframe>
   </div>
+  <div class="card-block special-card mx-auto my-auto rounded text-center p-2 border border-dark"
+    style="width: 18rem; border: 5px;">
+    <img id="posterImage" src="https://image.tmdb.org/t/p/original{{randomPoster}}" class="card-img-top" alt="...">
+    <a id="moreInfo" href="/movies/movie_detail/{{movieId}}/" style="width: 60%; margin-top: 10px;"
+      class="btn btn-primary">더 보러가기</a>
+  </div>
+</div>
 
-  <div class="row">
-    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-      <div class="MultiCarousel-inner">
-        {% for movie in movies %}
-          <div class="item">
-            <div class="pad15 rounded">
-              <img class="{{movie.teaser}} teaser" 
-              src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" 
-              alt="" style="height: 200px;" 
-              data-teaserid="{{movie.teaser}}" 
-              data-posterid="{{movie.poster_url}}"
-              data-movieId = "{{movie.pk}}">
-            </div>
-          </div>
-        {% endfor %}
-       
+<div class="row">
+  <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000"
+    style="padding: 0;">
+    <div class="MultiCarousel-inner">
+      {% for movie in movies %}
+      <div class="item">
+        <div class="pad15 rounded" style="background-color: rgba(0, 0, 0, 0);">
+          <img class="{{movie.teaser}} teaser rounded" src="https://image.tmdb.org/t/p/original{{movie.poster_url}}"
+            alt="" style="height: 250px; cursor:pointer;" data-teaserid="{{movie.teaser}}"
+            data-posterid="{{movie.poster_url}}" data-movieId="{{movie.pk}}">
+        </div>
       </div>
-      <button class="btn btn-primary leftLst"> < </button> 
-      <button class="btn btn-primary rightLst"> ></button>
-    </div>
-  </div>
-  
-  <div class="text-center">
-    <p style="color: white;">영화 고르기</p>
-  </div>
-  <div class="dropdown text-center mt-5">
-    <button id="genreDropDown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      장르 고르기
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      {% for genre in allGenres %}
-        <button class="dropdown-item genreChoice" 
-                type="button" 
-                data-id="{{genre.id}}"
-                data-name="{{genre.name}}">
-                {{genre.name}}
-        </button>
       {% endfor %}
+
     </div>
+    <button class="btn btn-primary leftLst">
+      < </button> <button class="btn btn-primary rightLst"> >
+    </button>
   </div>
-  <div class="allMovies">
-    {% for genre, movies in allGenres.items %}
-      <div class="{{genre}}-seletedGenre">
-        {% for movie in genre.movies.all %}
-            <div class="card {{genre}} {{movie}} selectedMovie" style="width: 18rem; display: none;" data-id="{{movie.id}}" value="{{movie.title}}">
-              <a href="{% url 'movies:movie_detail' movie.pk %}">
-                <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}">
-                <h5 class="card-title">{{movie.title}}</h5>
-              </a>
-            </div>
-        {% endfor %}
-      </div>
+</div>
+
+<div class="text-center">
+  <h1 class="text-center text-warning border-bottom border-right px-3 border-warning pb-3"
+    style="margin-top: 80px; margin-bottom: 10px; display: inline-block;">GENRES</h1>
+</div>
+<div class="dropdown text-center mt-5">
+  <button id="genreDropDown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 100px;">
+    GENRES
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    {% for genre in allGenres %}
+    <button class="dropdown-item genreChoice" type="button" data-id="{{genre.id}}" data-name="{{genre.name}}">
+      {{genre.name}}
+    </button>
     {% endfor %}
-  </div>  
-
-
-  <div id="showMovies" class="d-flex justify-content-between">
-    
   </div>
+</div>
+<div class="allMovies">
+  {% for genre, movies in allGenres.items %}
+  <div class="{{genre}}-seletedGenre">
+    {% for movie in genre.movies.all %}
+    <div class="card-block special-card mx-2 my-3 {{genre}} {{movie}} selectedMovie"
+      style="width: 18; display: none; font-size: 10px;" data-id="{{movie.id}}" value="{{movie.title}}">
+      <a class="text-light text-center text-decoration-none" href="{% url 'movies:movie_detail' movie.pk %}">
+        <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}"
+          style="width: 210px; height: 290px;">
+        <h5 class="card-title">{{movie.title}}</h5>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+
+
+<div id="showMovies" class="row">
+</div>
+
 {% comment %} </div> {% endcomment %}
 
-{% endblock content %}
+{% endblock content2 %}
 
 {% block script %}
 <script type="text/javascript">
@@ -178,9 +255,9 @@
   const showMovies = document.querySelector('#showMovies')
 
   genreBtns.forEach(btn => {
-    btn.addEventListener('click', function(event) {
+    btn.addEventListener('click', function (event) {
       if (showMovies.children.length != 0) {
-        while(showMovies.hasChildNodes()) {
+        while (showMovies.hasChildNodes()) {
           showMovies.removeChild(showMovies.firstChild)
         }
       }
@@ -193,31 +270,33 @@
       } else {
         const selectedMovie = selectedGenre.children
         if (selectedMovie.length < 4) { // 길이가 4 이하인 경우
-          for (let i = 0; i < selectedMovie.length; i++){
+          for (let i = 0; i < selectedMovie.length; i++) {
             const clone = selectedMovie[i].cloneNode(true)
             showMovies.appendChild(clone)
-            showMovies.children[i].style.display = 'block'
+            showMovies.children[i].style.display = 'inline'
+            showMovies.children[i].className = 'col-12 col-sm-6 col-md-4 col-lg-3 my-3'
           }
         } else {
           const randomNums = []
           const movieLen = selectedMovie.length
-        
+
           while (randomNums.length < 4) {
-            const num = Math.floor(Math.random() * (movieLen-1))
+            const num = Math.floor(Math.random() * (movieLen - 1))
             if (!randomNums.includes(num)) {
               randomNums.push(num)
             }
           }
           console.log(randomNums)
-          for (let i = 0; i < 4; i++){ // 4 이상인 경우
+          for (let i = 0; i < 4; i++) { // 4 이상인 경우
             const clone = selectedMovie[randomNums[i]].cloneNode(true)
             showMovies.appendChild(clone)
-            showMovies.children[i].style.display = 'block'
+            showMovies.children[i].style.display = 'inline'
+            showMovies.children[i].className = 'col-12 col-sm-6 col-md-4 col-lg-3 my-3'
           }
         }
 
       }
-      
+
       const genreId = event.target.dataset.id
       const dropDown = document.querySelector('#genreDropDown')
       dropDown.innerText = genreName
@@ -225,22 +304,22 @@
   })
 
   const teaserBtns = document.querySelectorAll('.teaser')
-  teaserBtns.forEach(btn =>{
-    btn.addEventListener('click', function(event) {
-        console.log(event)
-        const teaserId = event.target.dataset.teaserid
-        const posterId = event.target.dataset.posterid
-        const movieId = event.target.dataset.movieid
-        console.log(movieId)
-        let mainTeaser = document.querySelector('#mainTeaser')
-        let posterImage = document.querySelector('#posterImage')
-        let moreInfo = document.querySelector('#moreInfo')
-        mainTeaser.src = `http://www.youtube.com/embed/${teaserId}?autoplay=1`
-        posterImage.src = `https://image.tmdb.org/t/p/original${posterId}`
-        moreInfo.href = `/movies/movie_detail/${movieId}/`
-        
+  teaserBtns.forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      console.log(event)
+      const teaserId = event.target.dataset.teaserid
+      const posterId = event.target.dataset.posterid
+      const movieId = event.target.dataset.movieid
+      console.log(movieId)
+      let mainTeaser = document.querySelector('#mainTeaser')
+      let posterImage = document.querySelector('#posterImage')
+      let moreInfo = document.querySelector('#moreInfo')
+      mainTeaser.src = `http://www.youtube.com/embed/${teaserId}?autoplay=1`
+      posterImage.src = `https://image.tmdb.org/t/p/original${posterId}`
+      moreInfo.href = `/movies/movie_detail/${movieId}/`
+
     })
-  }) 
+  })
 </script>
 
 <script>
