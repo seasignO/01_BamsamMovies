@@ -1,12 +1,37 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block content %}
+{% load static %}
 
-<h1>영화 수정</h1>
-<form action="" method="POST">
+{% block css %}
+<style>
+  body {
+    background-color: black;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0, 0;
+    background-position: center;
+    background-attachment: fixed;
+    background-image: url('{% static 'movies/images/biglogo.png' %}');
+  }
+
+  .container {
+    padding-right: 300px;
+  }
+
+  button {
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<h1 class="mt-5 text-light border-bottom border-secondary py-3">영화 수정</h1>
+<form action="" method="POST" class="text-light mt-5">
 {% csrf_token %}
 {% bootstrap_form form %}
-<button class="btn btn-primary" style="submit">submit!</a>
+<button class="btn btn-secondary" style="submit">SUBMIT</a>
 </form>
 
 {% endblock content %}
