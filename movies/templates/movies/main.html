@@ -161,7 +161,7 @@
       style="width: 18; display: none; font-size: 10px;" data-id="{{movie.id}}" value="{{movie.title}}">
       <a class="text-light text-center text-decoration-none" href="{% url 'movies:movie_detail' movie.pk %}">
         <img src="https://image.tmdb.org/t/p/original{{movie.poster_url}}" class="card-img-top" alt="{{movie.title}}"
-          style="width: 210px; height: 290px;">
+          style="width: 100%; height: 290px;">
         <p class="card-title rounded-bottom py-2 text-dark" style="background-color: rgba(250, 250, 250, 0.5); font-size: 20px; font-family: 'Black Han Sans';,'Noto Sans KR', sans-serif;, 'Nanum Myeongjo', serif;">{{movie.title}}</p>
       </a>
     </div>
@@ -173,8 +173,6 @@
 
 <div id="showMovies" class="row" style="margin-bottom: 100px;">
 </div>
-
-{% comment %} </div> {% endcomment %}
 
 {% endblock content2 %}
 
